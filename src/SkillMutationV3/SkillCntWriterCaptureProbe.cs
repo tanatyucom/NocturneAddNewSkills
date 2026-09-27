@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Skill Power-Up AddNew V3 - DIRECT OWNERSHIP WRITER CAPTURE,
     // full-capacity forget+replace episode edition.
@@ -169,7 +169,7 @@ namespace NocturneModernGameplay
                     _installFailedPermanently = true;
                     if (_armed) DisarmWatchpoint();
                     MelonLogger.Warning(
-                        "[NocturneModernGameplay] SKILLCNT-WRITER-CAPTURE refused: " +
+                        "[NocturneAddNewSkills] SKILLCNT-WRITER-CAPTURE refused: " +
                         "PowerUpMutationCfgDiagnostics.Enabled is true and already owns Dr0-Dr3.");
                     return;
                 }
@@ -200,7 +200,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] SkillCntWriterCaptureProbe prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] SkillCntWriterCaptureProbe prefix failed safely: {ex.Message}");
             }
         }
 
@@ -214,7 +214,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] SkillCntWriterCaptureProbe postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] SkillCntWriterCaptureProbe postfix failed safely: {ex.Message}");
             }
         }
 
@@ -234,7 +234,7 @@ namespace NocturneModernGameplay
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneModernGameplay] SkillCntWriterCaptureProbe uninstall failed: {ex.Message}");
+                MelonLogger.Warning($"[NocturneAddNewSkills] SkillCntWriterCaptureProbe uninstall failed: {ex.Message}");
             }
         }
 
@@ -246,12 +246,12 @@ namespace NocturneModernGameplay
             if (_vehHandle == IntPtr.Zero)
             {
                 _installFailedPermanently = true;
-                MelonLogger.Error("[NocturneModernGameplay] SKILLCNT-WRITER-CAPTURE: AddVectoredExceptionHandler failed.");
+                MelonLogger.Error("[NocturneAddNewSkills] SKILLCNT-WRITER-CAPTURE: AddVectoredExceptionHandler failed.");
                 return;
             }
             _vehRegistered = true;
             MelonLogger.Msg(
-                "[NocturneModernGameplay] SKILLCNT-WRITER-CAPTURE VEH installed " +
+                "[NocturneAddNewSkills] SKILLCNT-WRITER-CAPTURE VEH installed " +
                 "(continuous write-breakpoint mode, full-capacity episode edition).");
         }
 
@@ -265,7 +265,7 @@ namespace NocturneModernGameplay
                 if (!GetThreadContext(thread, ctx))
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] SKILLCNT-WRITER-CAPTURE GetThreadContext (arm) failed; error={Marshal.GetLastWin32Error()}.");
+                        $"[NocturneAddNewSkills] SKILLCNT-WRITER-CAPTURE GetThreadContext (arm) failed; error={Marshal.GetLastWin32Error()}.");
                     return;
                 }
 
@@ -281,7 +281,7 @@ namespace NocturneModernGameplay
                 if (!SetThreadContext(thread, ctx))
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] SKILLCNT-WRITER-CAPTURE SetThreadContext (arm) failed; error={Marshal.GetLastWin32Error()}.");
+                        $"[NocturneAddNewSkills] SKILLCNT-WRITER-CAPTURE SetThreadContext (arm) failed; error={Marshal.GetLastWin32Error()}.");
                     return;
                 }
 
@@ -437,7 +437,7 @@ namespace NocturneModernGameplay
             {
                 _captureErrorCount = 0;
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] SKILLCNT-WRITER-CAPTURE capture errors (safely dropped): {errors}.");
+                    $"[NocturneAddNewSkills] SKILLCNT-WRITER-CAPTURE capture errors (safely dropped): {errors}.");
             }
         }
 
@@ -448,7 +448,7 @@ namespace NocturneModernGameplay
                 string ripLocation = DescribeAddress(hit.Rip);
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] SKILLCNT-WRITER-HIT; " +
+                    "[NocturneAddNewSkills] SKILLCNT-WRITER-HIT; " +
                     $"frame={hit.FrameId}; watchedAddress=0x{hit.WatchedAddress:X}; threadId={hit.ThreadId}; " +
                     $"dr6=0x{hit.Dr6:X}; trapRip=0x{hit.Rip:X}; trapRipLocation={ripLocation}; " +
                     $"rsp=0x{hit.Rsp:X}; rflags=0x{hit.Rflags:X}; " +
@@ -462,7 +462,7 @@ namespace NocturneModernGameplay
                 if (hit.SkillsReadOk)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] SKILLCNT-WRITER-HIT-SKILLS; " +
+                        "[NocturneAddNewSkills] SKILLCNT-WRITER-HIT-SKILLS; " +
                         $"frame={hit.FrameId}; " +
                         $"skills=[{hit.Skill0 & 0xFFFF},{hit.Skill1 & 0xFFFF},{hit.Skill2 & 0xFFFF},{hit.Skill3 & 0xFFFF}," +
                         $"{hit.Skill4 & 0xFFFF},{hit.Skill5 & 0xFFFF},{hit.Skill6 & 0xFFFF},{hit.Skill7 & 0xFFFF}].");
@@ -476,19 +476,19 @@ namespace NocturneModernGameplay
                     byte[] window = new byte[before + after];
                     Marshal.Copy(windowStart, window, 0, window.Length);
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] SKILLCNT-WRITER-HIT-BYTES; " +
+                        "[NocturneAddNewSkills] SKILLCNT-WRITER-HIT-BYTES; " +
                         $"frame={hit.FrameId}; windowStart=0x{windowStart.ToInt64():X}; " +
                         $"tripRipOffsetInWindow={before}; bytesHex={BytesToHex(window)}.");
                 }
                 catch (Exception exBytes)
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] SKILLCNT-WRITER-HIT-BYTES read failed: {exBytes.Message}");
+                        $"[NocturneAddNewSkills] SKILLCNT-WRITER-HIT-BYTES read failed: {exBytes.Message}");
                 }
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneModernGameplay] SKILLCNT-WRITER-HIT emit failed safely: {ex.Message}");
+                MelonLogger.Warning($"[NocturneAddNewSkills] SKILLCNT-WRITER-HIT emit failed safely: {ex.Message}");
             }
         }
 

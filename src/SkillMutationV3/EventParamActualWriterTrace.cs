@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Mutation AddNew investigation (investigations/ACQUISITION_LEARNASNEW/
     // PLAN.md) - EVENTPARAM ACTUAL WRITER TRACE (2026-09-15).
@@ -132,7 +132,7 @@ namespace NocturneModernGameplay
                 if (_armed && _armedAtFrame >= 0 && (frame - _armedAtFrame) >= MaxArmedFrames)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] EVENTPARAM-ACTUALWRITER-AUTODISARM; " +
+                        "[NocturneAddNewSkills] EVENTPARAM-ACTUALWRITER-AUTODISARM; " +
                         $"reason=frame-budget-exhausted; totalHits={_totalHits}; armedFrames={frame - _armedAtFrame}.");
                     DisarmWatchpoint();
                     _autoDisarmed = true;
@@ -141,7 +141,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] EventParamActualWriterTrace prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] EventParamActualWriterTrace prefix failed safely: {ex.Message}");
             }
         }
 
@@ -155,7 +155,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] EventParamActualWriterTrace postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] EventParamActualWriterTrace postfix failed safely: {ex.Message}");
             }
         }
 
@@ -174,7 +174,7 @@ namespace NocturneModernGameplay
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneModernGameplay] EventParamActualWriterTrace uninstall failed: {ex.Message}");
+                MelonLogger.Warning($"[NocturneAddNewSkills] EventParamActualWriterTrace uninstall failed: {ex.Message}");
             }
         }
 
@@ -186,12 +186,12 @@ namespace NocturneModernGameplay
             if (_vehHandle == IntPtr.Zero)
             {
                 _installFailedPermanently = true;
-                MelonLogger.Error("[NocturneModernGameplay] EVENTPARAM-ACTUALWRITER: AddVectoredExceptionHandler failed.");
+                MelonLogger.Error("[NocturneAddNewSkills] EVENTPARAM-ACTUALWRITER: AddVectoredExceptionHandler failed.");
                 return;
             }
             _vehRegistered = true;
             MelonLogger.Msg(
-                "[NocturneModernGameplay] EVENTPARAM-ACTUALWRITER VEH installed " +
+                "[NocturneAddNewSkills] EVENTPARAM-ACTUALWRITER VEH installed " +
                 $"(watching GBWK+0x32, maxHits={MaxHits}, maxArmedFrames={MaxArmedFrames}).");
         }
 
@@ -205,7 +205,7 @@ namespace NocturneModernGameplay
                 if (!GetThreadContext(thread, ctx))
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] EVENTPARAM-ACTUALWRITER GetThreadContext (arm) failed; error={Marshal.GetLastWin32Error()}.");
+                        $"[NocturneAddNewSkills] EVENTPARAM-ACTUALWRITER GetThreadContext (arm) failed; error={Marshal.GetLastWin32Error()}.");
                     return;
                 }
 
@@ -221,14 +221,14 @@ namespace NocturneModernGameplay
                 if (!SetThreadContext(thread, ctx))
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] EVENTPARAM-ACTUALWRITER SetThreadContext (arm) failed; error={Marshal.GetLastWin32Error()}.");
+                        $"[NocturneAddNewSkills] EVENTPARAM-ACTUALWRITER SetThreadContext (arm) failed; error={Marshal.GetLastWin32Error()}.");
                     return;
                 }
 
                 _armedDr0Address = dr0Address;
                 _armed = true;
                 MelonLogger.Msg(
-                    $"[NocturneModernGameplay] EVENTPARAM-ACTUALWRITER-ARMED; address=0x{dr0Address:X}.");
+                    $"[NocturneAddNewSkills] EVENTPARAM-ACTUALWRITER-ARMED; address=0x{dr0Address:X}.");
             }
             finally
             {
@@ -361,7 +361,7 @@ namespace NocturneModernGameplay
                 ref PendingHit hit = ref _pending[i];
                 string ripLocation = DescribeAddress(hit.TrapRip);
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] EVENTPARAM-ACTUALWRITER-HIT; " +
+                    "[NocturneAddNewSkills] EVENTPARAM-ACTUALWRITER-HIT; " +
                     $"frame={frameNow}; trapRip=0x{hit.TrapRip:X}; trapRipLocation={ripLocation}; " +
                     $"oldValue={hit.OldValue}; newValue={hit.NewValue}; seq={hit.Seq}; unit={hit.Unit}; " +
                     $"defSkillResult={hit.DefSkillResult}; pUpSkillResult={hit.PUpSkillResult}.");
@@ -370,7 +370,7 @@ namespace NocturneModernGameplay
             if (count > 0 && _totalHits >= MaxHits && _armed)
             {
                 MelonLogger.Msg(
-                    $"[NocturneModernGameplay] EVENTPARAM-ACTUALWRITER-AUTODISARM; reason=hit-budget-exhausted; totalHits={_totalHits}.");
+                    $"[NocturneAddNewSkills] EVENTPARAM-ACTUALWRITER-AUTODISARM; reason=hit-budget-exhausted; totalHits={_totalHits}.");
                 DisarmWatchpoint();
                 _autoDisarmed = true;
             }

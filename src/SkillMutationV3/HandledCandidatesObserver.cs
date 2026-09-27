@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // OLD QUEUE LOOP SUPPRESSION ARCHAEOLOGY - HandledCandidates read-only
     // observation (step 1 of 2). Never writes any native field. Never
@@ -140,7 +140,7 @@ namespace NocturneModernGameplay
                 if (EpisodeSkillChangeApplied.Remove(stockPtr))
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] EPISODE-LATCH-CLEAR; " +
+                        "[NocturneAddNewSkills] EPISODE-LATCH-CLEAR; " +
                         $"stockPtr=0x{stockPtr:X}; reason=LevelUpCnt {last}->{levelUpCnt} (new level detected).");
                 }
             }
@@ -214,7 +214,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] HandledCandidatesObserver prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] HandledCandidatesObserver prefix failed safely: {ex.Message}");
             }
         }
 
@@ -249,7 +249,7 @@ namespace NocturneModernGameplay
                 }
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] HANDLEDCANDIDATES-CHECK; " +
+                    "[NocturneAddNewSkills] HANDLEDCANDIDATES-CHECK; " +
                     $"frame={frame}; unit={_unitBefore}; stockPtr=0x{stockPtr:X}; " +
                     $"eventParam={eventParam}; wouldSuppress={wouldSuppress}; " +
                     $"firstSeenFrame={firstSeenFrame}; framesSinceFirstSeen={frame - firstSeenFrame}; " +
@@ -270,7 +270,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] HandledCandidatesObserver postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] HandledCandidatesObserver postfix failed safely: {ex.Message}");
             }
         }
     }

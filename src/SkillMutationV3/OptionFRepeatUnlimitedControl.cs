@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Option F result conversion - INITIAL CANDIDATE implementation
     // (investigations/REPEAT_UNLIMITED/PLAN.md). Converts
@@ -122,7 +122,7 @@ namespace NocturneModernGameplay
             {
                 _coreActive = false;
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] OptionFRepeatUnlimitedControl prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] OptionFRepeatUnlimitedControl prefix failed safely: {ex.Message}");
                 return null;
             }
         }
@@ -154,7 +154,7 @@ namespace NocturneModernGameplay
                 try
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] OPTIONF-DIAG-TOTAL-CALLS; " +
+                        "[NocturneAddNewSkills] OPTIONF-DIAG-TOTAL-CALLS; " +
                         $"totalCalls={_diagCallCounter}; frame={UnityEngine.Time.frameCount}.");
                 }
                 catch { /* diagnostic only */ }
@@ -165,7 +165,7 @@ namespace NocturneModernGameplay
                 try
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] OPTIONF-DIAG-EXCLUSION-HIT; " +
+                        "[NocturneAddNewSkills] OPTIONF-DIAG-EXCLUSION-HIT; " +
                         $"totalCalls={_diagCallCounter}; coreActive=True; frame={UnityEngine.Time.frameCount}.");
                 }
                 catch { /* diagnostic only */ }
@@ -203,7 +203,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    "[NocturneModernGameplay] OptionFRepeatUnlimitedControl exclusion observer failed safely: " +
+                    "[NocturneAddNewSkills] OptionFRepeatUnlimitedControl exclusion observer failed safely: " +
                     $"{ex.Message}");
             }
         }
@@ -345,7 +345,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] OptionFRepeatUnlimitedControl postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] OptionFRepeatUnlimitedControl postfix failed safely: {ex.Message}");
             }
             finally
             {
@@ -373,7 +373,7 @@ namespace NocturneModernGameplay
             string skillName = SkillNameResolver.Resolve(pUpSkillId);
 
             MelonLogger.Msg(
-                "[NocturneModernGameplay] OPTION-F-DECISION; " +
+                "[NocturneAddNewSkills] OPTION-F-DECISION; " +
                 $"invocation={state.InvocationId}; unit={state.UnitId}; level={state.Level}; " +
                 $"pUpSkillID={pUpSkillId}; pUpSkillName=\"{skillName}\"; rawResult={rawResult}; " +
                 $"bit6WasSet={state.Bit6WasSet}; exclusionObserved={_exclusionObservedThisCore}; " +

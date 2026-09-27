@@ -1,4 +1,4 @@
-# NocturneModernGameplay
+# Nocturne Add New Skills
 
 SMT3 Nocturne HD Remaster (Steam版, IL2CPP) 向け MelonLoader MOD。
 
@@ -17,7 +17,7 @@ SMT3 Nocturne HD Remaster (Steam版, IL2CPP) 向け MelonLoader MOD。
 
 ## プロジェクト範囲と設計方針
 
-NocturneModernGameplayは、難易度・確率・育成効率・リソース管理など、
+NocturneAddNewSkills(旧NocturneModernGameplay)は、難易度・確率・育成効率・リソース管理など、
 ゲーム結果に影響するルールを現代化するプロジェクトです。SMT3の世界観や
 戦闘の基本設計を維持しつつ、SMT5以降に近い快適性を取り入れます。
 

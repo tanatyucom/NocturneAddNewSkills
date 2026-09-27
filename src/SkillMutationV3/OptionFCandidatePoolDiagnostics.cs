@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Repeat=Unlimited investigation, R0-B targeted reproduction diagnostic
     // (investigations/REPEAT_UNLIMITED/PLAN.md "R0-Bを意図的に再現するための
@@ -127,7 +127,7 @@ namespace NocturneModernGameplay
                     : "N/A";
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] V3-OPTIONF-CANDIDATE-POOL; " +
+                    "[NocturneAddNewSkills] V3-OPTIONF-CANDIDATE-POOL; " +
                     $"invocation={invocationText}; coreActive={coreActive}; unit={unitId}; " +
                     $"level={level}; hensinmae={hensinmae}; " +
                     $"stockPtr=0x{stock.Pointer.ToInt64():X}; " +
@@ -141,7 +141,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] OptionFCandidatePoolDiagnostics prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] OptionFCandidatePoolDiagnostics prefix failed safely: {ex.Message}");
             }
         }
     }

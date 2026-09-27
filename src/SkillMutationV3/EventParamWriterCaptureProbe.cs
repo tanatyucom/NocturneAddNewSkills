@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Skill Power-Up AddNew V3 - EVENTPARAM DIRECT WRITER CAPTURE.
     //
@@ -149,7 +149,7 @@ namespace NocturneModernGameplay
                     _installFailedPermanently = true;
                     if (_armed) DisarmWatchpoint();
                     MelonLogger.Warning(
-                        "[NocturneModernGameplay] EVENTPARAM-WRITER-CAPTURE refused: " +
+                        "[NocturneAddNewSkills] EVENTPARAM-WRITER-CAPTURE refused: " +
                         "PowerUpMutationCfgDiagnostics.Enabled is true and already owns Dr0-Dr3.");
                     return;
                 }
@@ -171,7 +171,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] EventParamWriterCaptureProbe prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] EventParamWriterCaptureProbe prefix failed safely: {ex.Message}");
             }
         }
 
@@ -185,7 +185,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] EventParamWriterCaptureProbe postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] EventParamWriterCaptureProbe postfix failed safely: {ex.Message}");
             }
         }
 
@@ -204,7 +204,7 @@ namespace NocturneModernGameplay
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneModernGameplay] EventParamWriterCaptureProbe uninstall failed: {ex.Message}");
+                MelonLogger.Warning($"[NocturneAddNewSkills] EventParamWriterCaptureProbe uninstall failed: {ex.Message}");
             }
         }
 
@@ -216,12 +216,12 @@ namespace NocturneModernGameplay
             if (_vehHandle == IntPtr.Zero)
             {
                 _installFailedPermanently = true;
-                MelonLogger.Error("[NocturneModernGameplay] EVENTPARAM-WRITER-CAPTURE: AddVectoredExceptionHandler failed.");
+                MelonLogger.Error("[NocturneAddNewSkills] EVENTPARAM-WRITER-CAPTURE: AddVectoredExceptionHandler failed.");
                 return;
             }
             _vehRegistered = true;
             MelonLogger.Msg(
-                "[NocturneModernGameplay] EVENTPARAM-WRITER-CAPTURE VEH installed (watching GBWK+0x32).");
+                "[NocturneAddNewSkills] EVENTPARAM-WRITER-CAPTURE VEH installed (watching GBWK+0x32).");
         }
 
         private static void ArmWatchpoint(long dr0Address)
@@ -234,7 +234,7 @@ namespace NocturneModernGameplay
                 if (!GetThreadContext(thread, ctx))
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] EVENTPARAM-WRITER-CAPTURE GetThreadContext (arm) failed; error={Marshal.GetLastWin32Error()}.");
+                        $"[NocturneAddNewSkills] EVENTPARAM-WRITER-CAPTURE GetThreadContext (arm) failed; error={Marshal.GetLastWin32Error()}.");
                     return;
                 }
 
@@ -250,14 +250,14 @@ namespace NocturneModernGameplay
                 if (!SetThreadContext(thread, ctx))
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] EVENTPARAM-WRITER-CAPTURE SetThreadContext (arm) failed; error={Marshal.GetLastWin32Error()}.");
+                        $"[NocturneAddNewSkills] EVENTPARAM-WRITER-CAPTURE SetThreadContext (arm) failed; error={Marshal.GetLastWin32Error()}.");
                     return;
                 }
 
                 _armedDr0Address = dr0Address;
                 _armed = true;
                 MelonLogger.Msg(
-                    $"[NocturneModernGameplay] EVENTPARAM-WRITER-CAPTURE armed; address=0x{dr0Address:X}.");
+                    $"[NocturneAddNewSkills] EVENTPARAM-WRITER-CAPTURE armed; address=0x{dr0Address:X}.");
             }
             finally
             {
@@ -396,7 +396,7 @@ namespace NocturneModernGameplay
             {
                 _captureErrorCount = 0;
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] EVENTPARAM-WRITER-CAPTURE capture errors (safely dropped): {errors}.");
+                    $"[NocturneAddNewSkills] EVENTPARAM-WRITER-CAPTURE capture errors (safely dropped): {errors}.");
             }
         }
 
@@ -407,7 +407,7 @@ namespace NocturneModernGameplay
                 string ripLocation = DescribeAddress(hit.Rip);
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] EVENTPARAM-WRITER-HIT; " +
+                    "[NocturneAddNewSkills] EVENTPARAM-WRITER-HIT; " +
                     $"frame={hit.FrameId}; watchedAddress=0x{hit.WatchedAddress:X}; threadId={hit.ThreadId}; " +
                     $"dr6=0x{hit.Dr6:X}; trapRip=0x{hit.Rip:X}; trapRipLocation={ripLocation}; " +
                     $"rsp=0x{hit.Rsp:X}; rflags=0x{hit.Rflags:X}; " +
@@ -427,19 +427,19 @@ namespace NocturneModernGameplay
                     byte[] window = new byte[before + after];
                     Marshal.Copy(windowStart, window, 0, window.Length);
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] EVENTPARAM-WRITER-HIT-BYTES; " +
+                        "[NocturneAddNewSkills] EVENTPARAM-WRITER-HIT-BYTES; " +
                         $"frame={hit.FrameId}; windowStart=0x{windowStart.ToInt64():X}; " +
                         $"tripRipOffsetInWindow={before}; bytesHex={BytesToHex(window)}.");
                 }
                 catch (Exception exBytes)
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] EVENTPARAM-WRITER-HIT-BYTES read failed: {exBytes.Message}");
+                        $"[NocturneAddNewSkills] EVENTPARAM-WRITER-HIT-BYTES read failed: {exBytes.Message}");
                 }
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneModernGameplay] EVENTPARAM-WRITER-HIT emit failed safely: {ex.Message}");
+                MelonLogger.Warning($"[NocturneAddNewSkills] EVENTPARAM-WRITER-HIT emit failed safely: {ex.Message}");
             }
         }
 

@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // HIDDEN NEW SKILL ENTRY - writer identification for [r13+0x10] (the
     // loop-bound byte CONFIRMED this session to be 0 for Frost's failing
@@ -212,7 +212,7 @@ namespace NocturneModernGameplay
                 if (elapsed >= MaxArmedFrames)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] R13WRITEWATCH-AUTOUNINSTALL; " +
+                        "[NocturneAddNewSkills] R13WRITEWATCH-AUTOUNINSTALL; " +
                         $"fetchHits={_totalFetchHits}; writeHits={_totalWriteHits}; loopReadHits={_totalLoopReadHits}; " +
                         $"gateCheckHits={_totalGateCheckHits}; armedFrames={elapsed}.");
                     Uninstall();
@@ -221,7 +221,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] R13FetchAndWriteWatchTrace.Tick failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] R13FetchAndWriteWatchTrace.Tick failed safely: {ex.Message}");
             }
         }
 
@@ -250,7 +250,7 @@ namespace NocturneModernGameplay
 
                 _installed = true;
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] R13WRITEWATCH-INSTALLED; " +
+                    "[NocturneAddNewSkills] R13WRITEWATCH-INSTALLED; " +
                     $"fetch=0x{_addrFetch.ToInt64():X}; loopRead=0x{_addrLoopRead.ToInt64():X}; " +
                     $"gateCheck=0x{_addrGateCheck.ToInt64():X}; " +
                     "dr1=dynamic(reprogrammed each fetch hit); " +
@@ -259,7 +259,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneModernGameplay] R13FetchAndWriteWatchTrace install refused safely: {ex}");
+                    $"[NocturneAddNewSkills] R13FetchAndWriteWatchTrace install refused safely: {ex}");
                 Uninstall();
             }
         }
@@ -285,7 +285,7 @@ namespace NocturneModernGameplay
                     catch (Exception ex)
                     {
                         MelonLogger.Warning(
-                            $"[NocturneModernGameplay] R13FetchAndWriteWatchTrace breakpoint removal failed: {ex.Message}");
+                            $"[NocturneAddNewSkills] R13FetchAndWriteWatchTrace breakpoint removal failed: {ex.Message}");
                     }
                 }
                 if (_vehHandle != IntPtr.Zero)
@@ -544,26 +544,26 @@ namespace NocturneModernGameplay
                 {
                     case HitKind.Fetch:
                         MelonLogger.Msg(
-                            "[NocturneModernGameplay] R13WRITEWATCH-FETCH; " +
+                            "[NocturneAddNewSkills] R13WRITEWATCH-FETCH; " +
                             $"frame={hit.Frame}; seq={hit.Seq}; bridgeActive={hit.BridgeActive}; unit={hit.Unit}; " +
                             $"target={hit.Target}; r13=0x{hit.R13OrAddr:X}; byteAtFetch={hit.ByteValue}.");
                         break;
                     case HitKind.Write:
                         MelonLogger.Msg(
-                            "[NocturneModernGameplay] R13WRITEWATCH-WRITE; " +
+                            "[NocturneAddNewSkills] R13WRITEWATCH-WRITE; " +
                             $"frame={hit.Frame}; seq={hit.Seq}; bridgeActive={hit.BridgeActive}; unit={hit.Unit}; " +
                             $"target={hit.Target}; addr=0x{hit.R13OrAddr:X}; byteAfterWrite={hit.ByteValue}; " +
                             $"writerRipRuntime=0x{hit.WriterRip:X}.");
                         break;
                     case HitKind.LoopRead:
                         MelonLogger.Msg(
-                            "[NocturneModernGameplay] R13WRITEWATCH-LOOPREAD; " +
+                            "[NocturneAddNewSkills] R13WRITEWATCH-LOOPREAD; " +
                             $"frame={hit.Frame}; seq={hit.Seq}; bridgeActive={hit.BridgeActive}; unit={hit.Unit}; " +
                             $"target={hit.Target}; r13=0x{hit.R13OrAddr:X}; loopBound={hit.ByteValue}.");
                         break;
                     case HitKind.GateCheck:
                         MelonLogger.Msg(
-                            "[NocturneModernGameplay] R13WRITEWATCH-GATE3; " +
+                            "[NocturneAddNewSkills] R13WRITEWATCH-GATE3; " +
                             $"frame={hit.Frame}; seq={hit.Seq}; bridgeActive={hit.BridgeActive}; unit={hit.Unit}; " +
                             $"target={hit.Target}; ebx={hit.Ebx}; skillId={hit.SkillId}; gate3Al={hit.Gate3Al}; " +
                             $"appended={(hit.Gate3Al < 0)}.");

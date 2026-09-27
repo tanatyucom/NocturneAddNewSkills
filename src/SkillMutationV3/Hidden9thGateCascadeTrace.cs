@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // HIDDEN NEW SKILL ENTRY - full gate-cascade capture for the dedicated
     // target==8 presentation path (read-only, no writes). Session
@@ -182,7 +182,7 @@ namespace NocturneModernGameplay
                 if (elapsed >= MaxArmedFrames)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] HIDDEN9THGATE-AUTOUNINSTALL; " +
+                        "[NocturneAddNewSkills] HIDDEN9THGATE-AUTOUNINSTALL; " +
                         $"totalHits={_totalHitCount}; armedFrames={elapsed}.");
                     Uninstall();
                 }
@@ -190,7 +190,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] Hidden9thGateCascadeTrace.Tick failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] Hidden9thGateCascadeTrace.Tick failed safely: {ex.Message}");
             }
         }
 
@@ -220,7 +220,7 @@ namespace NocturneModernGameplay
 
                 _installed = true;
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] HIDDEN9THGATE-INSTALLED; " +
+                    "[NocturneAddNewSkills] HIDDEN9THGATE-INSTALLED; " +
                     $"cascadeStart=0x{_addrCascadeStart.ToInt64():X}; gate4Pass=0x{_addrGate4Pass.ToInt64():X}; " +
                     $"gate5Pass=0x{_addrGate5Pass.ToInt64():X}; gate6Pass=0x{_addrGate6Pass.ToInt64():X}; " +
                     "mechanism=hardware-execute-breakpoint x4(no GameAssembly.dll bytes written).");
@@ -228,7 +228,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneModernGameplay] Hidden9thGateCascadeTrace install refused safely: {ex}");
+                    $"[NocturneAddNewSkills] Hidden9thGateCascadeTrace install refused safely: {ex}");
                 Uninstall();
             }
         }
@@ -254,7 +254,7 @@ namespace NocturneModernGameplay
                     catch (Exception ex)
                     {
                         MelonLogger.Warning(
-                            $"[NocturneModernGameplay] Hidden9thGateCascadeTrace breakpoint removal failed: {ex.Message}");
+                            $"[NocturneAddNewSkills] Hidden9thGateCascadeTrace breakpoint removal failed: {ex.Message}");
                     }
                 }
                 if (_vehHandle != IntPtr.Zero)
@@ -414,7 +414,7 @@ namespace NocturneModernGameplay
                 ref PendingHit hit = ref _pending[i];
                 string r12Str = hit.Checkpoint == 0 ? $"; r12=0x{hit.R12:X}" : "";
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] HIDDEN9THGATE-HIT; " +
+                    "[NocturneAddNewSkills] HIDDEN9THGATE-HIT; " +
                     $"frame={hit.Frame}; seq={hit.Seq}; bridgeActive={hit.BridgeActive}; unit={hit.Unit}; " +
                     $"checkpoint={CheckpointNames[hit.Checkpoint]}{r12Str}.");
             }

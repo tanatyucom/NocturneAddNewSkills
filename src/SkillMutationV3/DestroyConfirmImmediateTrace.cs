@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Skill Power-Up AddNew V3 - DestroyConfirm immediate before/after trace.
     // Read-only observer only. Never writes SeqInfo.Current, Flag, skill[],
@@ -75,7 +75,7 @@ namespace NocturneModernGameplay
             {
                 _captured = false;
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] DestroyConfirmImmediateTrace prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] DestroyConfirmImmediateTrace prefix failed safely: {ex.Message}");
             }
         }
 
@@ -124,7 +124,7 @@ namespace NocturneModernGameplay
                 int frame = UnityEngine.Time.frameCount;
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] DESTROYCONFIRM-BEGIN; " +
+                    "[NocturneAddNewSkills] DESTROYCONFIRM-BEGIN; " +
                     $"invocation={_invocation}; frame={frame}; unit={_unit}; " +
                     $"seqBefore={_seqBefore}; flagBefore={_flagBefore}; " +
                     $"skillCntBefore={_skillCntBefore}; " +
@@ -132,7 +132,7 @@ namespace NocturneModernGameplay
                     $"skillsBefore=[{string.Join(",", _skillsBefore)}].");
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] DESTROYCONFIRM-END; " +
+                    "[NocturneAddNewSkills] DESTROYCONFIRM-END; " +
                     $"invocation={_invocation}; frame={frame}; unit={_unit}; " +
                     $"seqAfter={seqAfter}; flagAfter={flagAfter}; " +
                     $"skillCntAfter={skillCntAfter}; " +
@@ -142,7 +142,7 @@ namespace NocturneModernGameplay
                 if (_skillCntBefore == 8 && skillCntAfter == 7)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] DESTROYCONFIRM-DELETE-OBSERVED; " +
+                        "[NocturneAddNewSkills] DESTROYCONFIRM-DELETE-OBSERVED; " +
                         $"invocation={_invocation}; unit={_unit}; " +
                         $"skillsBefore=[{string.Join(",", _skillsBefore)}]; " +
                         $"skillsAfter=[{string.Join(",", skillsAfter)}].");
@@ -150,14 +150,14 @@ namespace NocturneModernGameplay
                 else if (!skillCntChanged && arraysChanged)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] DESTROYCONFIRM-REPLACE-OBSERVED; " +
+                        "[NocturneAddNewSkills] DESTROYCONFIRM-REPLACE-OBSERVED; " +
                         $"invocation={_invocation}; unit={_unit}; skillCnt={skillCntAfter}; " +
                         $"changedSlots=[{string.Join(",", changedSlots)}].");
                 }
                 else if (skillCntChanged)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] DESTROYCONFIRM-SKILLCNT-CHANGE; " +
+                        "[NocturneAddNewSkills] DESTROYCONFIRM-SKILLCNT-CHANGE; " +
                         $"invocation={_invocation}; unit={_unit}; " +
                         $"skillCntBefore={_skillCntBefore}; skillCntAfter={skillCntAfter}.");
                 }
@@ -165,7 +165,7 @@ namespace NocturneModernGameplay
                 if (pUpChanged)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] DESTROYCONFIRM-PUPSKILL-CHANGE; " +
+                        "[NocturneAddNewSkills] DESTROYCONFIRM-PUPSKILL-CHANGE; " +
                         $"invocation={_invocation}; unit={_unit}; " +
                         $"pUpResultBefore={_pUpResultBefore}; pUpResultAfter={pUpResultAfter}; " +
                         $"pUpIndexBefore={_pUpIndexBefore}; pUpIndexAfter={pUpIndexAfter}; " +
@@ -175,7 +175,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] DestroyConfirmImmediateTrace postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] DestroyConfirmImmediateTrace postfix failed safely: {ex.Message}");
             }
         }
     }

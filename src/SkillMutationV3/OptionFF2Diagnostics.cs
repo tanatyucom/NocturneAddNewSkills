@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Repeat=Unlimited investigation, Option F / F2 feasibility diagnostic
     // ONLY (investigations/REPEAT_UNLIMITED/PLAN.md). Read-only observer -
@@ -129,7 +129,7 @@ namespace NocturneModernGameplay
                 };
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] V3-OPTIONF-F2-LIFECYCLE; " +
+                    "[NocturneAddNewSkills] V3-OPTIONF-F2-LIFECYCLE; " +
                     $"stage=CorePrefixReset; invocation={_invocationCounter}.");
             }
             catch (Exception ex)
@@ -143,7 +143,7 @@ namespace NocturneModernGameplay
                 _coreActive = false;
                 __state = null;
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] OptionFF2CoreDiagnostics prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] OptionFF2CoreDiagnostics prefix failed safely: {ex.Message}");
             }
         }
 
@@ -189,11 +189,11 @@ namespace NocturneModernGameplay
                         classification = "UNKNOWN";
 
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] V3-OPTIONF-F2-LIFECYCLE; " +
+                        "[NocturneAddNewSkills] V3-OPTIONF-F2-LIFECYCLE; " +
                         $"stage=CorePostfixConsume; invocation={__state.InvocationId}.");
 
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] V3-OPTIONF-F2; " +
+                        "[NocturneAddNewSkills] V3-OPTIONF-F2; " +
                         $"invocation={__state.InvocationId}; rawResult={rawResult}; " +
                         $"bit6WasSet={bit6WasSet}; pUpSkillID={pUpSkillID}; " +
                         $"exclusionObserved={exclusionObserved}; exclusionMatched={exclusionMatched}; " +
@@ -207,7 +207,7 @@ namespace NocturneModernGameplay
                     if (rawResult == 0)
                     {
                         MelonLogger.Msg(
-                            "[NocturneModernGameplay] V3-OPTIONF-F2-R0; " +
+                            "[NocturneAddNewSkills] V3-OPTIONF-F2-R0; " +
                             $"invocation={__state.InvocationId}; bit6WasSet={bit6WasSet}; " +
                             $"pUpSkillID={pUpSkillID}; skillCnt={exclusionSkillIds.Length}; " +
                             $"exclusionMatched={exclusionMatched}; " +
@@ -234,7 +234,7 @@ namespace NocturneModernGameplay
                         exclusionSkillIdsNamed[i] = SkillNameResolver.Format(exclusionSkillIds[i]);
 
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] V3-OPTIONF-F2-EXCLUSION-ALL; " +
+                        "[NocturneAddNewSkills] V3-OPTIONF-F2-EXCLUSION-ALL; " +
                         $"invocation={__state.InvocationId}; observed={exclusionObserved}; " +
                         $"skillCnt={exclusionSkillIds.Length}; " +
                         $"skillIDs=[{string.Join(",", exclusionSkillIds)}]; " +
@@ -255,7 +255,7 @@ namespace NocturneModernGameplay
                 catch (Exception ex)
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] OptionFF2CoreDiagnostics postfix failed safely: {ex.Message}");
+                        $"[NocturneAddNewSkills] OptionFF2CoreDiagnostics postfix failed safely: {ex.Message}");
                 }
             }
             finally
@@ -312,7 +312,7 @@ namespace NocturneModernGameplay
                 if (__3 == null || __3.Pointer == IntPtr.Zero)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] V3-OPTIONF-F2-LIFECYCLE; " +
+                        "[NocturneAddNewSkills] V3-OPTIONF-F2-LIFECYCLE; " +
                         $"stage=ExclusionObserved; invocation={invocation}; infoNull=True.");
                     return;
                 }
@@ -325,7 +325,7 @@ namespace NocturneModernGameplay
                 if (skillIdArrayPtr == IntPtr.Zero)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] V3-OPTIONF-F2-LIFECYCLE; " +
+                        "[NocturneAddNewSkills] V3-OPTIONF-F2-LIFECYCLE; " +
                         $"stage=ExclusionObserved; invocation={invocation}; skillCnt={skillCnt}; arrayNull=True.");
                     OptionFF2CoreDiagnostics.SetExclusionSnapshot(Array.Empty<ushort>());
                     return;
@@ -338,7 +338,7 @@ namespace NocturneModernGameplay
                 if (gbwk == null)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] V3-OPTIONF-F2-LIFECYCLE; " +
+                        "[NocturneAddNewSkills] V3-OPTIONF-F2-LIFECYCLE; " +
                         $"stage=ExclusionObserved; invocation={invocation}; skillCnt={skillCnt}; gbwkNull=True.");
                     return;
                 }
@@ -364,7 +364,7 @@ namespace NocturneModernGameplay
                 if (matched) OptionFF2CoreDiagnostics.MarkExclusionMatched();
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] V3-OPTIONF-F2-LIFECYCLE; " +
+                    "[NocturneAddNewSkills] V3-OPTIONF-F2-LIFECYCLE; " +
                     $"stage=ExclusionObserved; invocation={invocation}; skillCnt={skillCnt}; " +
                     $"exclusionMatched={matched}.");
 
@@ -375,7 +375,7 @@ namespace NocturneModernGameplay
                 if (matched)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] V3-OPTIONF-F2-EXCLUSION; " +
+                        "[NocturneAddNewSkills] V3-OPTIONF-F2-EXCLUSION; " +
                         $"invocation={invocation}; pUpSkillID={pUpSkillID}; skillCnt={skillCnt}; " +
                         $"matchedIndex={matchedIndex}; matchedSkillID={matchedSkillID}; " +
                         $"candidateSkillIDs=[{string.Join(",", candidateIds)}].");
@@ -384,7 +384,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] OptionFF2ExclusionListObserver postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] OptionFF2ExclusionListObserver postfix failed safely: {ex.Message}");
             }
         }
     }

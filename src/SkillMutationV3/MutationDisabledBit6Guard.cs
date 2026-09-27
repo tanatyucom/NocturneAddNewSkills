@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Corrects a pre-existing gap in SkillMutation.Chance = Disabled
     // (SkillMutationChanceControl's DEntry1/DEntry2 raw patches), found via
@@ -61,7 +61,7 @@ namespace NocturneModernGameplay
             {
                 _captured = false;
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] MutationDisabledBit6Guard prefix capture failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] MutationDisabledBit6Guard prefix capture failed safely: {ex.Message}");
             }
         }
 
@@ -84,7 +84,7 @@ namespace NocturneModernGameplay
                 PowerUpMutationCfgDiagnostics.IsTargetUnit(_capturedUnit))
             {
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] MutationDisabledBit6Guard; " +
+                    "[NocturneAddNewSkills] MutationDisabledBit6Guard; " +
                     $"unit={_capturedUnit} bit6WasSetBeforeCore={_bit6WasSetBeforeCore} " +
                     $"originalResult={originalResult} correctedResult={__result} corrected={corrected}.");
             }

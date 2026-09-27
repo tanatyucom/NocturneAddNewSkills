@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Skill Power-Up AddNew V3 - DEFAULTSKILL EXTERNAL ITERATOR STATE PROBE.
     // Read-only observer only. Never writes any field.
@@ -250,7 +250,7 @@ namespace NocturneModernGameplay
                             _refIndexBefore < _lastExitRefIndex && bit200Before;
 
                         MelonLogger.Msg(
-                            "[NocturneModernGameplay] DEFAULTSKILL-CROSSCALL-DIFF; " +
+                            "[NocturneAddNewSkills] DEFAULTSKILL-CROSSCALL-DIFF; " +
                             $"unit={_lastExitUnit}->{unitNow}; " +
                             $"frame={_lastExitFrame}->{frameNow}; " +
                             $"seq={_lastExitSeq}->{seqNow}; " +
@@ -274,7 +274,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] DefaultSkillExternalStateProbe prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] DefaultSkillExternalStateProbe prefix failed safely: {ex.Message}");
             }
         }
 
@@ -351,7 +351,7 @@ namespace NocturneModernGameplay
                 catch { /* leave defaults */ }
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] DEFAULTSKILL-EXTERNAL-STATE; " +
+                    "[NocturneAddNewSkills] DEFAULTSKILL-EXTERNAL-STATE; " +
                     $"frame={frame}; " +
                     $"counterOk={_counterReadOkBefore}/{counterOkAfter}; counter {_counterBefore}->{counterAfter}; " +
                     $"counterObj 0x{_counterObjPtrBefore:X}->0x{counterObjPtrAfter:X}; " +
@@ -369,7 +369,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] DefaultSkillExternalStateProbe postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] DefaultSkillExternalStateProbe postfix failed safely: {ex.Message}");
             }
         }
 

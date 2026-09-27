@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     internal sealed class GameplayFeature
     {

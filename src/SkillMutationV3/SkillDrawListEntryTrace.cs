@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // HIDDEN NEW SKILL ENTRY (master-archive.md Section 22) - cmpDrawSkillList
     // entry-point trace (read-only, no writes). Companion to
@@ -43,7 +43,7 @@ namespace NocturneModernGameplay
                 if (method == null)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] SKILLDRAWLIST-PATCH-STATUS; " +
+                        "[NocturneAddNewSkills] SKILLDRAWLIST-PATCH-STATUS; " +
                         "methodInfo=NULL (GetMethod failed to resolve cmpDrawSkill.cmpDrawSkillList).");
                     return;
                 }
@@ -53,7 +53,7 @@ namespace NocturneModernGameplay
                 int postfixes = info?.Postfixes?.Count ?? 0;
                 IntPtr fnPtr = method.MethodHandle.GetFunctionPointer();
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] SKILLDRAWLIST-PATCH-STATUS; " +
+                    "[NocturneAddNewSkills] SKILLDRAWLIST-PATCH-STATUS; " +
                     $"methodInfo=FOUND; declaringType={method.DeclaringType}; " +
                     $"prefixes={prefixes}; postfixes={postfixes}; " +
                     $"functionPointer=0x{fnPtr.ToInt64():X}.");
@@ -61,7 +61,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] SkillDrawListEntryTrace.LogPatchStatus failed: {ex}");
+                    $"[NocturneAddNewSkills] SkillDrawListEntryTrace.LogPatchStatus failed: {ex}");
             }
         }
 
@@ -88,7 +88,7 @@ namespace NocturneModernGameplay
                 if (_totalCalls == 1 || _totalCalls % 500 == 0)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] SKILLDRAWLIST-UNGATED-HEARTBEAT; " +
+                        "[NocturneAddNewSkills] SKILLDRAWLIST-UNGATED-HEARTBEAT; " +
                         $"totalCalls={_totalCalls}; frame={UnityEngine.Time.frameCount}; seq={seqForHeartbeat}.");
                 }
 
@@ -119,13 +119,13 @@ namespace NocturneModernGameplay
 
                 int frame = UnityEngine.Time.frameCount;
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] SKILLDRAWLIST-ENTRY-TRACE; " +
+                    "[NocturneAddNewSkills] SKILLDRAWLIST-ENTRY-TRACE; " +
                     $"frame={frame}; {snapshot}.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] SkillDrawListEntryTrace prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] SkillDrawListEntryTrace prefix failed safely: {ex.Message}");
             }
         }
     }

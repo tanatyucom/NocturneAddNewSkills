@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // PRESENTATION FIX (Queue-era archaeology, adapted for V3) - part 2:
     // the actual LIST ROW LABEL TEXT source.
@@ -72,14 +72,14 @@ namespace NocturneModernGameplay
                 if (before != __0)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] ADDNEW-SKILLNAME-LABEL-FIX; " +
+                        "[NocturneAddNewSkills] ADDNEW-SKILLNAME-LABEL-FIX; " +
                         $"unit={unit}; context={__1}; skillId {before}->{__0}.");
                 }
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] AddNewSkillNameLabelFix prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] AddNewSkillNameLabelFix prefix failed safely: {ex.Message}");
             }
         }
 

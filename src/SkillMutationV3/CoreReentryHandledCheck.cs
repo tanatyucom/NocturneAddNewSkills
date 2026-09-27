@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // OLD QUEUE LOOP SUPPRESSION ARCHAEOLOGY - ONE-SHOT CORE CONSUMPTION
     // GUARD (suppression PoC).
@@ -102,7 +102,7 @@ namespace NocturneModernGameplay
 
                     int frameEpisodeSuppress = UnityEngine.Time.frameCount;
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] CORE-EPISODE-LATCH; " +
+                        "[NocturneAddNewSkills] CORE-EPISODE-LATCH; " +
                         $"frame={frameEpisodeSuppress}; unit={_unitBefore}; stockPtr=0x{stockPtr:X}; " +
                         $"candidate={eventParam}; action=SUPPRESS-EPISODE-LATCH.");
                     return false;
@@ -128,7 +128,7 @@ namespace NocturneModernGameplay
 
                     int frameAllow = UnityEngine.Time.frameCount;
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] CORE-CONSUMPTION; " +
+                        "[NocturneAddNewSkills] CORE-CONSUMPTION; " +
                         $"frame={frameAllow}; unit={_unitBefore}; stockPtr=0x{stockPtr:X}; " +
                         $"candidate={eventParam}; action=ALLOW-FIRST.");
                     return true;
@@ -144,7 +144,7 @@ namespace NocturneModernGameplay
 
                 int frameSuppress = UnityEngine.Time.frameCount;
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] CORE-CONSUMPTION; " +
+                    "[NocturneAddNewSkills] CORE-CONSUMPTION; " +
                     $"frame={frameSuppress}; unit={_unitBefore}; stockPtr=0x{stockPtr:X}; " +
                     $"candidate={eventParam}; action=SUPPRESS-REENTRY.");
                 return false;
@@ -152,7 +152,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] CoreReentryHandledCheck prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] CoreReentryHandledCheck prefix failed safely: {ex.Message}");
                 return true;
             }
         }
@@ -197,7 +197,7 @@ namespace NocturneModernGameplay
                 // as a diagnostic asset - see 01_CURRENT_STATE.md Phase H).
                 if (MultiLevelStateTransitionTrace.Enabled)
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] MULTILEVEL-CORE; " +
+                    "[NocturneAddNewSkills] MULTILEVEL-CORE; " +
                     $"frame={frame}; unit={_unitBefore}; stockPtr=0x{_stockPtrBefore:X}; " +
                     $"level={_levelBefore}; levelUpCnt={_levelUpCntBefore}; " +
                     $"coreResultNative={coreResultNative}; coreResultAfter={__result}; " +
@@ -211,7 +211,7 @@ namespace NocturneModernGameplay
                 if (_action == "PASSTHROUGH-NOT-HANDLED" && __result == 0) return;
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] CORE-REENTRY-HANDLED-CHECK; " +
+                    "[NocturneAddNewSkills] CORE-REENTRY-HANDLED-CHECK; " +
                     $"frame={frame}; unit={_unitBefore}; stockPtr=0x{_stockPtrBefore:X}; " +
                     $"eventParam={_eventParamBefore}; action={_action}; " +
                     $"coreResult={__result}; " +
@@ -221,7 +221,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] CoreReentryHandledCheck postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] CoreReentryHandledCheck postfix failed safely: {ex.Message}");
             }
         }
     }

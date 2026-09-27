@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Skill Power-Up AddNew V3 - DEFAULTSKILL RUNTIME OBSERVATION
     // VALIDATION / RAW POINTER / RAW MEMORY TRACE.
@@ -147,7 +147,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] RawOwnershipObservationTrace prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] RawOwnershipObservationTrace prefix failed safely: {ex.Message}");
             }
         }
 
@@ -186,7 +186,7 @@ namespace NocturneModernGameplay
                                              SameArray(after.RawSkills, after.WrapperSkills);
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] RAW-OWNERSHIP-PREFIX; " +
+                    "[NocturneAddNewSkills] RAW-OWNERSHIP-PREFIX; " +
                     $"gbwkPtr=0x{_before.GbwkPtr:X}; pCurrentStockField=0x{_before.PCurrentStockField:X}; " +
                     $"workStockField=0x{_before.WorkStockField:X}; stockWrapperPtr=0x{_before.StockWrapperPtr:X}; " +
                     $"rawUnitUnverifiedOffset0x14={_before.RawUnit}; rawSkillCnt={_before.RawSkillCnt}; " +
@@ -197,7 +197,7 @@ namespace NocturneModernGameplay
                     $"rawPending32={_before.RawPending32}.");
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] RAW-OWNERSHIP-POSTFIX; " +
+                    "[NocturneAddNewSkills] RAW-OWNERSHIP-POSTFIX; " +
                     $"gbwkPtr=0x{after.GbwkPtr:X}; pCurrentStockField=0x{after.PCurrentStockField:X}; " +
                     $"workStockField=0x{after.WorkStockField:X}; stockWrapperPtr=0x{after.StockWrapperPtr:X}; " +
                     $"rawUnitUnverifiedOffset0x14={after.RawUnit}; rawSkillCnt={after.RawSkillCnt}; " +
@@ -208,7 +208,7 @@ namespace NocturneModernGameplay
                     $"rawPending32={after.RawPending32}.");
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] RAW-OWNERSHIP-VERDICT; " +
+                    "[NocturneAddNewSkills] RAW-OWNERSHIP-VERDICT; " +
                     $"samePCurrentStockPointer={samePCurrentStockPointer}; sameWorkStockPointer={sameWorkStockPointer}; " +
                     $"rawWrapperAgreeBefore={rawWrapperAgreeBefore}; rawWrapperAgreeAfter={rawWrapperAgreeAfter}; " +
                     $"rawSkillCntChanged={_before.RawSkillCnt != after.RawSkillCnt}; " +
@@ -218,7 +218,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] RawOwnershipObservationTrace postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] RawOwnershipObservationTrace postfix failed safely: {ex.Message}");
             }
         }
 

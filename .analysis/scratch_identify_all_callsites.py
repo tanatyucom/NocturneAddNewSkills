@@ -1,5 +1,5 @@
 import struct
-exec(open(r"C:\SMT3Modding\NocturneModernGameplay\.analysis\resolve_name_to_va.py").read().split("import sys")[0])
+exec(open(r"C:\SMT3Modding\NocturneAddNewSkills\.analysis\resolve_name_to_va.py").read().split("import sys")[0])
 
 candidates_com = [0x1822486DE, 0x18242175C, 0x1824250E5, 0x1824253D2, 0x182426CBE]
 candidates_comex = [0x182173BF0, 0x1821C7A82, 0x1821C7CCF, 0x1821C7F89, 0x1821C8803,

@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Read-only investigation telemetry: logs GBWK.SeqInfo.Current transitions
     // for GBWK.pCurrentStock, filtered to unit 59/60 (PowerUpMutationCfgDiagnostics
@@ -57,14 +57,14 @@ namespace NocturneModernGameplay
                 bool bit6 = (flagRaw & 0x40) != 0;
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] V3-SEQ-TRANSITION; " +
+                    "[NocturneAddNewSkills] V3-SEQ-TRANSITION; " +
                     $"frame={frame} unit={unit} from={fromSeq} to={seq} " +
                     $"pUpSkillResult={pUpSkillResult} pUpSkillIndex={pUpSkillIndex} " +
                     $"stockFlagRaw=0x{flagRaw:X} bit6={bit6}.");
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneModernGameplay] V3-SEQ-TRANSITION failed safely: {ex.Message}");
+                MelonLogger.Warning($"[NocturneAddNewSkills] V3-SEQ-TRANSITION failed safely: {ex.Message}");
             }
         }
     }

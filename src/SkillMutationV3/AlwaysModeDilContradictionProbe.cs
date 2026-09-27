@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // ALWAYS/dil CONTRADICTION VERIFICATION PROBE (2026-09-19). Read-only.
     // Never writes any native field, never touches __result.
@@ -95,7 +95,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] AlwaysModeDilContradictionProbe prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] AlwaysModeDilContradictionProbe prefix failed safely: {ex.Message}");
             }
         }
 
@@ -110,7 +110,7 @@ namespace NocturneModernGameplay
                 int frame = UnityEngine.Time.frameCount;
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] ALWAYSDIL-PROBE; " +
+                    "[NocturneAddNewSkills] ALWAYSDIL-PROBE; " +
                     $"frame={frame}; unit={_unit}; stockPtr=0x{_stockPtr:X}; " +
                     $"pUpSkillIdAtPrefix={_pUpSkillIdAtPrefix}; pUpSkillIdAtPostfix={pUpSkillIdAtPostfix}; " +
                     $"rawResult={__result}; " +
@@ -120,7 +120,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] AlwaysModeDilContradictionProbe postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] AlwaysModeDilContradictionProbe postfix failed safely: {ex.Message}");
             }
         }
     }

@@ -1,8 +1,8 @@
-# NocturneModernGameplay Roadmap
+# NocturneAddNewSkills Roadmap
 
 ## Project Philosophy
 
-NocturneModernGameplayは、SMT3の世界観・戦闘・基本設計を維持しながら、
+NocturneAddNewSkills(旧NocturneModernGameplay)は、SMT3の世界観・戦闘・基本設計を維持しながら、
 難易度、確率、育成効率、リソース管理などゲーム結果に関わる部分を現代化します。
 SMT5以降に近い快適性を取り入れますが、「何でも入りQoL Pack」にはしません。
 
@@ -28,7 +28,7 @@ Quick Healはゲーム内で習得済みの回復スキルと実際のMPを使�
 Force Encounterも通常エンカウント可能というnative判定を利用して、戦闘開始操作だけを
 短縮します。このため、どちらもController側の責任です。
 
-### NocturneModernGameplay
+### NocturneAddNewSkills
 
 難易度、確率、進行、育成効率、報酬、リソース管理など、ゲーム結果に影響する変更を
 担当します。Controller側の入力・操作機能は再実装しません。
@@ -52,7 +52,7 @@ Force Encounterも通常エンカウント可能というnative判定を利用�
 Vanilla:
 Original Skill -> Mutated Skill
 
-NocturneModernGameplay:
+NocturneAddNewSkills:
 Original Skill remains + Mutated Skill is learned
 ```
 

@@ -1,7 +1,7 @@
 using System;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Zero-base implementation of [SkillMutation] Chance = Native / Always /
     // Disabled, per the Canonical CFG in 01_CURRENT_STATE.md
@@ -153,7 +153,7 @@ namespace NocturneModernGameplay
 
                 _resolved = true;
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] SkillMutationChanceControl resolved; all sites vanilla-or-known.");
+                    "[NocturneAddNewSkills] SkillMutationChanceControl resolved; all sites vanilla-or-known.");
 
                 // Defensive: reconcile to Native at startup regardless of any
                 // unexpected leftover patched state (should always be
@@ -165,7 +165,7 @@ namespace NocturneModernGameplay
             {
                 _resolved = false;
                 MelonLogger.Error(
-                    $"[NocturneModernGameplay] SkillMutationChanceControl init refused safely: {ex}");
+                    $"[NocturneAddNewSkills] SkillMutationChanceControl init refused safely: {ex}");
             }
         }
 
@@ -174,7 +174,7 @@ namespace NocturneModernGameplay
             if (!_resolved)
             {
                 MelonLogger.Warning(
-                    "[NocturneModernGameplay] SkillMutationChanceControl not resolved; ignoring SetMode.");
+                    "[NocturneAddNewSkills] SkillMutationChanceControl not resolved; ignoring SetMode.");
                 return;
             }
             // Fail-safe: Always depends on SharedSkillChangeOuterGateControl
@@ -188,7 +188,7 @@ namespace NocturneModernGameplay
             if (mode == NativeChanceMode.Always && !SharedSkillChangeOuterGateControl.IsResolved)
             {
                 MelonLogger.Error(
-                    "[NocturneModernGameplay] SkillMutationChanceControl refusing Always; " +
+                    "[NocturneAddNewSkills] SkillMutationChanceControl refusing Always; " +
                     "SharedSkillChangeOuterGateControl is not resolved (outer gate cannot be forced). " +
                     "Mode left unchanged.");
                 return;
@@ -232,14 +232,14 @@ namespace NocturneModernGameplay
                 }
 
                 Mode = mode;
-                MelonLogger.Msg($"[NocturneModernGameplay] SkillMutationChanceControl mode set; mode={mode}.");
+                MelonLogger.Msg($"[NocturneAddNewSkills] SkillMutationChanceControl mode set; mode={mode}.");
 
                 SharedSkillChangeOuterGateControl.Recompute();
             }
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneModernGameplay] SkillMutationChanceControl SetMode({mode}) failed safely: {ex}");
+                    $"[NocturneAddNewSkills] SkillMutationChanceControl SetMode({mode}) failed safely: {ex}");
             }
         }
     }

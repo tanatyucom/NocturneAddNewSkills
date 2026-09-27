@@ -8,7 +8,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Skill Power-Up AddNew V3 - HARMONY / IL2CPP INVOCATION BOUNDARY
     // INVESTIGATION. Read-only observer only. Never writes any field, byte,
@@ -105,7 +105,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] HarmonyInvocationBoundaryTrace prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] HarmonyInvocationBoundaryTrace prefix failed safely: {ex.Message}");
             }
         }
 
@@ -126,7 +126,7 @@ namespace NocturneModernGameplay
                 bool samePointer = postfixPCurrentStock == _prefixPCurrentStock;
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] HARMONY-BOUNDARY-TIMING; " +
+                    "[NocturneAddNewSkills] HARMONY-BOUNDARY-TIMING; " +
                     $"prefixThreadId={_prefixThreadId}; postfixThreadId={postfixThreadId}; sameThread={sameThread}; " +
                     $"prefixPCurrentStock=0x{_prefixPCurrentStock:X}; postfixPCurrentStock=0x{postfixPCurrentStock:X}; samePointer={samePointer}; " +
                     $"rawSkillCntBefore={_prefixRawSkillCnt}; rawSkillCntAfter={postfixRawSkillCnt}; " +
@@ -135,7 +135,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] HarmonyInvocationBoundaryTrace postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] HarmonyInvocationBoundaryTrace postfix failed safely: {ex.Message}");
             }
         }
 
@@ -172,13 +172,13 @@ namespace NocturneModernGameplay
                 if (method == null)
                 {
                     MelonLogger.Warning(
-                        "[NocturneModernGameplay] HARMONY-BOUNDARY-PATCHINFO; " +
+                        "[NocturneAddNewSkills] HARMONY-BOUNDARY-PATCHINFO; " +
                         "could not reflect MethodBase for rstupdate.rstUpdateSeqDefaultSkill.");
                     return;
                 }
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] HARMONY-BOUNDARY-METHODBASE; " +
+                    "[NocturneAddNewSkills] HARMONY-BOUNDARY-METHODBASE; " +
                     $"declaringType={method.DeclaringType}; name={method.Name}; " +
                     $"methodHandleValue=0x{method.MethodHandle.Value.ToInt64():X}.");
 
@@ -186,7 +186,7 @@ namespace NocturneModernGameplay
                 if (patches == null)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] HARMONY-BOUNDARY-PATCHINFO; " +
+                        "[NocturneAddNewSkills] HARMONY-BOUNDARY-PATCHINFO; " +
                         "Harmony.GetPatchInfo returned null (no patches registered via this Harmony instance's bookkeeping).");
                     return;
                 }
@@ -199,7 +199,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] HARMONY-BOUNDARY-PATCHINFO dump failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] HARMONY-BOUNDARY-PATCHINFO dump failed safely: {ex.Message}");
             }
         }
 
@@ -207,13 +207,13 @@ namespace NocturneModernGameplay
         {
             if (patchList == null || patchList.Count == 0)
             {
-                MelonLogger.Msg($"[NocturneModernGameplay] HARMONY-BOUNDARY-PATCHLIST; kind={kind}; count=0.");
+                MelonLogger.Msg($"[NocturneAddNewSkills] HARMONY-BOUNDARY-PATCHLIST; kind={kind}; count=0.");
                 return;
             }
             foreach (var p in patchList)
             {
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] HARMONY-BOUNDARY-PATCHLIST; " +
+                    "[NocturneAddNewSkills] HARMONY-BOUNDARY-PATCHLIST; " +
                     $"kind={kind}; owner={p.owner}; index={p.index}; priority={p.priority}; " +
                     $"patchMethod={p.PatchMethod.DeclaringType}.{p.PatchMethod.Name}; before=[{string.Join(",", p.before)}]; after=[{string.Join(",", p.after)}].");
             }
@@ -236,7 +236,7 @@ namespace NocturneModernGameplay
                     if (value is not IntPtr ptr)
                     {
                         MelonLogger.Msg(
-                            $"[NocturneModernGameplay] HARMONY-BOUNDARY-NATIVEFIELD; field={f.Name}; value=non-IntPtr.");
+                            $"[NocturneAddNewSkills] HARMONY-BOUNDARY-NATIVEFIELD; field={f.Name}; value=non-IntPtr.");
                         continue;
                     }
 
@@ -268,7 +268,7 @@ namespace NocturneModernGameplay
                     }
 
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] HARMONY-BOUNDARY-NATIVEFIELD; " +
+                        "[NocturneAddNewSkills] HARMONY-BOUNDARY-NATIVEFIELD; " +
                         $"field={f.Name}; methodInfoPtr=0x{ptr.ToInt64():X}; " +
                         $"methodPointerFieldReadOk={readOk}; methodPointerValue=0x{methodPointerValue:X}; location={moduleInfo}.");
                 }
@@ -276,14 +276,14 @@ namespace NocturneModernGameplay
                 if (matched == 0)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] HARMONY-BOUNDARY-NATIVEFIELD; " +
+                        "[NocturneAddNewSkills] HARMONY-BOUNDARY-NATIVEFIELD; " +
                         "no static IntPtr field on rstupdate matched name filter 'DefaultSkill'.");
                 }
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] HARMONY-BOUNDARY-NATIVEFIELD dump failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] HARMONY-BOUNDARY-NATIVEFIELD dump failed safely: {ex.Message}");
             }
         }
 
@@ -295,7 +295,7 @@ namespace NocturneModernGameplay
                 if (gaBase == IntPtr.Zero)
                 {
                     MelonLogger.Warning(
-                        "[NocturneModernGameplay] HARMONY-BOUNDARY-BYTES; GameAssembly.dll module base unavailable.");
+                        "[NocturneAddNewSkills] HARMONY-BOUNDARY-BYTES; GameAssembly.dll module base unavailable.");
                     return;
                 }
 
@@ -319,7 +319,7 @@ namespace NocturneModernGameplay
                 }
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] HARMONY-BOUNDARY-BYTES; " +
+                    "[NocturneAddNewSkills] HARMONY-BOUNDARY-BYTES; " +
                     $"diskVA=0x{DefaultSkillVA:X}; runtimeAddr=0x{runtimeAddr.ToInt64():X}; " +
                     $"identical={identical}; firstDiffIndex={firstDiffIndex}; " +
                     $"liveBytesHex={BytesToHex(liveBytes)}.");
@@ -359,12 +359,12 @@ namespace NocturneModernGameplay
                         catch (Exception exSlot)
                         {
                             MelonLogger.Warning(
-                                "[NocturneModernGameplay] HARMONY-BOUNDARY-BYTES-DETOUR; " +
+                                "[NocturneAddNewSkills] HARMONY-BOUNDARY-BYTES-DETOUR; " +
                                 $"jmp [rip+disp32] pointer slot 0x{pointerSlot:X} unreadable: {exSlot.Message}");
                         }
 
                         MelonLogger.Msg(
-                            "[NocturneModernGameplay] HARMONY-BOUNDARY-BYTES-DETOUR; " +
+                            "[NocturneAddNewSkills] HARMONY-BOUNDARY-BYTES-DETOUR; " +
                             $"kind=jmp [rip+disp32] (indirect, absolute-via-memory); atOffset={firstDiffIndex}; " +
                             $"disp32=0x{disp32:X}; pointerSlot=0x{pointerSlot:X}; " +
                             $"slotReadOk={slotReadOk}; finalTarget=0x{finalTarget:X}; " +
@@ -378,7 +378,7 @@ namespace NocturneModernGameplay
                     else
                     {
                         MelonLogger.Msg(
-                            "[NocturneModernGameplay] HARMONY-BOUNDARY-BYTES-DETOUR; " +
+                            "[NocturneAddNewSkills] HARMONY-BOUNDARY-BYTES-DETOUR; " +
                             "first differing byte is not a recognized jmp/call rel32 or jmp [rip+disp32] opcode; " +
                             "no automatic target interpretation performed.");
                     }
@@ -387,7 +387,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] HARMONY-BOUNDARY-BYTES dump failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] HARMONY-BOUNDARY-BYTES dump failed safely: {ex.Message}");
             }
         }
 
@@ -399,7 +399,7 @@ namespace NocturneModernGameplay
             bool insideGameAssembly = location.StartsWith("GameAssembly.dll", StringComparison.OrdinalIgnoreCase);
 
             MelonLogger.Msg(
-                "[NocturneModernGameplay] HARMONY-BOUNDARY-BYTES-DETOUR-TARGET; " +
+                "[NocturneAddNewSkills] HARMONY-BOUNDARY-BYTES-DETOUR-TARGET; " +
                 $"kind={kind}; atOffset={atOffset}; targetRuntimeAddr=0x{target:X}; " +
                 $"insideGameAssembly={insideGameAssembly}; " +
                 $"targetRvaFromGameAssemblyBase=0x{targetRvaFromGa:X}; targetPreferredVaIfInGameAssembly=0x{targetPreferredVa:X}; " +
@@ -412,13 +412,13 @@ namespace NocturneModernGameplay
                     byte[] preview = new byte[32];
                     Marshal.Copy(new IntPtr(target), preview, 0, preview.Length);
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] HARMONY-BOUNDARY-BYTES-DETOUR-PREVIEW; " +
+                        "[NocturneAddNewSkills] HARMONY-BOUNDARY-BYTES-DETOUR-PREVIEW; " +
                         $"kind={kind}; previewBytesHex={BytesToHex(preview)}.");
                 }
                 catch (Exception ex)
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] HARMONY-BOUNDARY-BYTES-DETOUR-PREVIEW read failed: {ex.Message}");
+                        $"[NocturneAddNewSkills] HARMONY-BOUNDARY-BYTES-DETOUR-PREVIEW read failed: {ex.Message}");
                 }
             }
         }

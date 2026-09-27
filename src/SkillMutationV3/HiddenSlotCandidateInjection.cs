@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // HIDDEN NEW SKILL ENTRY - presentation candidate injection.
     //
@@ -219,7 +219,7 @@ namespace NocturneModernGameplay
                     _lastLoggedUnit = pStock.id;
                     _lastLoggedTarget = target;
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] HIDDENSLOT-INJECT; " +
+                        "[NocturneAddNewSkills] HIDDENSLOT-INJECT; " +
                         $"frame={UnityEngine.Time.frameCount}; unit={pStock.id}; " +
                         $"target={SkillNameResolver.Format(target)}; " +
                         $"targetLevelLen={targetLevelArray.Length}; skillIdLen={skillIdArray.Length}.");
@@ -228,7 +228,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] HiddenSlotCandidateInjection postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] HiddenSlotCandidateInjection postfix failed safely: {ex.Message}");
             }
         }
     }

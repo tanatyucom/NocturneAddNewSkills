@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text.Json;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     internal sealed class FeatureMetadataSnapshot
     {
@@ -33,7 +33,7 @@ namespace NocturneModernGameplay
     internal sealed class ProviderMetadataSnapshot
     {
         public string ProviderId { get; set; } = "nocturne_modern_gameplay";
-        public string ProviderName { get; set; } = "Nocturne Modern Gameplay";
+        public string ProviderName { get; set; } = "Nocturne Add New Skills";
         public string Version { get; set; } = "0.1.0";
         public List<FeatureMetadataSnapshot> Features { get; set; } = new();
         public string Error { get; set; } = string.Empty;
@@ -135,7 +135,7 @@ namespace NocturneModernGameplay
                 }
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] SETTINGS-RELOAD; " +
+                    "[NocturneAddNewSkills] SETTINGS-RELOAD; " +
                     $"sourceMutationChance={sourceMutationChance}; sourcePowerUpChance={sourcePowerUpChance}; " +
                     $"sourceRepeat={sourceRepeat}; " +
                     $"appliedMutationChance={GameplaySettingsService.SkillMutationChance}; " +
@@ -155,6 +155,8 @@ namespace NocturneModernGameplay
 
         private static string ModDirectory =>
             Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
+        // Keeps the pre-rename file name (and ProviderId): ModernController
+        // discovers providers via "NocturneModern*.features.json".
         private static string SnapshotPath =>
             Path.Combine(ModDirectory, "NocturneModernGameplay.features.json");
         private static string RequestPath =>

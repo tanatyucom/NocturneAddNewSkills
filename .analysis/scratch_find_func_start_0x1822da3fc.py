@@ -1,5 +1,5 @@
 import struct
-exec(open(r"C:\SMT3Modding\NocturneModernGameplay\.analysis\resolve_name_to_va.py").read().split("import sys")[0])
+exec(open(r"C:\SMT3Modding\NocturneAddNewSkills\.analysis\resolve_name_to_va.py").read().split("import sys")[0])
 
 target = 0x1822DA3FC
 

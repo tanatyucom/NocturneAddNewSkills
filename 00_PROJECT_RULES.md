@@ -1,4 +1,4 @@
-# NocturneModernGameplay Project Rules
+# NocturneAddNewSkills Project Rules
 
 ## 基本方針
 

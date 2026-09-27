@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Read-only investigation telemetry for the native bit6 CLEAR mechanism
     // inside rstupdate.rstUpdateSeqSkillPowerUp (VA 0x18228C770), added this
@@ -122,7 +122,7 @@ namespace NocturneModernGameplay
             {
                 _captured = false;
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] SeqSkillPowerUpBit6ClearDiagnostics prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] SeqSkillPowerUpBit6ClearDiagnostics prefix failed safely: {ex.Message}");
             }
         }
 
@@ -145,7 +145,7 @@ namespace NocturneModernGameplay
                 int? state1CAfter = TryReadState1C();
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] V3-SEQ10-BIT6; " +
+                    "[NocturneAddNewSkills] V3-SEQ10-BIT6; " +
                     $"unit={_unit} frame={frame} " +
                     $"seqBefore={_seqBefore} seqAfter={seqAfter} " +
                     $"flagBefore={_flagBefore} flagAfter={flagAfter} " +
@@ -158,7 +158,7 @@ namespace NocturneModernGameplay
                 if (_bit6Before && !bit6After)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] V3-BIT6-CLEAR; " +
+                        "[NocturneAddNewSkills] V3-BIT6-CLEAR; " +
                         $"unit={_unit} frame={frame} seqBefore={_seqBefore} seqAfter={seqAfter} " +
                         $"flagBefore={_flagBefore} flagAfter={flagAfter} " +
                         $"pUpResult={pUpResultAfter} " +
@@ -168,7 +168,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] SeqSkillPowerUpBit6ClearDiagnostics postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] SeqSkillPowerUpBit6ClearDiagnostics postfix failed safely: {ex.Message}");
             }
         }
     }

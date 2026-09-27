@@ -1,13 +1,13 @@
 using MelonLoader;
 
 [assembly: MelonInfo(
-    typeof(NocturneModernGameplay.ModMain),
-    "Nocturne Modern Gameplay",
+    typeof(NocturneAddNewSkills.ModMain),
+    "Nocturne Add New Skills",
     "0.1.0",
     "Gray Ghost")]
 [assembly: MelonGame(null, "smt3hd")]
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     public sealed class ModMain : MelonMod
     {
@@ -41,7 +41,7 @@ namespace NocturneModernGameplay
             SkillNameCostDrawFieldTrace.LogPatchStatus();
             SkillMakeStrColFieldTrace.LogPatchStatus();
             LoggerInstance.Msg(
-                "[NocturneModernGameplay] Loaded standalone; " +
+                "[NocturneAddNewSkills] Loaded standalone; " +
                 "GUI metadata bridge is optional.");
         }
 

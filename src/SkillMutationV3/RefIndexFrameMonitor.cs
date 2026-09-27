@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // DEFAULTSKILL REFINDEX ROLLBACK INVESTIGATION - FRAME-BOUNDARY TIMING.
     // Read-only observer only. Never writes any field, never touches native
@@ -133,7 +133,7 @@ namespace NocturneModernGameplay
                 sbyte pUpSkillResult = gbwk?.PUpSkillResult ?? 0;
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] REFINDEX-FRAME-CHANGE; " +
+                    "[NocturneAddNewSkills] REFINDEX-FRAME-CHANGE; " +
                     $"frame={frame}; unit={unit}; " +
                     $"refTableObjSame={refTableObj == prevRefTableObj}; " +
                     $"refTableObj 0x{prevRefTableObj:X}->0x{refTableObj:X}; " +
@@ -145,7 +145,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] RefIndexFrameMonitor postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] RefIndexFrameMonitor postfix failed safely: {ex.Message}");
             }
         }
 

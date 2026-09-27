@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Mutation AddNew - EMPTY-SLOT PoC (2026-09-15, User-approved design
     // candidate B).
@@ -73,7 +73,7 @@ namespace NocturneModernGameplay
                     if (_eventCommitted)
                     {
                         MelonLogger.Msg(
-                            "[NocturneModernGameplay] MUTADDNEW-LATCH-RESET; " +
+                            "[NocturneAddNewSkills] MUTADDNEW-LATCH-RESET; " +
                             $"unit={_committedUnit}; pUpSkillResult={gbwk.PUpSkillResult}.");
                     }
                     _eventCommitted = false;
@@ -118,7 +118,7 @@ namespace NocturneModernGameplay
                     {
                         _blockLoggedForCurrentLatch = true;
                         MelonLogger.Msg(
-                            "[NocturneModernGameplay] MUTADDNEW-LATCH-BLOCK; " +
+                            "[NocturneAddNewSkills] MUTADDNEW-LATCH-BLOCK; " +
                             $"unit={unit}; originalIndex={originalIndex}; " +
                             $"source={SkillNameResolver.Format(sourceSkillId)}; " +
                             $"target={SkillNameResolver.Format(targetSkillId)}; " +
@@ -132,7 +132,7 @@ namespace NocturneModernGameplay
                 if (skillCnt < 0 || skillCnt >= LogicalSkillCapacity || arrayLength < LogicalSkillCapacity)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] MUTADDNEW-POC-SKIP; " +
+                        "[NocturneAddNewSkills] MUTADDNEW-POC-SKIP; " +
                         $"invocation={invocation}; unit={unit}; reason=no-capacity.");
                     return; // full capacity: MutationFullCapacityAddNewBridgePoc's domain
                 }
@@ -147,7 +147,7 @@ namespace NocturneModernGameplay
                 if (!packed)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] MUTADDNEW-POC-SKIP; " +
+                        "[NocturneAddNewSkills] MUTADDNEW-POC-SKIP; " +
                         $"invocation={invocation}; unit={unit}; reason=non-packed-skill-layout.");
                     return;
                 }
@@ -167,7 +167,7 @@ namespace NocturneModernGameplay
                 _skillsBefore = skillsBefore;
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] MUTADDNEW-POC-BEGIN; " +
+                    "[NocturneAddNewSkills] MUTADDNEW-POC-BEGIN; " +
                     $"invocation={_invocation}; unit={_unit}; " +
                     $"originalIndex={_originalIndex}; emptySlot={_emptySlot}; " +
                     $"skillCnt={_originalSkillCnt}; " +
@@ -182,7 +182,7 @@ namespace NocturneModernGameplay
             {
                 _active = false;
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] MutationAddNewEmptySlotPoc prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] MutationAddNewEmptySlotPoc prefix failed safely: {ex.Message}");
             }
         }
 
@@ -210,7 +210,7 @@ namespace NocturneModernGameplay
                 int currentSkillCnt = stock.skillcnt;
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] MUTADDNEW-POC-END; " +
+                    "[NocturneAddNewSkills] MUTADDNEW-POC-END; " +
                     $"invocation={_invocation}; unit={_unit}; " +
                     $"skillsAfter=[{string.Join(",", skillsAfter)}]; " +
                     $"sourcePreserved={sourcePreserved}; targetAtEmptySlot={targetAtEmptySlot}; " +
@@ -219,19 +219,19 @@ namespace NocturneModernGameplay
                 if (!targetAtEmptySlot)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] MUTADDNEW-POC-NO-COMMIT; " +
+                        "[NocturneAddNewSkills] MUTADDNEW-POC-NO-COMMIT; " +
                         $"invocation={_invocation}; unit={_unit}; reason=target-not-written.");
                 }
                 else if (!sourcePreserved)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] MUTADDNEW-POC-NO-COMMIT; " +
+                        "[NocturneAddNewSkills] MUTADDNEW-POC-NO-COMMIT; " +
                         $"invocation={_invocation}; unit={_unit}; reason=source-not-preserved.");
                 }
                 else if (currentSkillCnt != _originalSkillCnt)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] MUTADDNEW-POC-NO-COMMIT; " +
+                        "[NocturneAddNewSkills] MUTADDNEW-POC-NO-COMMIT; " +
                         $"invocation={_invocation}; unit={_unit}; reason=skillcnt-changed-unexpectedly.");
                 }
                 else
@@ -245,13 +245,13 @@ namespace NocturneModernGameplay
                     _committedTargetSkillId = _targetSkillId;
 
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] MUTADDNEW-LATCH-SET; " +
+                        "[NocturneAddNewSkills] MUTADDNEW-LATCH-SET; " +
                         $"unit={_unit}; originalIndex={_originalIndex}; " +
                         $"source={SkillNameResolver.Format(_sourceSkillId)}; " +
                         $"target={SkillNameResolver.Format(_targetSkillId)}.");
 
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] MUTADDNEW-POC-COMMIT; " +
+                        "[NocturneAddNewSkills] MUTADDNEW-POC-COMMIT; " +
                         $"invocation={_invocation}; unit={_unit}; " +
                         $"sourceSlot={_originalIndex}; targetSlot={_emptySlot}; " +
                         $"source={SkillNameResolver.Format(_sourceSkillId)}; " +
@@ -262,7 +262,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] MutationAddNewEmptySlotPoc postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] MutationAddNewEmptySlotPoc postfix failed safely: {ex.Message}");
             }
             finally
             {
@@ -277,7 +277,7 @@ namespace NocturneModernGameplay
                 if (__exception != null)
                 {
                     MelonLogger.Warning(
-                        "[NocturneModernGameplay] MUTADDNEW-POC-EXCEPTION; " +
+                        "[NocturneAddNewSkills] MUTADDNEW-POC-EXCEPTION; " +
                         $"invocation={_invocation}; unit={_unit}; " +
                         $"restoring PUpSkillIndex after an exception: {__exception.Message}");
                 }
@@ -299,7 +299,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] MutationAddNewEmptySlotPoc restore failed: {ex.Message}");
+                    $"[NocturneAddNewSkills] MutationAddNewEmptySlotPoc restore failed: {ex.Message}");
             }
         }
     }

@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // OLD QUEUE LOOP SUPPRESSION ARCHAEOLOGY - "where does 349 get
     // reclassified as DefSkillResult=2 a second time" investigation.
@@ -85,7 +85,7 @@ namespace NocturneModernGameplay
                 {
                     int frame = UnityEngine.Time.frameCount;
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] DEFAULTSKILL-HANDLED-REENTRY-ENTRY; " +
+                        "[NocturneAddNewSkills] DEFAULTSKILL-HANDLED-REENTRY-ENTRY; " +
                         $"frame={frame}; unit={_unitBefore}; stockPtr=0x{_stockPtrBefore:X}; " +
                         $"eventParam={_eventParamBefore}; handled={_handledBefore}; " +
                         $"defSkillResult={_defSkillResultBefore}; " +
@@ -98,7 +98,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] DefaultSkillHandledReentryTrace prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] DefaultSkillHandledReentryTrace prefix failed safely: {ex.Message}");
             }
         }
 
@@ -125,7 +125,7 @@ namespace NocturneModernGameplay
                 int frame = UnityEngine.Time.frameCount;
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] DEFAULTSKILL-HANDLED-REENTRY-EXIT; " +
+                    "[NocturneAddNewSkills] DEFAULTSKILL-HANDLED-REENTRY-EXIT; " +
                     $"frame={frame}; unit={_unitBefore}; stockPtr=0x{_stockPtrBefore:X}; " +
                     $"eventParam={_eventParamBefore}; handled={_handledBefore}; " +
                     $"defSkillResult {_defSkillResultBefore}->{defSkillResultAfter}; " +
@@ -141,7 +141,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] DefaultSkillHandledReentryTrace postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] DefaultSkillHandledReentryTrace postfix failed safely: {ex.Message}");
             }
         }
     }

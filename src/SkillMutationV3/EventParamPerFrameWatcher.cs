@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Skill Power-Up AddNew V3 - EVENTPARAM PER-FRAME WATCHER.
     // Read-only observer only. Never writes any field.
@@ -83,7 +83,7 @@ namespace NocturneModernGameplay
                 int frame = UnityEngine.Time.frameCount;
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] EVENTPARAM-PERFRAME-CHANGE; " +
+                    "[NocturneAddNewSkills] EVENTPARAM-PERFRAME-CHANGE; " +
                     $"frame={frame}; unit={_lastUnit}->{unit}; seq={_lastSeq}->{seq}; " +
                     $"eventParam {_lastEventParam}->{eventParam}; " +
                     $"eventNums {_lastEventNums}->{eventNums}; " +
@@ -100,7 +100,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] EventParamPerFrameWatcher postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] EventParamPerFrameWatcher postfix failed safely: {ex.Message}");
             }
         }
     }

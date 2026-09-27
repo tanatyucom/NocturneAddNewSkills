@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Read-only investigation telemetry correlating rstcalc.rstCalc's own
     // finish (i.e. after ALL Harmony patches on rstCalcSkillPowerUpCore -
@@ -61,14 +61,14 @@ namespace NocturneModernGameplay
 
                 int frame = UnityEngine.Time.frameCount;
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] V3-RSTCALC-STATE1C; " +
+                    "[NocturneAddNewSkills] V3-RSTCALC-STATE1C; " +
                     $"unit={unit} frame={frame} seq={seq} " +
                     $"pUpSkillResult={pUpResult} pUpSkillIndex={pUpIndex} state1C={state1CText}.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] RstCalcState1CDiagnostics postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] RstCalcState1CDiagnostics postfix failed safely: {ex.Message}");
             }
         }
     }

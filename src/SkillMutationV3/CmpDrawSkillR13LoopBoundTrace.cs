@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // HIDDEN NEW SKILL ENTRY - minimal read-only capture of `r13` (and its
     // `+0x10` loop-bound byte) at the entry of the candidate-scan loop
@@ -165,7 +165,7 @@ namespace NocturneModernGameplay
                 if (elapsed >= MaxArmedFrames)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] R13LOOPBOUND-AUTOUNINSTALL; " +
+                        "[NocturneAddNewSkills] R13LOOPBOUND-AUTOUNINSTALL; " +
                         $"totalHits={_totalHitCount}; armedFrames={elapsed}.");
                     Uninstall();
                 }
@@ -173,7 +173,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] CmpDrawSkillR13LoopBoundTrace.Tick failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] CmpDrawSkillR13LoopBoundTrace.Tick failed safely: {ex.Message}");
             }
         }
 
@@ -200,14 +200,14 @@ namespace NocturneModernGameplay
 
                 _installed = true;
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] R13LOOPBOUND-INSTALLED; " +
+                    "[NocturneAddNewSkills] R13LOOPBOUND-INSTALLED; " +
                     $"observation=0x{_addrObservation.ToInt64():X}; " +
                     "mechanism=hardware-execute-breakpoint x1(no GameAssembly.dll bytes written).");
             }
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneModernGameplay] CmpDrawSkillR13LoopBoundTrace install refused safely: {ex}");
+                    $"[NocturneAddNewSkills] CmpDrawSkillR13LoopBoundTrace install refused safely: {ex}");
                 Uninstall();
             }
         }
@@ -233,7 +233,7 @@ namespace NocturneModernGameplay
                     catch (Exception ex)
                     {
                         MelonLogger.Warning(
-                            $"[NocturneModernGameplay] CmpDrawSkillR13LoopBoundTrace breakpoint removal failed: {ex.Message}");
+                            $"[NocturneAddNewSkills] CmpDrawSkillR13LoopBoundTrace breakpoint removal failed: {ex.Message}");
                     }
                 }
                 if (_vehHandle != IntPtr.Zero)
@@ -389,7 +389,7 @@ namespace NocturneModernGameplay
                     ? "n/a(r13=null)"
                     : (hit.LoopBound == UnreadableLoopBoundSentinel ? "unreadable" : hit.LoopBound.ToString());
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] R13LOOPBOUND-HIT; " +
+                    "[NocturneAddNewSkills] R13LOOPBOUND-HIT; " +
                     $"frame={hit.Frame}; seq={hit.Seq}; bridgeActive={hit.BridgeActive}; unit={hit.Unit}; " +
                     $"target={hit.Target}; r13={r13Str}; loopBound={loopBoundStr}.");
             }

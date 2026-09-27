@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Skill Power-Up AddNew V3 - NATIVE vs BRIDGE FORGET-FLOW STATE DIFF.
     // Read-only observer only. Never writes any field.
@@ -122,7 +122,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] DestroyConfirmEntryExitTrace prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] DestroyConfirmEntryExitTrace prefix failed safely: {ex.Message}");
             }
         }
 
@@ -199,7 +199,7 @@ namespace NocturneModernGameplay
                 }
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] DESTROYCONFIRM-STATE-DIFF; " +
+                    "[NocturneAddNewSkills] DESTROYCONFIRM-STATE-DIFF; " +
                     $"invocation={_invocation}; frame={frame}; unit={_unitBefore}; " +
                     $"stockPtr=0x{_stockPtrBefore:X}; " +
                     $"skillCnt {_skillCntBefore}->{skillCntAfter}; " +
@@ -220,7 +220,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] DestroyConfirmEntryExitTrace postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] DestroyConfirmEntryExitTrace postfix failed safely: {ex.Message}");
             }
         }
     }

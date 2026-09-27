@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // ROOT-CAUSE FIX: DefaultSkill classification's "already handled this
     // result lifecycle" guard, applied at the exact native classifier
@@ -61,7 +61,7 @@ namespace NocturneModernGameplay
 
                 int frame = UnityEngine.Time.frameCount;
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] DEFAULTSKILL-CLASSIFICATION-BLOCK; " +
+                    "[NocturneAddNewSkills] DEFAULTSKILL-CLASSIFICATION-BLOCK; " +
                     $"frame={frame}; unit={stock.id}; stockPtr=0x{stockPtr:X}; " +
                     $"candidate={SkillNameResolver.Format(__0)}; nativeResult={__result}; " +
                     "action=FORCE-RESULT-0-ALREADY-HANDLED.");
@@ -71,7 +71,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] DefaultSkillHandledClassificationBlock postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] DefaultSkillHandledClassificationBlock postfix failed safely: {ex.Message}");
             }
         }
     }

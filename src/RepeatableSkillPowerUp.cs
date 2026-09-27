@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Repeatable Skill Power-Up (Stage 2).
     //
@@ -84,7 +84,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 _captured = false;
-                MelonLogger.Warning($"[NocturneModernGameplay] BIT6-CLEAR capture failed safely: {ex.Message}");
+                MelonLogger.Warning($"[NocturneAddNewSkills] BIT6-CLEAR capture failed safely: {ex.Message}");
             }
         }
 
@@ -126,14 +126,14 @@ namespace NocturneModernGameplay
 
                 string reason = stockChanged ? "stockChanged" : "noMoreDemons";
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] BIT6-CLEAR; " +
+                    "[NocturneAddNewSkills] BIT6-CLEAR; " +
                     $"frame={UnityEngine.Time.frameCount} oldUnit={_oldUnit} " +
                     $"oldStock=0x{_oldStockPtr.ToInt64():X} " +
                     $"before=0x{before:X2} after=0x{after:X2} reason={reason}.");
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneModernGameplay] BIT6-CLEAR apply failed safely: {ex.Message}");
+                MelonLogger.Warning($"[NocturneAddNewSkills] BIT6-CLEAR apply failed safely: {ex.Message}");
             }
         }
     }

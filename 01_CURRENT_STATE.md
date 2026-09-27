@@ -1,4 +1,13 @@
-# NocturneModernGameplay Current State
+# NocturneAddNewSkills Current State
+
+## Project Identity (2026-09-27 rename)
+
+- Public display name: `Nocturne Add New Skills`
+- Repository / Assembly / Namespace: `NocturneAddNewSkills`(DLL: `NocturneAddNewSkills.dll`)
+- 旧名: `NocturneModernGameplay`(以下の過去Evidence・ログ・SHA-256記録内の旧名は当時の事実としてそのまま残す)
+- Historical path: `C:\SMT3Modding\NocturneModernGameplay`
+- Current path: `C:\SMT3Modding\NocturneAddNewSkills`
+- 互換性のため旧名を維持するもの: 設定ファイル`NocturneModernGameplay.settings.json`、GUI連携ファイル`NocturneModernGameplay.features.json`(ModernControllerは`NocturneModern*.features.json`で検出)、ProviderId `nocturne_modern_gameplay`
 
 ## Skill Mutation V3
 

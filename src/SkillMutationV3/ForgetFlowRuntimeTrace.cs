@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Skill Power-Up AddNew V3 - FULL-CAPACITY FORGET FLOW runtime trace.
     // Read-only observer only. Never writes SeqInfo.Current, Flag, skill[],
@@ -135,21 +135,21 @@ namespace NocturneModernGameplay
                 if (seq != _lastSeq)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] FORGET-SEQ-CHANGE; " +
+                        "[NocturneAddNewSkills] FORGET-SEQ-CHANGE; " +
                         $"frame={frame}; unit={unit}; from={_lastSeq}; to={seq}.");
                 }
 
                 if (flag != _lastFlag)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] FORGET-FLAG-CHANGE; " +
+                        "[NocturneAddNewSkills] FORGET-FLAG-CHANGE; " +
                         $"frame={frame}; seq={seq}; unit={unit}; from={_lastFlag}; to={flag}.");
                 }
 
                 if (pUpResult != _lastPUpResult || pUpIndex != _lastPUpIndex || pUpId != _lastPUpId)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] FORGET-PUPSKILL-CHANGE; " +
+                        "[NocturneAddNewSkills] FORGET-PUPSKILL-CHANGE; " +
                         $"frame={frame}; seq={seq}; unit={unit}; " +
                         $"pUpResultBefore={_lastPUpResult}; pUpResultAfter={pUpResult}; " +
                         $"pUpIndexBefore={_lastPUpIndex}; pUpIndexAfter={pUpIndex}; " +
@@ -161,7 +161,7 @@ namespace NocturneModernGameplay
                     if (_lastSkillCnt == 8 && skillCnt == 7)
                     {
                         MelonLogger.Msg(
-                            "[NocturneModernGameplay] FORGET-DELETE-DETECTED; " +
+                            "[NocturneAddNewSkills] FORGET-DELETE-DETECTED; " +
                             $"frame={frame}; seq={seq}; flag={flag}; unit={unit}; " +
                             $"skillCntBefore={_lastSkillCnt}; skillCntAfter={skillCnt}; " +
                             $"pUpResult={pUpResult}; pUpIndex={pUpIndex}; pUpId={pUpId}; " +
@@ -171,7 +171,7 @@ namespace NocturneModernGameplay
                     else
                     {
                         MelonLogger.Msg(
-                            "[NocturneModernGameplay] FORGET-SKILLCNT-CHANGE; " +
+                            "[NocturneAddNewSkills] FORGET-SKILLCNT-CHANGE; " +
                             $"frame={frame}; seq={seq}; flag={flag}; unit={unit}; " +
                             $"skillCntBefore={_lastSkillCnt}; skillCntAfter={skillCnt}; " +
                             $"skillsBefore=[{string.Join(",", _lastSkillArray)}]; " +
@@ -180,7 +180,7 @@ namespace NocturneModernGameplay
                 }
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] FORGET-TRACE; " +
+                    "[NocturneAddNewSkills] FORGET-TRACE; " +
                     $"frame={frame}; seq={seq}; flag={flag}; unit={unit}; skillCnt={skillCnt}; " +
                     $"pUpResult={pUpResult}; pUpIndex={pUpIndex}; pUpId={pUpId}.");
 
@@ -191,7 +191,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] ForgetFlowRuntimeTrace postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] ForgetFlowRuntimeTrace postfix failed safely: {ex.Message}");
             }
         }
     }

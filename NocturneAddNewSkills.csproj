@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <AssemblyName>NocturneModernGameplay</AssemblyName>
-    <RootNamespace>NocturneModernGameplay</RootNamespace>
+    <AssemblyName>NocturneAddNewSkills</AssemblyName>
+    <RootNamespace>NocturneAddNewSkills</RootNamespace>
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
     <Optimize>true</Optimize>

@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Text.Json;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Persisted config shape. Kept as a plain POCO separate from the
     // runtime NativeChanceMode enum so a malformed/unknown string in the
@@ -56,6 +56,8 @@ namespace NocturneModernGameplay
         // worked.
         internal static string Repeat { get; private set; } = "Native";
 
+        // File name intentionally keeps the pre-rename MOD name so existing
+        // user settings survive the NocturneAddNewSkills rename.
         private static string SettingsPath =>
             Path.Combine(ModDirectory, "NocturneModernGameplay.settings.json");
 
@@ -89,7 +91,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    "[NocturneModernGameplay] Gameplay settings file unreadable/invalid; " +
+                    "[NocturneAddNewSkills] Gameplay settings file unreadable/invalid; " +
                     $"falling back to all-Native defaults: {ex.Message}");
                 SkillMutationChance = NativeChanceMode.Native;
                 SkillPowerUpChance = NativeChanceMode.Native;
@@ -104,7 +106,7 @@ namespace NocturneModernGameplay
             // there is nothing additional to "apply" at load time.
 
             MelonLogger.Msg(
-                "[NocturneModernGameplay] Gameplay settings loaded; " +
+                "[NocturneAddNewSkills] Gameplay settings loaded; " +
                 $"SkillMutation.Chance={SkillMutationChance} SkillPowerUp.Chance={SkillPowerUpChance} " +
                 $"SkillPowerUp.Repeat={Repeat}.");
         }
@@ -129,7 +131,7 @@ namespace NocturneModernGameplay
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneModernGameplay] Gameplay settings save failed: {ex.Message}");
+                MelonLogger.Warning($"[NocturneAddNewSkills] Gameplay settings save failed: {ex.Message}");
             }
         }
 
@@ -164,7 +166,7 @@ namespace NocturneModernGameplay
         {
             Repeat = ParseRepeat(mode);
             Save();
-            MelonLogger.Msg($"[NocturneModernGameplay] SkillPowerUp Repeat mode set; mode={Repeat}.");
+            MelonLogger.Msg($"[NocturneAddNewSkills] SkillPowerUp Repeat mode set; mode={Repeat}.");
         }
 
         private static NativeChanceMode ParseChanceMode(string? raw, string fieldName)
@@ -172,7 +174,7 @@ namespace NocturneModernGameplay
             if (Enum.TryParse(raw, ignoreCase: true, out NativeChanceMode mode))
                 return mode;
             MelonLogger.Warning(
-                $"[NocturneModernGameplay] config: unknown {fieldName} value '{raw}'; falling back to Native.");
+                $"[NocturneAddNewSkills] config: unknown {fieldName} value '{raw}'; falling back to Native.");
             return NativeChanceMode.Native;
         }
 
@@ -182,7 +184,7 @@ namespace NocturneModernGameplay
             if (string.Equals(raw, "Unlimited", StringComparison.OrdinalIgnoreCase)) return "Unlimited";
             if (!string.IsNullOrEmpty(raw))
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] config: unknown SkillPowerUp.Repeat value '{raw}'; falling back to Native.");
+                    $"[NocturneAddNewSkills] config: unknown SkillPowerUp.Repeat value '{raw}'; falling back to Native.");
             return "Native";
         }
     }

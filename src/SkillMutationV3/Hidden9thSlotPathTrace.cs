@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // HIDDEN NEW SKILL ENTRY - direct runtime confirmation of the
     // dedicated target==8 presentation path (read-only, no writes).
@@ -162,7 +162,7 @@ namespace NocturneModernGameplay
                 if (_branchEntryHitCount + _callDoneHitCount >= MaxTotalHitsSafety || elapsed >= MaxArmedFrames)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] HIDDEN9THPATH-AUTOUNINSTALL; " +
+                        "[NocturneAddNewSkills] HIDDEN9THPATH-AUTOUNINSTALL; " +
                         $"branchEntryHits={_branchEntryHitCount}; callDoneHits={_callDoneHitCount}; " +
                         $"armedFrames={elapsed}.");
                     Uninstall();
@@ -171,7 +171,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] Hidden9thSlotPathTrace.Tick failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] Hidden9thSlotPathTrace.Tick failed safely: {ex.Message}");
             }
         }
 
@@ -199,14 +199,14 @@ namespace NocturneModernGameplay
 
                 _installed = true;
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] HIDDEN9THPATH-INSTALLED; " +
+                    "[NocturneAddNewSkills] HIDDEN9THPATH-INSTALLED; " +
                     $"branchEntryVa=0x{_branchEntryAddress.ToInt64():X}; callDoneVa=0x{_callDoneAddress.ToInt64():X}; " +
                     "mechanism=hardware-execute-breakpoint(no GameAssembly.dll bytes written).");
             }
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneModernGameplay] Hidden9thSlotPathTrace install refused safely: {ex}");
+                    $"[NocturneAddNewSkills] Hidden9thSlotPathTrace install refused safely: {ex}");
                 Uninstall();
             }
         }
@@ -221,7 +221,7 @@ namespace NocturneModernGameplay
                     catch (Exception ex)
                     {
                         MelonLogger.Warning(
-                            $"[NocturneModernGameplay] Hidden9thSlotPathTrace breakpoint removal failed: {ex.Message}");
+                            $"[NocturneAddNewSkills] Hidden9thSlotPathTrace breakpoint removal failed: {ex.Message}");
                     }
                 }
                 if (_vehHandle != IntPtr.Zero)
@@ -365,7 +365,7 @@ namespace NocturneModernGameplay
             {
                 ref PendingHit hit = ref _pending[i];
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] HIDDEN9THPATH-HIT; " +
+                    "[NocturneAddNewSkills] HIDDEN9THPATH-HIT; " +
                     $"frame={hit.Frame}; seq={hit.Seq}; bridgeActive={hit.BridgeActive}; " +
                     $"event={(hit.IsCallDone ? "CALL-DONE(cmpSetupObject(skillCurObj[8],true) completed)" : "BRANCH-ENTRY(target==8 confirmed)")}.");
             }

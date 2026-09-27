@@ -7,7 +7,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     internal static class SkillMutationAlways
     {
@@ -55,7 +55,7 @@ namespace NocturneModernGameplay
             if (enabled) ApplyPatch();
             else RestorePatch();
             MelonLogger.Msg(
-                $"[NocturneModernGameplay] Skill Mutation: Always " +
+                $"[NocturneAddNewSkills] Skill Mutation: Always " +
                 $"{(enabled && _patched ? "enabled" : "disabled")}.");
         }
 
@@ -142,7 +142,7 @@ namespace NocturneModernGameplay
                     else
                     {
                         MelonLogger.Msg(
-                            "[NocturneModernGameplay] SkillMutationAlways diagnostic; " +
+                            "[NocturneAddNewSkills] SkillMutationAlways diagnostic; " +
                             "Patch B/C left vanilla (ExperimentalDisablePatchBAndC=true) - " +
                             "ordinary Power-Up outcomes are NOT forced into Mutation.");
                     }
@@ -171,7 +171,7 @@ namespace NocturneModernGameplay
                             BytesEqual(actualC, RollFailureVanillaBytes);
 
                         MelonLogger.Msg(
-                            "[NocturneModernGameplay] SKILL-MUTATION-DIAGNOSTIC-BYTES; " +
+                            "[NocturneAddNewSkills] SKILL-MUTATION-DIAGNOSTIC-BYTES; " +
                             $"patchA={FormatBytes(actualA)} patchB={FormatBytes(actualB)} " +
                             $"patchC={FormatBytes(actualC)} mode=A_ONLY " +
                             $"verified={diagnosticConfigVerified}.");
@@ -195,7 +195,7 @@ namespace NocturneModernGameplay
 
                 _patched = true;
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] SkillMutationAlways enabled; " +
+                    "[NocturneAddNewSkills] SkillMutationAlways enabled; " +
                     $"patchA=0x{_patchAAddress.ToInt64():X} " +
                     $"patchB=0x{_patchBAddress.ToInt64():X} " +
                     $"patchC=0x{_patchCAddress.ToInt64():X}.");
@@ -209,11 +209,11 @@ namespace NocturneModernGameplay
                 if (_patchAWritten || _patchBWritten || _patchCWritten)
                 {
                     MelonLogger.Error(
-                        "[NocturneModernGameplay] SkillMutationAlways rollback incomplete; " +
+                        "[NocturneAddNewSkills] SkillMutationAlways rollback incomplete; " +
                         "owned writes will be retried during shutdown.");
                 }
                 MelonLogger.Error(
-                    $"[NocturneModernGameplay] SkillMutationAlways disabled; " +
+                    $"[NocturneAddNewSkills] SkillMutationAlways disabled; " +
                     $"three-site patch refused safely: {ex}");
             }
 #if false
@@ -262,7 +262,7 @@ namespace NocturneModernGameplay
                 WriteExecutableBytes(_secondStartCheckAddress, ReturnTrueBytes);
                 _patched = true;
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] SKILL-MUTATION native chance patches applied; " +
+                    "[NocturneAddNewSkills] SKILL-MUTATION native chance patches applied; " +
                     $"helper=0x{_patchAddress.ToInt64():X} inline=0x{_inlinePatchAddress.ToInt64():X} " +
                     $"failureRedirect=0x{_failureReturnAddress.ToInt64():X} " +
                     $"devilEligibility=0x{_devilEligibilityAddress.ToInt64():X} " +
@@ -275,7 +275,7 @@ namespace NocturneModernGameplay
                 _patched = false;
                 _enabled = false;
                 MelonLogger.Error(
-                    $"[NocturneModernGameplay] Native mutation chance patch refused safely: {ex}");
+                    $"[NocturneAddNewSkills] Native mutation chance patch refused safely: {ex}");
             }
 #endif
         }
@@ -290,12 +290,12 @@ namespace NocturneModernGameplay
                     throw new InvalidOperationException(
                         "one or more owned patch sites could not be restored");
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] SkillMutationAlways three-site patch restored.");
+                    "[NocturneAddNewSkills] SkillMutationAlways three-site patch restored.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneModernGameplay] Authoritative mutation chance restore failed: {ex}");
+                    $"[NocturneAddNewSkills] Authoritative mutation chance restore failed: {ex}");
             }
             finally
             {
@@ -321,12 +321,12 @@ namespace NocturneModernGameplay
                 if (_secondStartCheckAddress != IntPtr.Zero && _secondStartCheckOriginal != null)
                     WriteExecutableBytes(_secondStartCheckAddress, _secondStartCheckOriginal);
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] SKILL-MUTATION native chance patch restored.");
+                    "[NocturneAddNewSkills] SKILL-MUTATION native chance patch restored.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneModernGameplay] Native mutation chance restore failed: {ex}");
+                    $"[NocturneAddNewSkills] Native mutation chance restore failed: {ex}");
             }
             finally { _patched = false; }
 #endif
@@ -357,12 +357,12 @@ namespace NocturneModernGameplay
                         signatures.Add($"{type.FullName}.{method.Name}({args})->{method.ReturnType.FullName}");
                     }
                 }
-                MelonLogger.Msg("[NocturneModernGameplay] SKILL-MUTATION UI getter signatures; " +
+                MelonLogger.Msg("[NocturneAddNewSkills] SKILL-MUTATION UI getter signatures; " +
                     string.Join(" | ", signatures) + ".");
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneModernGameplay] UI getter signature probe failed: {ex.Message}");
+                MelonLogger.Warning($"[NocturneAddNewSkills] UI getter signature probe failed: {ex.Message}");
             }
         }
 
@@ -395,19 +395,19 @@ namespace NocturneModernGameplay
 
                 const int dumpLength = 0x8000;
                 byte[] bytes = ReadBytes(target, dumpLength);
-                string directory = @"C:\SMT3Modding\NocturneModernGameplay\diagnostics";
+                string directory = @"C:\SMT3Modding\NocturneAddNewSkills\diagnostics";
                 Directory.CreateDirectory(directory);
                 string path = Path.Combine(directory, "rstCalc-native.bin");
                 File.WriteAllBytes(path, bytes);
                 MelonLogger.Msg(
-                    $"[NocturneModernGameplay] SKILL-MUTATION rstCalc native dump; " +
+                    $"[NocturneAddNewSkills] SKILL-MUTATION rstCalc native dump; " +
                     $"entry=0x{entry.ToInt64():X} target=0x{target.ToInt64():X} " +
                     $"length=0x{dumpLength:X} path={path}.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneModernGameplay] rstCalc native dump failed: {ex}");
+                    $"[NocturneAddNewSkills] rstCalc native dump failed: {ex}");
             }
         }
 
@@ -463,16 +463,16 @@ namespace NocturneModernGameplay
                     throw new InvalidOperationException(
                         $"resolved target has only {dumpLength} readable bytes remaining");
                 byte[] bytes = ReadBytes(target, dumpLength);
-                string directory = @"C:\SMT3Modding\NocturneModernGameplay\diagnostics";
+                string directory = @"C:\SMT3Modding\NocturneAddNewSkills\diagnostics";
                 Directory.CreateDirectory(directory);
                 string path = Path.Combine(directory, fileName);
                 File.WriteAllBytes(path, bytes);
-                MelonLogger.Msg($"[NocturneModernGameplay] native dump; method={fieldPrefix} " +
+                MelonLogger.Msg($"[NocturneAddNewSkills] native dump; method={fieldPrefix} " +
                     $"entry=0x{entry.ToInt64():X} target=0x{target.ToInt64():X} path={path}.");
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneModernGameplay] {fieldPrefix} dump failed: {ex.Message}");
+                MelonLogger.Warning($"[NocturneAddNewSkills] {fieldPrefix} dump failed: {ex.Message}");
             }
         }
 
@@ -514,7 +514,7 @@ namespace NocturneModernGameplay
             if (BytesEqual(actual, vanillaBytes))
             {
                 MelonLogger.Msg(
-                    $"[NocturneModernGameplay] {name} verified; " +
+                    $"[NocturneAddNewSkills] {name} verified; " +
                     $"address=0x{address.ToInt64():X} state=vanilla " +
                     $"bytes={FormatBytes(actual)}.");
                 return PatchSiteState.Vanilla;
@@ -522,7 +522,7 @@ namespace NocturneModernGameplay
             if (BytesEqual(actual, patchedBytes))
             {
                 MelonLogger.Msg(
-                    $"[NocturneModernGameplay] {name} verified; " +
+                    $"[NocturneAddNewSkills] {name} verified; " +
                     $"address=0x{address.ToInt64():X} state=already-patched " +
                     $"bytes={FormatBytes(actual)}.");
                 return PatchSiteState.AlreadyPatched;
@@ -551,7 +551,7 @@ namespace NocturneModernGameplay
                     $"mutation helper 0x{helperEntry.ToInt64():X} is not readable committed memory");
 
             MelonLogger.Msg(
-                "[NocturneModernGameplay] SkillMutationAlways helper resolved; " +
+                "[NocturneAddNewSkills] SkillMutationAlways helper resolved; " +
                 $"moduleBase=0x{moduleBase.ToInt64():X} rva=0x{helperRva:X} " +
                 $"entry=0x{helperEntry.ToInt64():X}.");
             return helperEntry;
@@ -585,7 +585,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneModernGameplay] {name} rollback failed at " +
+                    $"[NocturneAddNewSkills] {name} rollback failed at " +
                     $"0x{address.ToInt64():X}: {ex.Message}");
             }
         }
@@ -650,14 +650,14 @@ namespace NocturneModernGameplay
 
                 var bytes = new byte[128];
                 Marshal.Copy(target, bytes, 0, bytes.Length);
-                MelonLogger.Msg("[NocturneModernGameplay] MUTATION-NATIVE-2 " +
+                MelonLogger.Msg("[NocturneAddNewSkills] MUTATION-NATIVE-2 " +
                     $"thunk=0x{thunk.ToInt64():X} target=0x{target.ToInt64():X} " +
                     $"protect=0x{memory.Protect:X} bytes={BitConverter.ToString(bytes).Replace("-", string.Empty)}.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] Second mutation chance probe failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] Second mutation chance probe failed safely: {ex.Message}");
             }
         }
 
@@ -737,14 +737,14 @@ namespace NocturneModernGameplay
                 {
                     _logged = true;
                     MelonLogger.Msg(
-                        $"[NocturneModernGameplay] SKILL-MUTATION rstCalc candidate flags forced; units={Saved.Count}.");
+                        $"[NocturneAddNewSkills] SKILL-MUTATION rstCalc candidate flags forced; units={Saved.Count}.");
                 }
             }
             catch (Exception ex)
             {
                 RestoreFlags();
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] Could not force rstCalc mutation flags safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] Could not force rstCalc mutation flags safely: {ex.Message}");
             }
         }
 
@@ -785,13 +785,13 @@ namespace NocturneModernGameplay
                 // here: cmbGetMutationSkill advances native mutation state.
                 __result = checked((ushort)(skill + 3));
                 MelonLogger.Msg(
-                    $"[NocturneModernGameplay] SKILL-MUTATION candidate forced; " +
+                    $"[NocturneAddNewSkills] SKILL-MUTATION candidate forced; " +
                     $"unit={__0.id} index=0 skill={skill} selector={__result}.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] Mutation candidate redirect failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] Mutation candidate redirect failed safely: {ex.Message}");
             }
         }
     }
@@ -834,13 +834,13 @@ namespace NocturneModernGameplay
                     work.DefSkillResult = 0;
                 }
                 MelonLogger.Msg(
-                    $"[NocturneModernGameplay] SKILL-MUTATION core forced at result boundary; " +
+                    $"[NocturneAddNewSkills] SKILL-MUTATION core forced at result boundary; " +
                     $"unit={stock.id} result={result} skill={work.PUpSkillID} index={work.PUpSkillIndex}.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] Forced mutation core failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] Forced mutation core failed safely: {ex.Message}");
             }
         }
     }
@@ -864,7 +864,7 @@ namespace NocturneModernGameplay
                 {
                     _lastState = state;
                     MelonLogger.Msg(
-                        $"[NocturneModernGameplay] SKILL-MUTATION default-skill boundary; " +
+                        $"[NocturneAddNewSkills] SKILL-MUTATION default-skill boundary; " +
                         $"current={seq.Current} last={seq.Last} change={seq.Change} " +
                         $"unit={unit} defaultResult={work.DefSkillResult}.");
                 }
@@ -896,7 +896,7 @@ namespace NocturneModernGameplay
                 if (string.Equals(state, _lastState, StringComparison.Ordinal)) return;
                 _lastState = state;
                 MelonLogger.Msg(
-                    $"[NocturneModernGameplay] SKILL-MUTATION rstCalc boundary; " +
+                    $"[NocturneAddNewSkills] SKILL-MUTATION rstCalc boundary; " +
                     $"phase={phase} pid={pid} current={seq.Current} last={seq.Last} " +
                     $"change={seq.Change} unit={unit} powerResult={work.PUpSkillResult} " +
                     $"defaultResult={work.DefSkillResult}.");
@@ -925,7 +925,7 @@ namespace NocturneModernGameplay
             {
                 __result = 0;
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] SKILL-MUTATION nested mutation suppressed " +
+                    "[NocturneAddNewSkills] SKILL-MUTATION nested mutation suppressed " +
                     "during queued forget flow.");
                 return false;
             }
@@ -948,7 +948,7 @@ namespace NocturneModernGameplay
                 if (mutated == 0)
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] Forced mutation mapping unavailable; " +
+                        $"[NocturneAddNewSkills] Forced mutation mapping unavailable; " +
                         $"unit={stock.id} original={original}.");
                     return true;
                 }
@@ -958,14 +958,14 @@ namespace NocturneModernGameplay
                 work.PUpSkillResult = 2;
                 __result = 2;
                 MelonLogger.Msg(
-                    $"[NocturneModernGameplay] SKILL-MUTATION core replaced; " +
+                    $"[NocturneAddNewSkills] SKILL-MUTATION core replaced; " +
                     $"unit={stock.id} index={index} original={original} mutated={mutated} result=2.");
                 return false;
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] Mutation core replacement failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] Mutation core replacement failed safely: {ex.Message}");
                 return true;
             }
         }

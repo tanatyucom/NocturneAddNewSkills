@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // PRESENTATION FIX (Queue-era archaeology, adapted for V3) - list entry
     // highlight/selection correction while the borrowed forget UI is open.
@@ -68,7 +68,7 @@ namespace NocturneModernGameplay
                 {
                     _lastObservedCursor = cursor;
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] ADDNEW-HIGHLIGHT-CURSOR; " +
+                        "[NocturneAddNewSkills] ADDNEW-HIGHLIGHT-CURSOR; " +
                         $"unit={FullCapacityAddNewBridgeState.WatchedUnit}; cursor={cursor}; " +
                         $"selectedBefore={gbwk.SelectSkillID}; " +
                         $"target={SkillNameResolver.Format(FullCapacityAddNewBridgeState.Target)}.");
@@ -90,7 +90,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] AddNewHighlightCorrection postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] AddNewHighlightCorrection postfix failed safely: {ex.Message}");
             }
         }
     }

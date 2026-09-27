@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // HIDDEN NEW SKILL ENTRY - GBWK.SelectSkillID (real offset GBWK+0x9C,
     // measured empirically this session via SelectSkillIdOffsetProbe.cs -
@@ -138,7 +138,7 @@ namespace NocturneModernGameplay
                 if (_totalHitCount >= MaxTotalHitsSafety || elapsed >= MaxArmedFrames)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] SELECTSKILLIDWATCH-AUTOUNINSTALL; " +
+                        "[NocturneAddNewSkills] SELECTSKILLIDWATCH-AUTOUNINSTALL; " +
                         $"totalHits={_totalHitCount}; armedFrames={elapsed}.");
                     Uninstall();
                 }
@@ -146,7 +146,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] SelectSkillIdWriteWatchTrace.Tick failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] SelectSkillIdWriteWatchTrace.Tick failed safely: {ex.Message}");
             }
         }
 
@@ -175,14 +175,14 @@ namespace NocturneModernGameplay
 
                 _installed = true;
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] SELECTSKILLIDWATCH-INSTALLED; " +
+                    "[NocturneAddNewSkills] SELECTSKILLIDWATCH-INSTALLED; " +
                     $"targetAddress=0x{_targetAddress.ToInt64():X}; initialValue={_lastValue}; " +
                     "mechanism=hardware-write-breakpoint(no GameAssembly.dll bytes written).");
             }
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneModernGameplay] SelectSkillIdWriteWatchTrace install refused safely: {ex}");
+                    $"[NocturneAddNewSkills] SelectSkillIdWriteWatchTrace install refused safely: {ex}");
                 Uninstall();
             }
         }
@@ -197,7 +197,7 @@ namespace NocturneModernGameplay
                     catch (Exception ex)
                     {
                         MelonLogger.Warning(
-                            $"[NocturneModernGameplay] SelectSkillIdWriteWatchTrace breakpoint removal failed: {ex.Message}");
+                            $"[NocturneAddNewSkills] SelectSkillIdWriteWatchTrace breakpoint removal failed: {ex.Message}");
                     }
                 }
                 if (_vehHandle != IntPtr.Zero)
@@ -351,7 +351,7 @@ namespace NocturneModernGameplay
                 ref PendingHit hit = ref _pending[i];
                 long staticVa = GameAssemblyPreferredBase + (hit.WriterNextInsnAddress - _actualModuleBase);
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] SELECTSKILLIDWATCH-HIT; " +
+                    "[NocturneAddNewSkills] SELECTSKILLIDWATCH-HIT; " +
                     $"frame={hit.Frame}; seq={hit.Seq}; oldValue={hit.OldValue}; newValue={hit.NewValue}; " +
                     $"cursorShift={hit.CursorShift}; bridgeActive={hit.BridgeActive}; " +
                     $"writerNextInsnVa=0x{staticVa:X}; totalHits={_totalHitCount}.");

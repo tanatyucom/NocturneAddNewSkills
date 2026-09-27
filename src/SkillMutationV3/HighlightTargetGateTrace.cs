@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // HIDDEN NEW SKILL ENTRY - direct capture of the highlight-on decision
     // gate's real runtime values (read-only, no writes). Session
@@ -206,7 +206,7 @@ namespace NocturneModernGameplay
                     elapsed >= MaxArmedFrames)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] HIGHLIGHTGATE-AUTOUNINSTALL; " +
+                        "[NocturneAddNewSkills] HIGHLIGHTGATE-AUTOUNINSTALL; " +
                         $"distinctPairs={_seenCount}; rawHits={_rawHitCount}; loggedHits={_loggedHitCount}; " +
                         $"armedFrames={elapsed}.");
                     Uninstall();
@@ -215,7 +215,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] HighlightTargetGateTrace.Tick failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] HighlightTargetGateTrace.Tick failed safely: {ex.Message}");
             }
         }
 
@@ -256,14 +256,14 @@ namespace NocturneModernGameplay
 
                 _installed = true;
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] HIGHLIGHTGATE-INSTALLED; " +
+                    "[NocturneAddNewSkills] HIGHLIGHTGATE-INSTALLED; " +
                     $"targetVa=0x{_targetAddress.ToInt64():X}; " +
                     "mechanism=hardware-breakpoint(no GameAssembly.dll bytes written).");
             }
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneModernGameplay] HighlightTargetGateTrace install refused safely: {ex}");
+                    $"[NocturneAddNewSkills] HighlightTargetGateTrace install refused safely: {ex}");
                 Uninstall();
             }
         }
@@ -278,7 +278,7 @@ namespace NocturneModernGameplay
                     catch (Exception ex)
                     {
                         MelonLogger.Warning(
-                            $"[NocturneModernGameplay] HighlightTargetGateTrace breakpoint removal failed: {ex.Message}");
+                            $"[NocturneAddNewSkills] HighlightTargetGateTrace breakpoint removal failed: {ex.Message}");
                     }
                 }
                 if (_vehHandle != IntPtr.Zero)
@@ -462,7 +462,7 @@ namespace NocturneModernGameplay
                 ref PendingHit hit = ref _pending[i];
                 _loggedHitCount++;
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] HIGHLIGHTGATE-HIT; " +
+                    "[NocturneAddNewSkills] HIGHLIGHTGATE-HIT; " +
                     $"frame={hit.Frame}; ebx={hit.Ebx}; target={hit.Target}; index={hit.Index}; " +
                     $"shift={hit.Shift}; loopUpper={hit.LoopUpper}; match={hit.Target == hit.Ebx}.");
             }

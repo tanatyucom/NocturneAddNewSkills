@@ -5,7 +5,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // HIDDEN NEW SKILL ENTRY (master-archive.md Section 22) - pivot to
     // Unity UI (read-only, no writes). Session continuation after
@@ -117,7 +117,7 @@ namespace NocturneModernGameplay
                     string ancestorDump = string.Join(" > ", ancestors);
 
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] FORGETUI-TMP-TRACE; " +
+                        "[NocturneAddNewSkills] FORGETUI-TMP-TRACE; " +
                         $"frame={frame}; seq={seq}; bridgeActive={FullCapacityAddNewBridgeState.Active}; " +
                         $"path={path}; activeSelf={activeSelf}; activeInHierarchy={activeInHierarchy}; " +
                         $"text=\"{Escape(text)}\"; selfComponents=[{selfComponents}]; " +
@@ -127,7 +127,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] ForgetUiHierarchyDumpTrace postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] ForgetUiHierarchyDumpTrace postfix failed safely: {ex.Message}");
             }
         }
 

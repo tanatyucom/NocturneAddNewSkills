@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // GBWK.FLAG (+0x7E) WRITER/READER RUNTIME TRACE PoC (2026-09-19).
     // Read-only observer only. Never writes GBWK.Flag or any other native
@@ -54,7 +54,7 @@ namespace NocturneModernGameplay
         private static string Describe(string tag, int frame, int unit, long stockPtr,
             sbyte oldFlag, sbyte newFlag, int seqCurrent, int seqLast, short levelUpCnt,
             ushort eventParam) =>
-            $"[NocturneModernGameplay] {tag}; " +
+            $"[NocturneAddNewSkills] {tag}; " +
             $"frame={frame}; unit={unit}; stockPtr=0x{stockPtr:X}; oldFlag={oldFlag}; " +
             $"newFlag={newFlag}; seqCurrent={seqCurrent}; seqLast={seqLast}; " +
             $"levelUpCnt={levelUpCnt}; eventParam={eventParam}.";
@@ -121,7 +121,7 @@ namespace NocturneModernGameplay
                 catch (Exception ex)
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] GbwkFlagTransitionTrace(SkillPowerUp) prefix failed safely: {ex.Message}");
+                        $"[NocturneAddNewSkills] GbwkFlagTransitionTrace(SkillPowerUp) prefix failed safely: {ex.Message}");
                 }
             }
 
@@ -144,7 +144,7 @@ namespace NocturneModernGameplay
                 catch (Exception ex)
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] GbwkFlagTransitionTrace(SkillPowerUp) postfix failed safely: {ex.Message}");
+                        $"[NocturneAddNewSkills] GbwkFlagTransitionTrace(SkillPowerUp) postfix failed safely: {ex.Message}");
                 }
             }
         }
@@ -180,7 +180,7 @@ namespace NocturneModernGameplay
                 catch (Exception ex)
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] GbwkFlagTransitionTrace(HeartsMaster) prefix failed safely: {ex.Message}");
+                        $"[NocturneAddNewSkills] GbwkFlagTransitionTrace(HeartsMaster) prefix failed safely: {ex.Message}");
                 }
             }
 
@@ -203,7 +203,7 @@ namespace NocturneModernGameplay
                 catch (Exception ex)
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] GbwkFlagTransitionTrace(HeartsMaster) postfix failed safely: {ex.Message}");
+                        $"[NocturneAddNewSkills] GbwkFlagTransitionTrace(HeartsMaster) postfix failed safely: {ex.Message}");
                 }
             }
         }
@@ -239,7 +239,7 @@ namespace NocturneModernGameplay
                 catch (Exception ex)
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] GbwkFlagTransitionTrace(DevilParam) prefix failed safely: {ex.Message}");
+                        $"[NocturneAddNewSkills] GbwkFlagTransitionTrace(DevilParam) prefix failed safely: {ex.Message}");
                 }
             }
 
@@ -265,7 +265,7 @@ namespace NocturneModernGameplay
                 catch (Exception ex)
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] GbwkFlagTransitionTrace(DevilParam) postfix failed safely: {ex.Message}");
+                        $"[NocturneAddNewSkills] GbwkFlagTransitionTrace(DevilParam) postfix failed safely: {ex.Message}");
                 }
             }
         }
@@ -303,7 +303,7 @@ namespace NocturneModernGameplay
                 catch (Exception ex)
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] GbwkFlagTransitionTrace(HeartsEventCall) prefix failed safely: {ex.Message}");
+                        $"[NocturneAddNewSkills] GbwkFlagTransitionTrace(HeartsEventCall) prefix failed safely: {ex.Message}");
                 }
             }
 
@@ -320,7 +320,7 @@ namespace NocturneModernGameplay
 
                     int frame = UnityEngine.Time.frameCount;
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] GBWKFLAG-HEARTSEVENTCALL; " +
+                        "[NocturneAddNewSkills] GBWKFLAG-HEARTSEVENTCALL; " +
                         $"frame={frame}; unit={_unit}; stockPtr=0x{_stockPtr:X}; " +
                         $"eventType={_eventType}; arrayBefore=[{_arrayBefore}]; arrayAfter=[{arrayAfter}]; " +
                         $"flag={gbwk.Flag}; seqCurrent={gbwk.SeqInfo.Current}; seqLast={gbwk.SeqInfo.Last}; " +
@@ -329,7 +329,7 @@ namespace NocturneModernGameplay
                 catch (Exception ex)
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] GbwkFlagTransitionTrace(HeartsEventCall) postfix failed safely: {ex.Message}");
+                        $"[NocturneAddNewSkills] GbwkFlagTransitionTrace(HeartsEventCall) postfix failed safely: {ex.Message}");
                 }
             }
         }
@@ -361,7 +361,7 @@ namespace NocturneModernGameplay
 
                     int frame = UnityEngine.Time.frameCount;
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] SKILLPOWERUP-REACHED; " +
+                        "[NocturneAddNewSkills] SKILLPOWERUP-REACHED; " +
                         $"frame={frame}; unit={stock.id}; stockPtr=0x{stockPtr:X}; flag={gbwk.Flag}; " +
                         $"seqCurrent={gbwk.SeqInfo.Current}; seqLast={gbwk.SeqInfo.Last}; " +
                         $"levelUpCnt={gbwk.LevelUpCnt}; eventParam={gbwk.EventParam}.");
@@ -369,7 +369,7 @@ namespace NocturneModernGameplay
                 catch (Exception ex)
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] GbwkFlagTransitionTrace(SkillPowerUpReached) prefix failed safely: {ex.Message}");
+                        $"[NocturneAddNewSkills] GbwkFlagTransitionTrace(SkillPowerUpReached) prefix failed safely: {ex.Message}");
                 }
             }
         }
@@ -422,7 +422,7 @@ namespace NocturneModernGameplay
                 catch (Exception ex)
                 {
                     MelonLogger.Warning(
-                        $"[NocturneModernGameplay] GbwkFlagTransitionTrace(rstUpdate) postfix failed safely: {ex.Message}");
+                        $"[NocturneAddNewSkills] GbwkFlagTransitionTrace(rstUpdate) postfix failed safely: {ex.Message}");
                 }
             }
         }

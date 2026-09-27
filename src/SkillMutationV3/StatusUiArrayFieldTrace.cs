@@ -5,7 +5,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // HIDDEN NEW SKILL ENTRY (master-archive.md Section 22) - direct
     // statusUI field read (read-only, no writes). Session continuation
@@ -184,13 +184,13 @@ namespace NocturneModernGameplay
                 _lastSnapshot = snapshot;
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] STATUSUI-ARRAY-TRACE; " +
+                    "[NocturneAddNewSkills] STATUSUI-ARRAY-TRACE; " +
                     $"frame={frame}; {snapshot}.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] StatusUiArrayFieldTrace postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] StatusUiArrayFieldTrace postfix failed safely: {ex.Message}");
             }
         }
 

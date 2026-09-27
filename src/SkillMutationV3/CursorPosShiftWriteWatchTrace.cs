@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // HIDDEN NEW SKILL ENTRY - CursorPos.Shift WRITER capture (read-only,
     // no writes to game state - the hardware breakpoint itself only
@@ -174,7 +174,7 @@ namespace NocturneModernGameplay
                 if (_totalHitCount >= MaxTotalHitsSafety || elapsed >= MaxArmedFrames)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] SHIFTWATCH-AUTOUNINSTALL; " +
+                        "[NocturneAddNewSkills] SHIFTWATCH-AUTOUNINSTALL; " +
                         $"totalHits={_totalHitCount}; armedFrames={elapsed}.");
                     Uninstall();
                     return;
@@ -183,7 +183,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] CursorPosShiftWriteWatchTrace.Tick failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] CursorPosShiftWriteWatchTrace.Tick failed safely: {ex.Message}");
             }
         }
 
@@ -212,14 +212,14 @@ namespace NocturneModernGameplay
 
                 _installed = true;
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] SHIFTWATCH-INSTALLED; " +
+                    "[NocturneAddNewSkills] SHIFTWATCH-INSTALLED; " +
                     $"targetAddress=0x{_targetAddress.ToInt64():X}; initialShift={_lastShift}; " +
                     "mechanism=hardware-write-breakpoint(no GameAssembly.dll bytes written).");
             }
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneModernGameplay] CursorPosShiftWriteWatchTrace install refused safely: {ex}");
+                    $"[NocturneAddNewSkills] CursorPosShiftWriteWatchTrace install refused safely: {ex}");
                 Uninstall();
             }
         }
@@ -234,7 +234,7 @@ namespace NocturneModernGameplay
                     catch (Exception ex)
                     {
                         MelonLogger.Warning(
-                            $"[NocturneModernGameplay] CursorPosShiftWriteWatchTrace breakpoint removal failed: {ex.Message}");
+                            $"[NocturneAddNewSkills] CursorPosShiftWriteWatchTrace breakpoint removal failed: {ex.Message}");
                     }
                 }
                 if (_vehHandle != IntPtr.Zero)
@@ -391,7 +391,7 @@ namespace NocturneModernGameplay
                 ref PendingHit hit = ref _pending[i];
                 long staticVa = GameAssemblyPreferredBase + (hit.WriterNextInsnAddress - _actualModuleBase);
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] SHIFTWATCH-HIT; " +
+                    "[NocturneAddNewSkills] SHIFTWATCH-HIT; " +
                     $"frame={hit.Frame}; seq={hit.Seq}; oldShift={hit.OldShift}; newShift={hit.NewShift}; " +
                     $"index={hit.Index}; listNums={hit.ListNums}; eventParam={hit.EventParam}; " +
                     $"bridgeActive={hit.BridgeActive}; writerNextInsnVa=0x{staticVa:X}; " +

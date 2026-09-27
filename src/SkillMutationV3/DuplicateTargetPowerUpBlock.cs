@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // DUPLICATE POWER-UP TARGET BLOCK (mode-independent - Overwrite AND
     // AddNew both blocked).
@@ -72,7 +72,7 @@ namespace NocturneModernGameplay
                     int frame = UnityEngine.Time.frameCount;
                     string mode = FullCapacityAddNewBridgeTrigger.Enabled ? "AddNew" : "Overwrite";
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] DUPLICATE-PU-TARGET-BLOCK; " +
+                        "[NocturneAddNewSkills] DUPLICATE-PU-TARGET-BLOCK; " +
                         $"frame={frame}; unit={__0.id}; stockPtr=0x{__0.Pointer.ToInt64():X}; " +
                         $"target={SkillNameResolver.Format(__result)}; mode={mode}; " +
                         "action=BLOCK-AS-NO-CANDIDATE.");
@@ -84,7 +84,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] DuplicateTargetPowerUpBlock postfix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] DuplicateTargetPowerUpBlock postfix failed safely: {ex.Message}");
             }
         }
     }

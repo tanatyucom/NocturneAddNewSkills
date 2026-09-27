@@ -1,7 +1,7 @@
 using System;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // Single owner of the outer skill-change gate (VA 0x18227EFD0,
     // rstcalc.rstCalc's "test al, 3" that decides whether
@@ -49,7 +49,7 @@ namespace NocturneModernGameplay
                 _isPatched = isPatched;
                 _resolved = true;
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] SharedSkillChangeOuterGateControl resolved; site vanilla-or-known.");
+                    "[NocturneAddNewSkills] SharedSkillChangeOuterGateControl resolved; site vanilla-or-known.");
 
                 // Defensive: reconcile from current Chance modes right away
                 // (both SkillMutationChanceControl.Mode / SkillPowerUpChanceControl.Mode
@@ -63,7 +63,7 @@ namespace NocturneModernGameplay
             {
                 _resolved = false;
                 MelonLogger.Error(
-                    $"[NocturneModernGameplay] SharedSkillChangeOuterGateControl init refused safely: {ex}");
+                    $"[NocturneAddNewSkills] SharedSkillChangeOuterGateControl init refused safely: {ex}");
             }
         }
 
@@ -76,7 +76,7 @@ namespace NocturneModernGameplay
             if (!_resolved)
             {
                 MelonLogger.Warning(
-                    "[NocturneModernGameplay] SharedSkillChangeOuterGateControl not resolved; ignoring Recompute.");
+                    "[NocturneAddNewSkills] SharedSkillChangeOuterGateControl not resolved; ignoring Recompute.");
                 return;
             }
 
@@ -100,7 +100,7 @@ namespace NocturneModernGameplay
 
                     _isPatched = forcePass;
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] SharedOuterGate; " +
+                        "[NocturneAddNewSkills] SharedOuterGate; " +
                         $"mutationMode={mutationMode} powerUpMode={powerUpMode} forcePass={forcePass} " +
                         $"bytes={NativeChancePatchUtility.FormatBytes(target)}.");
                 }
@@ -108,7 +108,7 @@ namespace NocturneModernGameplay
                 {
                     byte[] current = NativeChancePatchUtility.ReadBytes(_address, Vanilla.Length);
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] SharedOuterGate (unchanged); " +
+                        "[NocturneAddNewSkills] SharedOuterGate (unchanged); " +
                         $"mutationMode={mutationMode} powerUpMode={powerUpMode} forcePass={forcePass} " +
                         $"bytes={NativeChancePatchUtility.FormatBytes(current)}.");
                 }
@@ -116,7 +116,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneModernGameplay] SharedSkillChangeOuterGateControl Recompute failed safely: {ex}");
+                    $"[NocturneAddNewSkills] SharedSkillChangeOuterGateControl Recompute failed safely: {ex}");
             }
         }
     }

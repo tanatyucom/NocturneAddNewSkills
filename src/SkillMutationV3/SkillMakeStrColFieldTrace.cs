@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneModernGameplay
+namespace NocturneAddNewSkills
 {
     // HIDDEN NEW SKILL ENTRY (master-archive.md Section 22) - broader-net
     // trace (read-only, no writes). Session continuation of
@@ -76,7 +76,7 @@ namespace NocturneModernGameplay
                 if (method == null)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] MAKESTRCOL-PATCH-STATUS; " +
+                        "[NocturneAddNewSkills] MAKESTRCOL-PATCH-STATUS; " +
                         "methodInfo=NULL (GetMethod failed to resolve cmpMisc.cmpMakeStrCol).");
                     return;
                 }
@@ -86,7 +86,7 @@ namespace NocturneModernGameplay
                 int postfixes = info?.Postfixes?.Count ?? 0;
                 IntPtr fnPtr = method.MethodHandle.GetFunctionPointer();
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] MAKESTRCOL-PATCH-STATUS; " +
+                    "[NocturneAddNewSkills] MAKESTRCOL-PATCH-STATUS; " +
                     $"methodInfo=FOUND; declaringType={method.DeclaringType}; " +
                     $"prefixes={prefixes}; postfixes={postfixes}; " +
                     $"functionPointer=0x{fnPtr.ToInt64():X}.");
@@ -94,7 +94,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] SkillMakeStrColFieldTrace.LogPatchStatus failed: {ex}");
+                    $"[NocturneAddNewSkills] SkillMakeStrColFieldTrace.LogPatchStatus failed: {ex}");
             }
         }
 
@@ -112,7 +112,7 @@ namespace NocturneModernGameplay
                 if (_totalCalls == 1 || _totalCalls % 500 == 0)
                 {
                     MelonLogger.Msg(
-                        "[NocturneModernGameplay] MAKESTRCOL-UNGATED-HEARTBEAT; " +
+                        "[NocturneAddNewSkills] MAKESTRCOL-UNGATED-HEARTBEAT; " +
                         $"totalCalls={_totalCalls}; frame={UnityEngine.Time.frameCount}; seq={seqForHeartbeat}.");
                 }
 
@@ -140,7 +140,7 @@ namespace NocturneModernGameplay
                 catch { /* leave unit=-1 */ }
 
                 MelonLogger.Msg(
-                    "[NocturneModernGameplay] MAKESTRCOL-FIELD-TRACE; " +
+                    "[NocturneAddNewSkills] MAKESTRCOL-FIELD-TRACE; " +
                     $"frame={frame}; callIndexInFrame={_callIndexInFrame}; seq={seq}; " +
                     $"bridgeActive={bridgeActive}; unit={unit}; " +
                     $"fontCol=0x{FontCol:X8}; selFlag={SelFlag}; mskFlag={MskFlag}.");
@@ -148,7 +148,7 @@ namespace NocturneModernGameplay
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneModernGameplay] SkillMakeStrColFieldTrace prefix failed safely: {ex.Message}");
+                    $"[NocturneAddNewSkills] SkillMakeStrColFieldTrace prefix failed safely: {ex.Message}");
             }
         }
     }
