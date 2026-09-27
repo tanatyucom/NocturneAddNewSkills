@@ -30,7 +30,7 @@ namespace NocturneAddNewSkills
 
     // Single source of truth for [SkillMutation]/[SkillPowerUp] Chance (and,
     // once implemented, Repeat). Owns the config file
-    // (NocturneModernGameplay.settings.json), owns the current in-memory
+    // (NocturneAddNewSkills.settings.json), owns the current in-memory
     // mode values, and is the ONLY thing that calls
     // SkillMutationChanceControl.SetMode / SkillPowerUpChanceControl.SetMode
     // - both ModMain's startup (via Load) and GameplayFeatureRegistry's GUI
@@ -39,7 +39,7 @@ namespace NocturneAddNewSkills
     // NocturneModernGameplay / NocturneModernController integration spec,
     // section 2 - Single Source of Truth).
     //
-    // NocturneModernGameplay.settings.json is deliberately a NEW, MOD-name-
+    // NocturneAddNewSkills.settings.json is deliberately a NEW, MOD-name-
     // qualified file - the pre-existing root settings.json
     // ({"language":"ja"}) is an unrelated, currently-unread placeholder and
     // is left untouched.
@@ -56,10 +56,8 @@ namespace NocturneAddNewSkills
         // worked.
         internal static string Repeat { get; private set; } = "Native";
 
-        // File name intentionally keeps the pre-rename MOD name so existing
-        // user settings survive the NocturneAddNewSkills rename.
         private static string SettingsPath =>
-            Path.Combine(ModDirectory, "NocturneModernGameplay.settings.json");
+            Path.Combine(ModDirectory, "NocturneAddNewSkills.settings.json");
 
         private static string ModDirectory =>
             Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;

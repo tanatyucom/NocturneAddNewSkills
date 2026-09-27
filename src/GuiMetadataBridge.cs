@@ -32,7 +32,7 @@ namespace NocturneAddNewSkills
 
     internal sealed class ProviderMetadataSnapshot
     {
-        public string ProviderId { get; set; } = "nocturne_modern_gameplay";
+        public string ProviderId { get; set; } = "nocturne_add_new_skills";
         public string ProviderName { get; set; } = "Nocturne Add New Skills";
         public string Version { get; set; } = "0.1.0";
         public List<FeatureMetadataSnapshot> Features { get; set; } = new();
@@ -52,7 +52,7 @@ namespace NocturneAddNewSkills
 
     internal static class GuiMetadataBridge
     {
-        private const string ProviderId = "nocturne_modern_gameplay";
+        private const string ProviderId = "nocturne_add_new_skills";
         private static int _lastRequestWriteTick;
 
         internal static void WriteSnapshot()
@@ -114,7 +114,7 @@ namespace NocturneAddNewSkills
                 // SETTINGS-RELOAD diagnostic (Settings GUI Chance reset bug
                 // investigation, 2026-09-12): "source" is this provider's
                 // persistent record (GameplaySettingsService, which is
-                // also what NocturneModernGameplay.settings.json holds -
+                // also what NocturneAddNewSkills.settings.json holds -
                 // see that class's own header comment) as it stood BEFORE
                 // this request batch is applied. "applied" is the same
                 // three values AFTER. A human comparing the two lines can
@@ -155,10 +155,10 @@ namespace NocturneAddNewSkills
 
         private static string ModDirectory =>
             Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
-        // Keeps the pre-rename file name (and ProviderId): ModernController
-        // discovers providers via "NocturneModern*.features.json".
+        // "NocturneModern" prefix is required: published ModernController
+        // discovers external providers via "NocturneModern*.features.json".
         private static string SnapshotPath =>
-            Path.Combine(ModDirectory, "NocturneModernGameplay.features.json");
+            Path.Combine(ModDirectory, "NocturneModernAddNewSkills.features.json");
         private static string RequestPath =>
             Path.Combine(ModDirectory, "NocturneModernController.feature-requests.json");
     }

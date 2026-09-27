@@ -28,7 +28,7 @@ namespace NocturneAddNewSkills
             SkillMutationChanceControl.Initialize();
             SkillPowerUpChanceControl.Initialize();
             // Settings Service is the single source of truth: it reads
-            // NocturneModernGameplay.settings.json (writing sane defaults
+            // NocturneAddNewSkills.settings.json (writing sane defaults
             // if missing) and applies the result via SetMode immediately -
             // this must run AFTER Initialize() (native sites resolved) and
             // BEFORE GameplayFeatureRegistry.Initialize() (which reads the

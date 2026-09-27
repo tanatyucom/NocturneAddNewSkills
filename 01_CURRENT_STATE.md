@@ -7,7 +7,9 @@
 - 旧名: `NocturneModernGameplay`(以下の過去Evidence・ログ・SHA-256記録内の旧名は当時の事実としてそのまま残す)
 - Historical path: `C:\SMT3Modding\NocturneModernGameplay`
 - Current path: `C:\SMT3Modding\NocturneAddNewSkills`
-- 互換性のため旧名を維持するもの: 設定ファイル`NocturneModernGameplay.settings.json`、GUI連携ファイル`NocturneModernGameplay.features.json`(ModernControllerは`NocturneModern*.features.json`で検出)、ProviderId `nocturne_modern_gameplay`
+- 設定ファイル: `NocturneAddNewSkills.settings.json`(旧`NocturneModernGameplay.settings.json`)
+- ProviderId: `nocturne_add_new_skills`(旧`nocturne_modern_gameplay`)
+- GUI連携ファイル: `NocturneModernAddNewSkills.features.json`(旧`NocturneModernGameplay.features.json`)。公開済みModernController v3.0.0は`NocturneModern*.features.json`で外部Providerを検出するため、この規約に一致する名前とする
 
 ## Skill Mutation V3
 
