@@ -220,8 +220,8 @@ namespace NocturneAddNewSkills
                 if (state == null) return;
                 // Repeat==Native: never touch native result at all - this
                 // entire feature is inert unless the user explicitly
-                // enabled Repeat=Unlimited.
-                if (GameplaySettingsService.Repeat != "Unlimited") return;
+                // enabled Repeat=Unlimited (and the MOD is globally ON).
+                if (GameplaySettingsService.EffectiveRepeat != "Unlimited") return;
 
                 int rawResult = __result;
                 // Scope: Option F only ever judges rawResult==0 cases

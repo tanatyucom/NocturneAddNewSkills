@@ -81,6 +81,10 @@ namespace NocturneAddNewSkills
                     return;
                 }
 
+                // Global OFF: latch bookkeeping above still runs; no new
+                // AddNew work starts (see ModEnableGate).
+                if (!ModEnableGate.IsActive) return;
+
                 // Mutual exclusion against ordinary Power-Up AddNew
                 // (either variant) in flight - same reasoning as
                 // MutationFullCapacityAddNewBridgeTrigger.

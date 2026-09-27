@@ -115,6 +115,10 @@ namespace NocturneAddNewSkills
                     return;
                 }
 
+                // Global OFF: latch bookkeeping above still runs; no new
+                // bridge is armed (see ModEnableGate).
+                if (!ModEnableGate.IsActive) return;
+
                 if (FullCapacityAddNewBridgeState.Active) return;
 
                 // Mutual exclusion with Mutation AddNew (2026-09-15,

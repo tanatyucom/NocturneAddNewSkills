@@ -88,6 +88,14 @@ namespace NocturneAddNewSkills
                 _bit6Before = (stock.flag & 0x40) != 0;
                 _captured = true;
 
+                // Global OFF: record for the Postfix bookkeeping, but never
+                // suppress native (see ModEnableGate).
+                if (!ModEnableGate.IsActive)
+                {
+                    _action = "PASSTHROUGH-MOD-DISABLED";
+                    return true;
+                }
+
                 // EPISODE LATCH (2026-09-17 root-cause fix): a Power-Up or
                 // Mutation already succeeded for this unit earlier in the
                 // same level-up episode - unconditionally suppress, REGARDLESS

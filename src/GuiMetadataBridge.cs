@@ -125,6 +125,7 @@ namespace NocturneAddNewSkills
                 string sourceMutationChance = GameplaySettingsService.SkillMutationChance.ToString();
                 string sourcePowerUpChance = GameplaySettingsService.SkillPowerUpChance.ToString();
                 string sourceRepeat = GameplaySettingsService.Repeat;
+                bool sourceEnabled = GameplaySettingsService.Enabled;
 
                 bool changed = false;
                 foreach (FeatureToggleRequest request in ownRequests)
@@ -136,6 +137,7 @@ namespace NocturneAddNewSkills
 
                 MelonLogger.Msg(
                     "[NocturneAddNewSkills] SETTINGS-RELOAD; " +
+                    $"sourceEnabled={sourceEnabled}; appliedEnabled={GameplaySettingsService.Enabled}; " +
                     $"sourceMutationChance={sourceMutationChance}; sourcePowerUpChance={sourcePowerUpChance}; " +
                     $"sourceRepeat={sourceRepeat}; " +
                     $"appliedMutationChance={GameplaySettingsService.SkillMutationChance}; " +

@@ -13,6 +13,9 @@ namespace NocturneAddNewSkills
     // fail-safe fallback to "Native" and a warning log per field.
     internal sealed class GameplaySettingsData
     {
+        // Global ON/OFF (see ModEnableGate). Nullable so a pre-toggle
+        // settings file without this key loads as true, never silently OFF.
+        public bool? Enabled { get; set; }
         public SkillMutationSettingsData SkillMutation { get; set; } = new();
         public SkillPowerUpSettingsData SkillPowerUp { get; set; } = new();
     }
@@ -45,6 +48,7 @@ namespace NocturneAddNewSkills
     // is left untouched.
     internal static class GameplaySettingsService
     {
+        internal static bool Enabled { get; private set; } = true;
         internal static NativeChanceMode SkillMutationChance { get; private set; } = NativeChanceMode.Native;
         internal static NativeChanceMode SkillPowerUpChance { get; private set; } = NativeChanceMode.Native;
 
@@ -55,6 +59,10 @@ namespace NocturneAddNewSkills
         // back to Native with a warning, never silently no-ops as if it
         // worked.
         internal static string Repeat { get; private set; } = "Native";
+
+        // What runtime code must read instead of Repeat: Native while the
+        // MOD is globally OFF, without touching the stored value.
+        internal static string EffectiveRepeat => Enabled ? Repeat : "Native";
 
         private static string SettingsPath =>
             Path.Combine(ModDirectory, "NocturneAddNewSkills.settings.json");
@@ -80,9 +88,15 @@ namespace NocturneAddNewSkills
                         File.ReadAllText(SettingsPath));
                     if (data != null)
                     {
+                        Enabled = data.Enabled ?? true;
                         SkillMutationChance = ParseChanceMode(data.SkillMutation?.Chance, "SkillMutation.Chance");
                         SkillPowerUpChance = ParseChanceMode(data.SkillPowerUp?.Chance, "SkillPowerUp.Chance");
                         Repeat = ParseRepeat(data.SkillPowerUp?.Repeat);
+                        if (data.Enabled == null)
+                        {
+                            // Normalize an older file so the key is visible.
+                            Save();
+                        }
                     }
                 }
             }
@@ -91,13 +105,13 @@ namespace NocturneAddNewSkills
                 MelonLogger.Warning(
                     "[NocturneAddNewSkills] Gameplay settings file unreadable/invalid; " +
                     $"falling back to all-Native defaults: {ex.Message}");
+                Enabled = true;
                 SkillMutationChance = NativeChanceMode.Native;
                 SkillPowerUpChance = NativeChanceMode.Native;
                 Repeat = "Native";
             }
 
-            SkillMutationChanceControl.SetMode(SkillMutationChance);
-            SkillPowerUpChanceControl.SetMode(SkillPowerUpChance);
+            ApplyEffectiveChanceModes();
             // Repeat itself has no ApplyMode/SetMode step here - it is read
             // directly from this service's Repeat property by
             // OptionFRepeatUnlimitedControl on every Core invocation, so
@@ -105,7 +119,7 @@ namespace NocturneAddNewSkills
 
             MelonLogger.Msg(
                 "[NocturneAddNewSkills] Gameplay settings loaded; " +
-                $"SkillMutation.Chance={SkillMutationChance} SkillPowerUp.Chance={SkillPowerUpChance} " +
+                $"Enabled={Enabled} SkillMutation.Chance={SkillMutationChance} SkillPowerUp.Chance={SkillPowerUpChance} " +
                 $"SkillPowerUp.Repeat={Repeat}.");
         }
 
@@ -115,6 +129,7 @@ namespace NocturneAddNewSkills
             {
                 var data = new GameplaySettingsData
                 {
+                    Enabled = Enabled,
                     SkillMutation = new SkillMutationSettingsData { Chance = SkillMutationChance.ToString() },
                     SkillPowerUp = new SkillPowerUpSettingsData
                     {
@@ -140,14 +155,14 @@ namespace NocturneAddNewSkills
         internal static void SetSkillMutationChance(NativeChanceMode mode)
         {
             SkillMutationChance = mode;
-            SkillMutationChanceControl.SetMode(mode);
+            SkillMutationChanceControl.SetMode(EffectiveMode(mode));
             Save();
         }
 
         internal static void SetSkillPowerUpChance(NativeChanceMode mode)
         {
             SkillPowerUpChance = mode;
-            SkillPowerUpChanceControl.SetMode(mode);
+            SkillPowerUpChanceControl.SetMode(EffectiveMode(mode));
             Save();
         }
 
@@ -166,6 +181,30 @@ namespace NocturneAddNewSkills
             Save();
             MelonLogger.Msg($"[NocturneAddNewSkills] SkillPowerUp Repeat mode set; mode={Repeat}.");
         }
+
+        // GUI entry point for the global "Add New Skills" toggle. Persists
+        // only Enabled; Chance/Repeat stored values are never rewritten, so
+        // turning it back ON resumes with the previous settings.
+        internal static void SetEnabled(bool enabled)
+        {
+            if (Enabled == enabled) return;
+            Enabled = enabled;
+            ApplyEffectiveChanceModes();
+            Save();
+            ModEnableGate.OnEnabledChanged(enabled);
+        }
+
+        // Native bytes follow the stored Chance modes only while Enabled;
+        // OFF restores vanilla bytes (Native) without changing the stored
+        // values.
+        private static void ApplyEffectiveChanceModes()
+        {
+            SkillMutationChanceControl.SetMode(EffectiveMode(SkillMutationChance));
+            SkillPowerUpChanceControl.SetMode(EffectiveMode(SkillPowerUpChance));
+        }
+
+        private static NativeChanceMode EffectiveMode(NativeChanceMode stored) =>
+            Enabled ? stored : NativeChanceMode.Native;
 
         private static NativeChanceMode ParseChanceMode(string? raw, string fieldName)
         {

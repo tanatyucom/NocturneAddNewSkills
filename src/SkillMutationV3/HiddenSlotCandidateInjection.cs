@@ -144,6 +144,7 @@ namespace NocturneAddNewSkills
             var pStock = __1;
             var pInfo = __3;
             if (!Enabled) return;
+            if (!ModEnableGate.AllowsBridgePresentation) return;
             try
             {
                 // Recognizes EITHER bridge's active episode (2026-09-15,

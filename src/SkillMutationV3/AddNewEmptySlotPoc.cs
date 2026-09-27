@@ -236,6 +236,10 @@ namespace NocturneAddNewSkills
                     return;
                 }
 
+                // Global OFF: latch bookkeeping above still runs; no new
+                // AddNew work starts (see ModEnableGate).
+                if (!ModEnableGate.IsActive) return;
+
                 // Mutual exclusion with Mutation AddNew (2026-09-15,
                 // User-directed minimal additive guard - see
                 // MutationFullCapacityAddNewBridgePoc.cs's own comment for

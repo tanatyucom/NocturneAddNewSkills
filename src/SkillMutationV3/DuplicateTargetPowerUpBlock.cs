@@ -55,6 +55,7 @@ namespace NocturneAddNewSkills
         {
             if (!Enabled) return;
             if (__result == 0) return; // already "no candidate" - nothing to do
+            if (!ModEnableGate.IsActive) return;
 
             try
             {

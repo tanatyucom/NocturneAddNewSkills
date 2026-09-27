@@ -48,6 +48,8 @@ namespace NocturneAddNewSkills
         {
             Features.Clear();
 
+            RegisterGlobalEnableFeature();
+
             // The old skill_mutation_always feature (SkillMutationAlways,
             // Patch A/B/C) is retired - see ModMain.cs (no longer
             // Initialize()'d) - and intentionally not re-registered here.
@@ -75,6 +77,27 @@ namespace NocturneAddNewSkills
                 GameplaySettingsService.SetSkillPowerUpChance,
                 SkillPowerUpChanceControl.Shutdown);
             RegisterRepeatFeature();
+        }
+
+        // Global ON/OFF shown as the first checkbox of this provider's card
+        // (AllowedValues null = plain boolean feature, same shape the
+        // published ModernController GUI renders for Quick Heal / Smart
+        // Auto). Id follows their "<mod name>" convention. Turning it off
+        // never rewrites the Chance/Repeat values below - see
+        // GameplaySettingsService.SetEnabled / ModEnableGate.
+        private static void RegisterGlobalEnableFeature()
+        {
+            const string id = "add_new_skills";
+            Features[id] = new GameplayFeature
+            {
+                Id = id,
+                Name = "Add New Skills",
+                Description = "Skill Power-Up / Mutation の拡張機能を有効にします。",
+                Category = "Gameplay Change",
+                SortOrder = 89,
+                Enabled = GameplaySettingsService.Enabled,
+                SetEnabled = GameplaySettingsService.SetEnabled
+            };
         }
 
         // Repeat routes through GameplaySettingsService.SetRepeat (NOT

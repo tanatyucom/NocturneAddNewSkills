@@ -11,6 +11,32 @@
 - ProviderId: `nocturne_add_new_skills`(旧`nocturne_modern_gameplay`)
 - GUI連携ファイル: `NocturneModernAddNewSkills.features.json`(旧`NocturneModernGameplay.features.json`)。公開済みModernController v3.0.0は`NocturneModern*.features.json`で外部Providerを検出するため、この規約に一致する名前とする
 
+## Global Enable Toggle (2026-09-28)
+
+### CONFIRMED (static + runtime toggle, 2026-09-28)
+
+- 設定: `NocturneAddNewSkills.settings.json`の`"Enabled"`。default `true`。キーが無い旧settingsは`true`として読み込み、起動時に`"Enabled": true`を補って保存する。
+- GUI: FeatureId `add_new_skills`(bool feature、SortOrder 89、Category `Gameplay Change`)。公開済みModernController v3.0.0の既存snapshot経路のみ使用(Controller repo変更なし)。統合snapshotでProvider先頭に表示される。
+- false = native pass-through: Chance(Mutation/Power-Up)は保存値を変えずに実効モードNativeを適用し、native bytesをvanillaへ戻す(SharedOuterGate `A8 03`)。Repeatは`EffectiveRepeat`(OFF時Native)で判定する。
+- 個別設定(Chance/Repeat)はOFF中も保持され、ON時に元の値で再適用される(Always/Always/Unlimited → OFF → ON で`A8 00`復帰を実機ログで確認)。
+- runtime toggle対応: GUI request(`NocturneModernController.feature-requests.json`)経由で即時反映。toggle時のみ`Enabled = false/true`ログ。
+- Gate対象(`ModEnableGate.IsActive`): AddNew empty-slot commit(PowerUp/Mutation)、full-capacity bridge arming(PowerUp/Mutation)、DuplicateTargetPowerUpBlock、CoreReentryHandledCheckの抑止(OFF時`PASSTHROUGH-MOD-DISABLED`)、DefaultSkillHandledClassificationBlock、HiddenSlotCandidateInjection(進行中bridgeのみ許可)、Repeat Unlimited変換。Always Episode Guarantee / Power-Up Chance変換 / MutationDisabledBit6GuardはChance実効モード経由で停止。
+- Toggle semantics: トグルは即時に設定・実効モードへ反映するが、進行中のtransaction(full-capacity bridge)はatomicに完了させ、次のnative episodeから完全OFFとなる。
+- OFF時cleanup: `SuppressNextMutationConversion`のみ明示クリア。latch類(AddNew committed latch、bridge completed latch、episode latch、HandledCandidates)はread-only bookkeepingとしてOFF中も動作し、native境界(PUpSkillResult、levelUpCnt、`rstCreateTargetList`)で自己リセットする。進行中のfull-capacity bridgeは完了まで継続させ、次のnative episodeから完全OFFとなる。
+- `LastOriginalCandidateSkillId`は意図的にクリアしない(0はReserve回帰のため)。
+
+### CONFIRMED runtime (2026-09-28 実機、User testok + Latest.log確認)
+
+- 同一セッション ON(起動) → OFF → level-up → ON → level-up。本MOD由来のWarning / Exceptionは0件。
+- OFF区間: `ALWAYS-EPISODE-GUARANTEE` / `MUTADDNEW-POC-COMMIT` / `OPTION-F-DECISION` / `DUPLICATE-PU-TARGET-BLOCK` は0件。Core呼び出し1回は`action=PASSTHROUGH-MOD-DISABLED`、native result 0(native確率で不成立)。
+- ON復帰区間(unit=91 Lv7): 保存値Always/Always/Unlimitedで復帰。所持済みPower-Up候補(メパトラ)を`DUPLICATE-PU-TARGET-BLOCK`、`ALWAYS-EPISODE-GUARANTEE fallbackType=mutation fallbackTarget=290 finalResult=2`、`MUTADDNEW-POC-COMMIT`(アギ保持のまま一分の活泉を新規習得、skillCnt 5→6)。latch SET→RESET正常、二重成立・Reserve書き込み・zombieなし。
+
+### UNRESOLVED
+
+- OFF中にnativeのPower-Up / Mutationが実際に成立するケース(vanilla overwrite)は今回のログでは未観測(native確率で不成立だったため)。
+- bridge進行中(忘却UI途中)でのOFF切替は未試験(今回のtoggleはいずれも`in-flight bridge=False`)。
+- 既知リスク: ON中のAddNewで元スキルと強化後スキルを両方所持した仲魔は、OFF中(DuplicateTargetPowerUpBlock停止)にnative Power-Upで重複スキルが生じ得る。実際に発生した場合のみ、MOD機能ではなくsave-safety guardとして常時有効化するかを再判断する(現時点では仕様どおりOFFで停止)。
+
 ## Skill Mutation V3
 
 ### CONFIRMED

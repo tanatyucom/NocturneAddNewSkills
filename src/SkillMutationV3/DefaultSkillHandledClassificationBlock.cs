@@ -50,6 +50,7 @@ namespace NocturneAddNewSkills
         {
             if (!Enabled) return;
             if (__result == 0) return; // already native's own "no-op" outcome
+            if (!ModEnableGate.IsActive) return;
             try
             {
                 var gbwk = rstinit.GBWK;
