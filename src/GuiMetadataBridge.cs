@@ -75,7 +75,7 @@ namespace NocturneAddNewSkills
                         Name = FeatureLocalization.Name(feature, japanese),
                         Description = FeatureLocalization.Description(feature, japanese),
                         Enabled = feature.Enabled,
-                        Category = FeatureLocalization.Category(japanese),
+                        Category = FeatureLocalization.Category,
                         SortOrder = feature.SortOrder,
                         RequiresRestart = feature.RequiresRestart,
                         Version = "0.1.0",
