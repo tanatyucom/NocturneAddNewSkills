@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // HIDDEN NEW SKILL ENTRY - direct runtime confirmation of the
     // dedicated target==8 presentation path (read-only, no writes).
@@ -162,7 +162,7 @@ namespace NocturneAddNewSkills
                 if (_branchEntryHitCount + _callDoneHitCount >= MaxTotalHitsSafety || elapsed >= MaxArmedFrames)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] HIDDEN9THPATH-AUTOUNINSTALL; " +
+                        "[NocturneSkillEvolution] HIDDEN9THPATH-AUTOUNINSTALL; " +
                         $"branchEntryHits={_branchEntryHitCount}; callDoneHits={_callDoneHitCount}; " +
                         $"armedFrames={elapsed}.");
                     Uninstall();
@@ -171,7 +171,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] Hidden9thSlotPathTrace.Tick failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] Hidden9thSlotPathTrace.Tick failed safely: {ex.Message}");
             }
         }
 
@@ -199,14 +199,14 @@ namespace NocturneAddNewSkills
 
                 _installed = true;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] HIDDEN9THPATH-INSTALLED; " +
+                    "[NocturneSkillEvolution] HIDDEN9THPATH-INSTALLED; " +
                     $"branchEntryVa=0x{_branchEntryAddress.ToInt64():X}; callDoneVa=0x{_callDoneAddress.ToInt64():X}; " +
                     "mechanism=hardware-execute-breakpoint(no GameAssembly.dll bytes written).");
             }
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneAddNewSkills] Hidden9thSlotPathTrace install refused safely: {ex}");
+                    $"[NocturneSkillEvolution] Hidden9thSlotPathTrace install refused safely: {ex}");
                 Uninstall();
             }
         }
@@ -221,7 +221,7 @@ namespace NocturneAddNewSkills
                     catch (Exception ex)
                     {
                         MelonLogger.Warning(
-                            $"[NocturneAddNewSkills] Hidden9thSlotPathTrace breakpoint removal failed: {ex.Message}");
+                            $"[NocturneSkillEvolution] Hidden9thSlotPathTrace breakpoint removal failed: {ex.Message}");
                     }
                 }
                 if (_vehHandle != IntPtr.Zero)
@@ -365,7 +365,7 @@ namespace NocturneAddNewSkills
             {
                 ref PendingHit hit = ref _pending[i];
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] HIDDEN9THPATH-HIT; " +
+                    "[NocturneSkillEvolution] HIDDEN9THPATH-HIT; " +
                     $"frame={hit.Frame}; seq={hit.Seq}; bridgeActive={hit.BridgeActive}; " +
                     $"event={(hit.IsCallDone ? "CALL-DONE(cmpSetupObject(skillCurObj[8],true) completed)" : "BRANCH-ENTRY(target==8 confirmed)")}.");
             }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Nocturne Modern Controller's current UI language, read the same way
     // its published gameplay mods (Smart Auto, Dash, ...) do: reflection on
@@ -93,7 +93,7 @@ namespace NocturneAddNewSkills
         private static readonly Dictionary<string, LocalizedText> Texts =
             new(StringComparer.OrdinalIgnoreCase)
             {
-                ["add_new_skills"] = new(
+                ["skill_evolution"] = new(
                     "変化後スキルを追加習得",
                     "Learn Transformed Skills",
                     "スキル強化・スキル変化時に、元のスキルを残したまま変化後のスキルを追加で習得します。",

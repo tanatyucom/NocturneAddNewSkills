@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // HIDDEN NEW SKILL ENTRY (master-archive.md Section 22) - SkillCursor
     // differential trace (read-only, no writes).
@@ -99,13 +99,13 @@ namespace NocturneAddNewSkills
 
                 int frame = UnityEngine.Time.frameCount;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] SKILLCURSOR-FIELD-TRACE; " +
+                    "[NocturneSkillEvolution] SKILLCURSOR-FIELD-TRACE; " +
                     $"frame={frame}; {snapshot}.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] SkillCursorFieldTrace postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] SkillCursorFieldTrace postfix failed safely: {ex.Message}");
             }
         }
     }

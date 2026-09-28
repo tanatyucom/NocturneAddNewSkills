@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // OLD QUEUE LOOP SUPPRESSION ARCHAEOLOGY - "where does DefSkillResult
     // get set back to 2 for an already-handled candidate" investigation,
@@ -78,7 +78,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] RstCalcHandledReclassifyTrace prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] RstCalcHandledReclassifyTrace prefix failed safely: {ex.Message}");
             }
         }
 
@@ -135,7 +135,7 @@ namespace NocturneAddNewSkills
                 sbyte pUpSkillResultAfter = gbwk.PUpSkillResult;
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] RSTCALC-HANDLED-RECLASSIFY; " +
+                    "[NocturneSkillEvolution] RSTCALC-HANDLED-RECLASSIFY; " +
                     $"frame={frame}; unit={_unitBefore}; stockPtr=0x{_stockPtrBefore:X}; " +
                     $"eventParam {_eventParamBefore}->{eventParamAfter}; " +
                     $"handled {_handledBefore}->{handledAfter}; " +
@@ -152,7 +152,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] RstCalcHandledReclassifyTrace postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] RstCalcHandledReclassifyTrace postfix failed safely: {ex.Message}");
             }
         }
     }

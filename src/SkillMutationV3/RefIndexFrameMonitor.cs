@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // DEFAULTSKILL REFINDEX ROLLBACK INVESTIGATION - FRAME-BOUNDARY TIMING.
     // Read-only observer only. Never writes any field, never touches native
@@ -133,7 +133,7 @@ namespace NocturneAddNewSkills
                 sbyte pUpSkillResult = gbwk?.PUpSkillResult ?? 0;
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] REFINDEX-FRAME-CHANGE; " +
+                    "[NocturneSkillEvolution] REFINDEX-FRAME-CHANGE; " +
                     $"frame={frame}; unit={unit}; " +
                     $"refTableObjSame={refTableObj == prevRefTableObj}; " +
                     $"refTableObj 0x{prevRefTableObj:X}->0x{refTableObj:X}; " +
@@ -145,7 +145,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] RefIndexFrameMonitor postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] RefIndexFrameMonitor postfix failed safely: {ex.Message}");
             }
         }
 

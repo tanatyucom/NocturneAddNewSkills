@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Text.Json;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Persisted config shape. Kept as a plain POCO separate from the
     // runtime NativeChanceMode enum so a malformed/unknown string in the
@@ -33,7 +33,7 @@ namespace NocturneAddNewSkills
 
     // Single source of truth for [SkillMutation]/[SkillPowerUp] Chance (and,
     // once implemented, Repeat). Owns the config file
-    // (NocturneAddNewSkills.settings.json), owns the current in-memory
+    // (NocturneSkillEvolution.settings.json), owns the current in-memory
     // mode values, and is the ONLY thing that calls
     // SkillMutationChanceControl.SetMode / SkillPowerUpChanceControl.SetMode
     // - both ModMain's startup (via Load) and GameplayFeatureRegistry's GUI
@@ -42,7 +42,7 @@ namespace NocturneAddNewSkills
     // NocturneModernGameplay / NocturneModernController integration spec,
     // section 2 - Single Source of Truth).
     //
-    // NocturneAddNewSkills.settings.json is deliberately a NEW, MOD-name-
+    // NocturneSkillEvolution.settings.json is deliberately a NEW, MOD-name-
     // qualified file - the pre-existing root settings.json
     // ({"language":"ja"}) is an unrelated, currently-unread placeholder and
     // is left untouched.
@@ -65,7 +65,15 @@ namespace NocturneAddNewSkills
         internal static string EffectiveRepeat => Enabled ? Repeat : "Native";
 
         private static string SettingsPath =>
-            Path.Combine(ModDirectory, "NocturneAddNewSkills.settings.json");
+            Path.Combine(ModDirectory, "NocturneSkillEvolution.settings.json");
+
+        // Settings file of the same MOD before its rename (published briefly
+        // as "Nocturne Add New Skills" v0.1.0). Read once to seed the new
+        // file when that one does not exist yet; never modified or deleted.
+        private const string LegacySettingsFileName = "NocturneAddNewSkills.settings.json";
+
+        private static string LegacySettingsPath =>
+            Path.Combine(ModDirectory, LegacySettingsFileName);
 
         private static string ModDirectory =>
             Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
@@ -78,21 +86,34 @@ namespace NocturneAddNewSkills
         {
             try
             {
-                if (!File.Exists(SettingsPath))
+                bool migrating = !File.Exists(SettingsPath) && File.Exists(LegacySettingsPath);
+                if (!File.Exists(SettingsPath) && !migrating)
                 {
                     Save();
                 }
                 else
                 {
+                    // Same schema and the same fail-safe validation as the
+                    // current file; only the known keys carry over.
                     GameplaySettingsData? data = JsonSerializer.Deserialize<GameplaySettingsData>(
-                        File.ReadAllText(SettingsPath));
+                        File.ReadAllText(migrating ? LegacySettingsPath : SettingsPath));
                     if (data != null)
                     {
                         Enabled = data.Enabled ?? true;
                         SkillMutationChance = ParseChanceMode(data.SkillMutation?.Chance, "SkillMutation.Chance");
                         SkillPowerUpChance = ParseChanceMode(data.SkillPowerUp?.Chance, "SkillPowerUp.Chance");
                         Repeat = ParseRepeat(data.SkillPowerUp?.Repeat);
-                        if (data.Enabled == null)
+                        if (migrating)
+                        {
+                            Save();
+                            if (File.Exists(SettingsPath))
+                            {
+                                MelonLogger.Msg(
+                                    $"[NocturneSkillEvolution] Migrated settings from {LegacySettingsFileName} " +
+                                    "to NocturneSkillEvolution.settings.json (old file kept).");
+                            }
+                        }
+                        else if (data.Enabled == null)
                         {
                             // Normalize an older file so the key is visible.
                             Save();
@@ -103,7 +124,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    "[NocturneAddNewSkills] Gameplay settings file unreadable/invalid; " +
+                    "[NocturneSkillEvolution] Gameplay settings file unreadable/invalid; " +
                     $"falling back to all-Native defaults: {ex.Message}");
                 Enabled = true;
                 SkillMutationChance = NativeChanceMode.Native;
@@ -118,7 +139,7 @@ namespace NocturneAddNewSkills
             // there is nothing additional to "apply" at load time.
 
             MelonLogger.Msg(
-                "[NocturneAddNewSkills] Gameplay settings loaded; " +
+                "[NocturneSkillEvolution] Gameplay settings loaded; " +
                 $"Enabled={Enabled} SkillMutation.Chance={SkillMutationChance} SkillPowerUp.Chance={SkillPowerUpChance} " +
                 $"SkillPowerUp.Repeat={Repeat}.");
         }
@@ -144,7 +165,7 @@ namespace NocturneAddNewSkills
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneAddNewSkills] Gameplay settings save failed: {ex.Message}");
+                MelonLogger.Warning($"[NocturneSkillEvolution] Gameplay settings save failed: {ex.Message}");
             }
         }
 
@@ -179,7 +200,7 @@ namespace NocturneAddNewSkills
         {
             Repeat = ParseRepeat(mode);
             Save();
-            MelonLogger.Msg($"[NocturneAddNewSkills] SkillPowerUp Repeat mode set; mode={Repeat}.");
+            MelonLogger.Msg($"[NocturneSkillEvolution] SkillPowerUp Repeat mode set; mode={Repeat}.");
         }
 
         // GUI entry point for the global "Add New Skills" toggle. Persists
@@ -211,7 +232,7 @@ namespace NocturneAddNewSkills
             if (Enum.TryParse(raw, ignoreCase: true, out NativeChanceMode mode))
                 return mode;
             MelonLogger.Warning(
-                $"[NocturneAddNewSkills] config: unknown {fieldName} value '{raw}'; falling back to Native.");
+                $"[NocturneSkillEvolution] config: unknown {fieldName} value '{raw}'; falling back to Native.");
             return NativeChanceMode.Native;
         }
 
@@ -221,7 +242,7 @@ namespace NocturneAddNewSkills
             if (string.Equals(raw, "Unlimited", StringComparison.OrdinalIgnoreCase)) return "Unlimited";
             if (!string.IsNullOrEmpty(raw))
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] config: unknown SkillPowerUp.Repeat value '{raw}'; falling back to Native.");
+                    $"[NocturneSkillEvolution] config: unknown SkillPowerUp.Repeat value '{raw}'; falling back to Native.");
             return "Native";
         }
     }

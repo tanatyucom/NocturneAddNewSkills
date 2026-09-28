@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // HIDDEN NEW SKILL ENTRY - minimal read-only capture of
     // fclMisc.fclChkMessage(0)'s return value at the exact point it is
@@ -157,7 +157,7 @@ namespace NocturneAddNewSkills
                 if (elapsed >= MaxArmedFrames)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] FCLCHKMSG-AUTOUNINSTALL; " +
+                        "[NocturneSkillEvolution] FCLCHKMSG-AUTOUNINSTALL; " +
                         $"totalHits={_totalHitCount}; armedFrames={elapsed}.");
                     Uninstall();
                 }
@@ -165,7 +165,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] FclChkMessageResultTrace.Tick failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] FclChkMessageResultTrace.Tick failed safely: {ex.Message}");
             }
         }
 
@@ -192,14 +192,14 @@ namespace NocturneAddNewSkills
 
                 _installed = true;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] FCLCHKMSG-INSTALLED; " +
+                    "[NocturneSkillEvolution] FCLCHKMSG-INSTALLED; " +
                     $"observation=0x{_addrObservation.ToInt64():X}; " +
                     "mechanism=hardware-execute-breakpoint x1(no GameAssembly.dll bytes written).");
             }
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneAddNewSkills] FclChkMessageResultTrace install refused safely: {ex}");
+                    $"[NocturneSkillEvolution] FclChkMessageResultTrace install refused safely: {ex}");
                 Uninstall();
             }
         }
@@ -225,7 +225,7 @@ namespace NocturneAddNewSkills
                     catch (Exception ex)
                     {
                         MelonLogger.Warning(
-                            $"[NocturneAddNewSkills] FclChkMessageResultTrace breakpoint removal failed: {ex.Message}");
+                            $"[NocturneSkillEvolution] FclChkMessageResultTrace breakpoint removal failed: {ex.Message}");
                     }
                 }
                 if (_vehHandle != IntPtr.Zero)
@@ -366,7 +366,7 @@ namespace NocturneAddNewSkills
             {
                 ref PendingHit hit = ref _pending[i];
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] FCLCHKMSG-HIT; " +
+                    "[NocturneSkillEvolution] FCLCHKMSG-HIT; " +
                     $"frame={hit.Frame}; seq={hit.Seq}; bridgeActive={hit.BridgeActive}; unit={hit.Unit}; " +
                     $"fclChkMessageResult={hit.Al}; cursorIndex={hit.Esi}.");
             }

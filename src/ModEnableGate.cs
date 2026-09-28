@@ -1,6 +1,6 @@
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Global "Add New Skills" ON/OFF (settings "Enabled", default true).
     //
@@ -42,8 +42,8 @@ namespace NocturneAddNewSkills
                 SkillPowerUpChanceAlwaysPatch.SuppressNextMutationConversion = false;
             }
             MelonLogger.Msg(enabled
-                ? "[NocturneAddNewSkills] Enabled = true."
-                : "[NocturneAddNewSkills] Enabled = false; runtime extension state cleared " +
+                ? "[NocturneSkillEvolution] Enabled = true."
+                : "[NocturneSkillEvolution] Enabled = false; runtime extension state cleared " +
                   "(in-flight bridge=" +
                   (FullCapacityAddNewBridgeState.Active || MutationAddNewBridgeState.Active) +
                   ", allowed to finish).");

@@ -7,7 +7,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     internal static class SkillMutationAlways
     {
@@ -55,7 +55,7 @@ namespace NocturneAddNewSkills
             if (enabled) ApplyPatch();
             else RestorePatch();
             MelonLogger.Msg(
-                $"[NocturneAddNewSkills] Skill Mutation: Always " +
+                $"[NocturneSkillEvolution] Skill Mutation: Always " +
                 $"{(enabled && _patched ? "enabled" : "disabled")}.");
         }
 
@@ -142,7 +142,7 @@ namespace NocturneAddNewSkills
                     else
                     {
                         MelonLogger.Msg(
-                            "[NocturneAddNewSkills] SkillMutationAlways diagnostic; " +
+                            "[NocturneSkillEvolution] SkillMutationAlways diagnostic; " +
                             "Patch B/C left vanilla (ExperimentalDisablePatchBAndC=true) - " +
                             "ordinary Power-Up outcomes are NOT forced into Mutation.");
                     }
@@ -171,7 +171,7 @@ namespace NocturneAddNewSkills
                             BytesEqual(actualC, RollFailureVanillaBytes);
 
                         MelonLogger.Msg(
-                            "[NocturneAddNewSkills] SKILL-MUTATION-DIAGNOSTIC-BYTES; " +
+                            "[NocturneSkillEvolution] SKILL-MUTATION-DIAGNOSTIC-BYTES; " +
                             $"patchA={FormatBytes(actualA)} patchB={FormatBytes(actualB)} " +
                             $"patchC={FormatBytes(actualC)} mode=A_ONLY " +
                             $"verified={diagnosticConfigVerified}.");
@@ -195,7 +195,7 @@ namespace NocturneAddNewSkills
 
                 _patched = true;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] SkillMutationAlways enabled; " +
+                    "[NocturneSkillEvolution] SkillMutationAlways enabled; " +
                     $"patchA=0x{_patchAAddress.ToInt64():X} " +
                     $"patchB=0x{_patchBAddress.ToInt64():X} " +
                     $"patchC=0x{_patchCAddress.ToInt64():X}.");
@@ -209,11 +209,11 @@ namespace NocturneAddNewSkills
                 if (_patchAWritten || _patchBWritten || _patchCWritten)
                 {
                     MelonLogger.Error(
-                        "[NocturneAddNewSkills] SkillMutationAlways rollback incomplete; " +
+                        "[NocturneSkillEvolution] SkillMutationAlways rollback incomplete; " +
                         "owned writes will be retried during shutdown.");
                 }
                 MelonLogger.Error(
-                    $"[NocturneAddNewSkills] SkillMutationAlways disabled; " +
+                    $"[NocturneSkillEvolution] SkillMutationAlways disabled; " +
                     $"three-site patch refused safely: {ex}");
             }
 #if false
@@ -262,7 +262,7 @@ namespace NocturneAddNewSkills
                 WriteExecutableBytes(_secondStartCheckAddress, ReturnTrueBytes);
                 _patched = true;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] SKILL-MUTATION native chance patches applied; " +
+                    "[NocturneSkillEvolution] SKILL-MUTATION native chance patches applied; " +
                     $"helper=0x{_patchAddress.ToInt64():X} inline=0x{_inlinePatchAddress.ToInt64():X} " +
                     $"failureRedirect=0x{_failureReturnAddress.ToInt64():X} " +
                     $"devilEligibility=0x{_devilEligibilityAddress.ToInt64():X} " +
@@ -275,7 +275,7 @@ namespace NocturneAddNewSkills
                 _patched = false;
                 _enabled = false;
                 MelonLogger.Error(
-                    $"[NocturneAddNewSkills] Native mutation chance patch refused safely: {ex}");
+                    $"[NocturneSkillEvolution] Native mutation chance patch refused safely: {ex}");
             }
 #endif
         }
@@ -290,12 +290,12 @@ namespace NocturneAddNewSkills
                     throw new InvalidOperationException(
                         "one or more owned patch sites could not be restored");
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] SkillMutationAlways three-site patch restored.");
+                    "[NocturneSkillEvolution] SkillMutationAlways three-site patch restored.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneAddNewSkills] Authoritative mutation chance restore failed: {ex}");
+                    $"[NocturneSkillEvolution] Authoritative mutation chance restore failed: {ex}");
             }
             finally
             {
@@ -321,12 +321,12 @@ namespace NocturneAddNewSkills
                 if (_secondStartCheckAddress != IntPtr.Zero && _secondStartCheckOriginal != null)
                     WriteExecutableBytes(_secondStartCheckAddress, _secondStartCheckOriginal);
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] SKILL-MUTATION native chance patch restored.");
+                    "[NocturneSkillEvolution] SKILL-MUTATION native chance patch restored.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneAddNewSkills] Native mutation chance restore failed: {ex}");
+                    $"[NocturneSkillEvolution] Native mutation chance restore failed: {ex}");
             }
             finally { _patched = false; }
 #endif
@@ -357,12 +357,12 @@ namespace NocturneAddNewSkills
                         signatures.Add($"{type.FullName}.{method.Name}({args})->{method.ReturnType.FullName}");
                     }
                 }
-                MelonLogger.Msg("[NocturneAddNewSkills] SKILL-MUTATION UI getter signatures; " +
+                MelonLogger.Msg("[NocturneSkillEvolution] SKILL-MUTATION UI getter signatures; " +
                     string.Join(" | ", signatures) + ".");
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneAddNewSkills] UI getter signature probe failed: {ex.Message}");
+                MelonLogger.Warning($"[NocturneSkillEvolution] UI getter signature probe failed: {ex.Message}");
             }
         }
 
@@ -395,19 +395,19 @@ namespace NocturneAddNewSkills
 
                 const int dumpLength = 0x8000;
                 byte[] bytes = ReadBytes(target, dumpLength);
-                string directory = @"C:\SMT3Modding\NocturneAddNewSkills\diagnostics";
+                string directory = @"C:\SMT3Modding\NocturneSkillEvolution\diagnostics";
                 Directory.CreateDirectory(directory);
                 string path = Path.Combine(directory, "rstCalc-native.bin");
                 File.WriteAllBytes(path, bytes);
                 MelonLogger.Msg(
-                    $"[NocturneAddNewSkills] SKILL-MUTATION rstCalc native dump; " +
+                    $"[NocturneSkillEvolution] SKILL-MUTATION rstCalc native dump; " +
                     $"entry=0x{entry.ToInt64():X} target=0x{target.ToInt64():X} " +
                     $"length=0x{dumpLength:X} path={path}.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneAddNewSkills] rstCalc native dump failed: {ex}");
+                    $"[NocturneSkillEvolution] rstCalc native dump failed: {ex}");
             }
         }
 
@@ -463,16 +463,16 @@ namespace NocturneAddNewSkills
                     throw new InvalidOperationException(
                         $"resolved target has only {dumpLength} readable bytes remaining");
                 byte[] bytes = ReadBytes(target, dumpLength);
-                string directory = @"C:\SMT3Modding\NocturneAddNewSkills\diagnostics";
+                string directory = @"C:\SMT3Modding\NocturneSkillEvolution\diagnostics";
                 Directory.CreateDirectory(directory);
                 string path = Path.Combine(directory, fileName);
                 File.WriteAllBytes(path, bytes);
-                MelonLogger.Msg($"[NocturneAddNewSkills] native dump; method={fieldPrefix} " +
+                MelonLogger.Msg($"[NocturneSkillEvolution] native dump; method={fieldPrefix} " +
                     $"entry=0x{entry.ToInt64():X} target=0x{target.ToInt64():X} path={path}.");
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneAddNewSkills] {fieldPrefix} dump failed: {ex.Message}");
+                MelonLogger.Warning($"[NocturneSkillEvolution] {fieldPrefix} dump failed: {ex.Message}");
             }
         }
 
@@ -514,7 +514,7 @@ namespace NocturneAddNewSkills
             if (BytesEqual(actual, vanillaBytes))
             {
                 MelonLogger.Msg(
-                    $"[NocturneAddNewSkills] {name} verified; " +
+                    $"[NocturneSkillEvolution] {name} verified; " +
                     $"address=0x{address.ToInt64():X} state=vanilla " +
                     $"bytes={FormatBytes(actual)}.");
                 return PatchSiteState.Vanilla;
@@ -522,7 +522,7 @@ namespace NocturneAddNewSkills
             if (BytesEqual(actual, patchedBytes))
             {
                 MelonLogger.Msg(
-                    $"[NocturneAddNewSkills] {name} verified; " +
+                    $"[NocturneSkillEvolution] {name} verified; " +
                     $"address=0x{address.ToInt64():X} state=already-patched " +
                     $"bytes={FormatBytes(actual)}.");
                 return PatchSiteState.AlreadyPatched;
@@ -551,7 +551,7 @@ namespace NocturneAddNewSkills
                     $"mutation helper 0x{helperEntry.ToInt64():X} is not readable committed memory");
 
             MelonLogger.Msg(
-                "[NocturneAddNewSkills] SkillMutationAlways helper resolved; " +
+                "[NocturneSkillEvolution] SkillMutationAlways helper resolved; " +
                 $"moduleBase=0x{moduleBase.ToInt64():X} rva=0x{helperRva:X} " +
                 $"entry=0x{helperEntry.ToInt64():X}.");
             return helperEntry;
@@ -585,7 +585,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneAddNewSkills] {name} rollback failed at " +
+                    $"[NocturneSkillEvolution] {name} rollback failed at " +
                     $"0x{address.ToInt64():X}: {ex.Message}");
             }
         }
@@ -650,14 +650,14 @@ namespace NocturneAddNewSkills
 
                 var bytes = new byte[128];
                 Marshal.Copy(target, bytes, 0, bytes.Length);
-                MelonLogger.Msg("[NocturneAddNewSkills] MUTATION-NATIVE-2 " +
+                MelonLogger.Msg("[NocturneSkillEvolution] MUTATION-NATIVE-2 " +
                     $"thunk=0x{thunk.ToInt64():X} target=0x{target.ToInt64():X} " +
                     $"protect=0x{memory.Protect:X} bytes={BitConverter.ToString(bytes).Replace("-", string.Empty)}.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] Second mutation chance probe failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] Second mutation chance probe failed safely: {ex.Message}");
             }
         }
 
@@ -737,14 +737,14 @@ namespace NocturneAddNewSkills
                 {
                     _logged = true;
                     MelonLogger.Msg(
-                        $"[NocturneAddNewSkills] SKILL-MUTATION rstCalc candidate flags forced; units={Saved.Count}.");
+                        $"[NocturneSkillEvolution] SKILL-MUTATION rstCalc candidate flags forced; units={Saved.Count}.");
                 }
             }
             catch (Exception ex)
             {
                 RestoreFlags();
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] Could not force rstCalc mutation flags safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] Could not force rstCalc mutation flags safely: {ex.Message}");
             }
         }
 
@@ -785,13 +785,13 @@ namespace NocturneAddNewSkills
                 // here: cmbGetMutationSkill advances native mutation state.
                 __result = checked((ushort)(skill + 3));
                 MelonLogger.Msg(
-                    $"[NocturneAddNewSkills] SKILL-MUTATION candidate forced; " +
+                    $"[NocturneSkillEvolution] SKILL-MUTATION candidate forced; " +
                     $"unit={__0.id} index=0 skill={skill} selector={__result}.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] Mutation candidate redirect failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] Mutation candidate redirect failed safely: {ex.Message}");
             }
         }
     }
@@ -834,13 +834,13 @@ namespace NocturneAddNewSkills
                     work.DefSkillResult = 0;
                 }
                 MelonLogger.Msg(
-                    $"[NocturneAddNewSkills] SKILL-MUTATION core forced at result boundary; " +
+                    $"[NocturneSkillEvolution] SKILL-MUTATION core forced at result boundary; " +
                     $"unit={stock.id} result={result} skill={work.PUpSkillID} index={work.PUpSkillIndex}.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] Forced mutation core failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] Forced mutation core failed safely: {ex.Message}");
             }
         }
     }
@@ -864,7 +864,7 @@ namespace NocturneAddNewSkills
                 {
                     _lastState = state;
                     MelonLogger.Msg(
-                        $"[NocturneAddNewSkills] SKILL-MUTATION default-skill boundary; " +
+                        $"[NocturneSkillEvolution] SKILL-MUTATION default-skill boundary; " +
                         $"current={seq.Current} last={seq.Last} change={seq.Change} " +
                         $"unit={unit} defaultResult={work.DefSkillResult}.");
                 }
@@ -896,7 +896,7 @@ namespace NocturneAddNewSkills
                 if (string.Equals(state, _lastState, StringComparison.Ordinal)) return;
                 _lastState = state;
                 MelonLogger.Msg(
-                    $"[NocturneAddNewSkills] SKILL-MUTATION rstCalc boundary; " +
+                    $"[NocturneSkillEvolution] SKILL-MUTATION rstCalc boundary; " +
                     $"phase={phase} pid={pid} current={seq.Current} last={seq.Last} " +
                     $"change={seq.Change} unit={unit} powerResult={work.PUpSkillResult} " +
                     $"defaultResult={work.DefSkillResult}.");
@@ -925,7 +925,7 @@ namespace NocturneAddNewSkills
             {
                 __result = 0;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] SKILL-MUTATION nested mutation suppressed " +
+                    "[NocturneSkillEvolution] SKILL-MUTATION nested mutation suppressed " +
                     "during queued forget flow.");
                 return false;
             }
@@ -948,7 +948,7 @@ namespace NocturneAddNewSkills
                 if (mutated == 0)
                 {
                     MelonLogger.Warning(
-                        $"[NocturneAddNewSkills] Forced mutation mapping unavailable; " +
+                        $"[NocturneSkillEvolution] Forced mutation mapping unavailable; " +
                         $"unit={stock.id} original={original}.");
                     return true;
                 }
@@ -958,14 +958,14 @@ namespace NocturneAddNewSkills
                 work.PUpSkillResult = 2;
                 __result = 2;
                 MelonLogger.Msg(
-                    $"[NocturneAddNewSkills] SKILL-MUTATION core replaced; " +
+                    $"[NocturneSkillEvolution] SKILL-MUTATION core replaced; " +
                     $"unit={stock.id} index={index} original={original} mutated={mutated} result=2.");
                 return false;
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] Mutation core replacement failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] Mutation core replacement failed safely: {ex.Message}");
                 return true;
             }
         }

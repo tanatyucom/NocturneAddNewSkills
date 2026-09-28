@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // HIDDEN NEW SKILL ENTRY - gate1/gate2 vs gate3 split for
     // rstcalc.rstCreateBeforeSkillList's per-candidate scan loop (VA
@@ -217,7 +217,7 @@ namespace NocturneAddNewSkills
                 if (elapsed >= MaxArmedFrames)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] CURRICULUMGATE-AUTOUNINSTALL; " +
+                        "[NocturneSkillEvolution] CURRICULUMGATE-AUTOUNINSTALL; " +
                         $"loopReadHits={_totalLoopReadHits}; gate1PassHits={_totalGate1PassHits}; " +
                         $"gateCheckHits={_totalGateCheckHits}; stockFieldsHits={_totalStockFieldsHits}; armedFrames={elapsed}.");
                     Uninstall();
@@ -226,7 +226,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] CurriculumGateChainTrace.Tick failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] CurriculumGateChainTrace.Tick failed safely: {ex.Message}");
             }
         }
 
@@ -256,7 +256,7 @@ namespace NocturneAddNewSkills
 
                 _installed = true;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] CURRICULUMGATE-INSTALLED; " +
+                    "[NocturneSkillEvolution] CURRICULUMGATE-INSTALLED; " +
                     $"loopRead=0x{_addrLoopRead.ToInt64():X}; gate1Pass=0x{_addrGate1Pass.ToInt64():X}; " +
                     $"gateCheck=0x{_addrGateCheck.ToInt64():X}; stockFieldProbe=0x{_addrStockFieldProbe.ToInt64():X}; " +
                     "mechanism=hardware-execute-x4(no GameAssembly.dll bytes written).");
@@ -264,7 +264,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneAddNewSkills] CurriculumGateChainTrace install refused safely: {ex}");
+                    $"[NocturneSkillEvolution] CurriculumGateChainTrace install refused safely: {ex}");
                 Uninstall();
             }
         }
@@ -290,7 +290,7 @@ namespace NocturneAddNewSkills
                     catch (Exception ex)
                     {
                         MelonLogger.Warning(
-                            $"[NocturneAddNewSkills] CurriculumGateChainTrace breakpoint removal failed: {ex.Message}");
+                            $"[NocturneSkillEvolution] CurriculumGateChainTrace breakpoint removal failed: {ex.Message}");
                     }
                 }
                 if (_vehHandle != IntPtr.Zero)
@@ -555,7 +555,7 @@ namespace NocturneAddNewSkills
                 {
                     case HitKind.LoopRead:
                         MelonLogger.Msg(
-                            "[NocturneAddNewSkills] CURRICULUMGATE-LOOPREAD; " +
+                            "[NocturneSkillEvolution] CURRICULUMGATE-LOOPREAD; " +
                             $"frame={hit.Frame}; seq={hit.Seq}; bridgeActive={hit.BridgeActive}; unit={hit.Unit}; " +
                             $"target={hit.Target}; r13=0x{hit.R13:X}; loopBound={hit.LoopBound}; " +
                             $"byteArrayPtr=0x{hit.ByteArrayPtr:X}; byteArrayLen={hit.ByteArrayLen}; " +
@@ -563,21 +563,21 @@ namespace NocturneAddNewSkills
                         break;
                     case HitKind.Gate1Pass:
                         MelonLogger.Msg(
-                            "[NocturneAddNewSkills] CURRICULUMGATE-GATE1PASS; " +
+                            "[NocturneSkillEvolution] CURRICULUMGATE-GATE1PASS; " +
                             $"frame={hit.Frame}; seq={hit.Seq}; bridgeActive={hit.BridgeActive}; unit={hit.Unit}; " +
                             $"target={hit.Target}; ebx={hit.Ebx}; skillId={hit.SkillId}; tag={hit.Tag}; " +
                             $"levelThresh={hit.LevelThresh}; levelBase={hit.LevelBase}.");
                         break;
                     case HitKind.GateCheck:
                         MelonLogger.Msg(
-                            "[NocturneAddNewSkills] CURRICULUMGATE-GATE3; " +
+                            "[NocturneSkillEvolution] CURRICULUMGATE-GATE3; " +
                             $"frame={hit.Frame}; seq={hit.Seq}; bridgeActive={hit.BridgeActive}; unit={hit.Unit}; " +
                             $"target={hit.Target}; ebx={hit.Ebx}; skillId={hit.SkillId}; gate3Al={hit.Gate3Al}; " +
                             $"appended={(hit.Gate3Al < 0)}.");
                         break;
                     case HitKind.StockFields:
                         MelonLogger.Msg(
-                            "[NocturneAddNewSkills] CURRICULUMGATE-STOCKFIELDS; " +
+                            "[NocturneSkillEvolution] CURRICULUMGATE-STOCKFIELDS; " +
                             $"frame={hit.Frame}; seq={hit.Seq}; bridgeActive={hit.BridgeActive}; unit={hit.Unit}; " +
                             $"target={hit.Target}; r15=0x{hit.R15:X}; stockId={hit.StockId}; stockLevel={hit.StockLevel}; " +
                             $"stockSkillCnt={hit.StockSkillCnt}; stockHensinmae={hit.StockHensinmae}.");

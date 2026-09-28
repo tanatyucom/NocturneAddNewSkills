@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // OLD QUEUE LOOP SUPPRESSION ARCHAEOLOGY - HandledCandidates read-only
     // observation (step 1 of 2). Never writes any native field. Never
@@ -140,7 +140,7 @@ namespace NocturneAddNewSkills
                 if (EpisodeSkillChangeApplied.Remove(stockPtr))
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] EPISODE-LATCH-CLEAR; " +
+                        "[NocturneSkillEvolution] EPISODE-LATCH-CLEAR; " +
                         $"stockPtr=0x{stockPtr:X}; reason=LevelUpCnt {last}->{levelUpCnt} (new level detected).");
                 }
             }
@@ -214,7 +214,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] HandledCandidatesObserver prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] HandledCandidatesObserver prefix failed safely: {ex.Message}");
             }
         }
 
@@ -249,7 +249,7 @@ namespace NocturneAddNewSkills
                 }
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] HANDLEDCANDIDATES-CHECK; " +
+                    "[NocturneSkillEvolution] HANDLEDCANDIDATES-CHECK; " +
                     $"frame={frame}; unit={_unitBefore}; stockPtr=0x{stockPtr:X}; " +
                     $"eventParam={eventParam}; wouldSuppress={wouldSuppress}; " +
                     $"firstSeenFrame={firstSeenFrame}; framesSinceFirstSeen={frame - firstSeenFrame}; " +
@@ -270,7 +270,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] HandledCandidatesObserver postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] HandledCandidatesObserver postfix failed safely: {ex.Message}");
             }
         }
     }

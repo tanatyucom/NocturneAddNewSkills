@@ -9,7 +9,7 @@
 - 「1. Analysis」「2. Findings」のようなユーザー向け英語見出しを使用しない。
 - 技術用語を英語で記載する場合は、必要に応じて日本語の説明を添える。
 
-# NocturneAddNewSkills 作業開始ルール
+# NocturneSkillEvolution 作業開始ルール
 
 作業開始時に、次の順番で読む。
 

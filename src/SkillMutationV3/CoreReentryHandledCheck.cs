@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // OLD QUEUE LOOP SUPPRESSION ARCHAEOLOGY - ONE-SHOT CORE CONSUMPTION
     // GUARD (suppression PoC).
@@ -110,7 +110,7 @@ namespace NocturneAddNewSkills
 
                     int frameEpisodeSuppress = UnityEngine.Time.frameCount;
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] CORE-EPISODE-LATCH; " +
+                        "[NocturneSkillEvolution] CORE-EPISODE-LATCH; " +
                         $"frame={frameEpisodeSuppress}; unit={_unitBefore}; stockPtr=0x{stockPtr:X}; " +
                         $"candidate={eventParam}; action=SUPPRESS-EPISODE-LATCH.");
                     return false;
@@ -136,7 +136,7 @@ namespace NocturneAddNewSkills
 
                     int frameAllow = UnityEngine.Time.frameCount;
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] CORE-CONSUMPTION; " +
+                        "[NocturneSkillEvolution] CORE-CONSUMPTION; " +
                         $"frame={frameAllow}; unit={_unitBefore}; stockPtr=0x{stockPtr:X}; " +
                         $"candidate={eventParam}; action=ALLOW-FIRST.");
                     return true;
@@ -152,7 +152,7 @@ namespace NocturneAddNewSkills
 
                 int frameSuppress = UnityEngine.Time.frameCount;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] CORE-CONSUMPTION; " +
+                    "[NocturneSkillEvolution] CORE-CONSUMPTION; " +
                     $"frame={frameSuppress}; unit={_unitBefore}; stockPtr=0x{stockPtr:X}; " +
                     $"candidate={eventParam}; action=SUPPRESS-REENTRY.");
                 return false;
@@ -160,7 +160,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] CoreReentryHandledCheck prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] CoreReentryHandledCheck prefix failed safely: {ex.Message}");
                 return true;
             }
         }
@@ -205,7 +205,7 @@ namespace NocturneAddNewSkills
                 // as a diagnostic asset - see 01_CURRENT_STATE.md Phase H).
                 if (MultiLevelStateTransitionTrace.Enabled)
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] MULTILEVEL-CORE; " +
+                    "[NocturneSkillEvolution] MULTILEVEL-CORE; " +
                     $"frame={frame}; unit={_unitBefore}; stockPtr=0x{_stockPtrBefore:X}; " +
                     $"level={_levelBefore}; levelUpCnt={_levelUpCntBefore}; " +
                     $"coreResultNative={coreResultNative}; coreResultAfter={__result}; " +
@@ -219,7 +219,7 @@ namespace NocturneAddNewSkills
                 if (_action == "PASSTHROUGH-NOT-HANDLED" && __result == 0) return;
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] CORE-REENTRY-HANDLED-CHECK; " +
+                    "[NocturneSkillEvolution] CORE-REENTRY-HANDLED-CHECK; " +
                     $"frame={frame}; unit={_unitBefore}; stockPtr=0x{_stockPtrBefore:X}; " +
                     $"eventParam={_eventParamBefore}; action={_action}; " +
                     $"coreResult={__result}; " +
@@ -229,7 +229,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] CoreReentryHandledCheck postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] CoreReentryHandledCheck postfix failed safely: {ex.Message}");
             }
         }
     }

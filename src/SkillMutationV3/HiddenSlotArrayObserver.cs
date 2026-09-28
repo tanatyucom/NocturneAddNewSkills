@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // HIDDEN NEW SKILL ENTRY (master-archive.md Section 22) - read-only
     // confirmation step. Never writes any field.
@@ -83,13 +83,13 @@ namespace NocturneAddNewSkills
 
                 int frame = UnityEngine.Time.frameCount;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] HIDDEN-SLOT-ARRAY-CHECK; " +
+                    "[NocturneSkillEvolution] HIDDEN-SLOT-ARRAY-CHECK; " +
                     $"frame={frame}; unit={FullCapacityAddNewBridgeState.WatchedUnit}; {snapshot}.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] HiddenSlotArrayObserver postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] HiddenSlotArrayObserver postfix failed safely: {ex.Message}");
             }
         }
     }

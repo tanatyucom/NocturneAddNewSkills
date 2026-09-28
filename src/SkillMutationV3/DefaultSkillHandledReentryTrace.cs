@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // OLD QUEUE LOOP SUPPRESSION ARCHAEOLOGY - "where does 349 get
     // reclassified as DefSkillResult=2 a second time" investigation.
@@ -85,7 +85,7 @@ namespace NocturneAddNewSkills
                 {
                     int frame = UnityEngine.Time.frameCount;
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] DEFAULTSKILL-HANDLED-REENTRY-ENTRY; " +
+                        "[NocturneSkillEvolution] DEFAULTSKILL-HANDLED-REENTRY-ENTRY; " +
                         $"frame={frame}; unit={_unitBefore}; stockPtr=0x{_stockPtrBefore:X}; " +
                         $"eventParam={_eventParamBefore}; handled={_handledBefore}; " +
                         $"defSkillResult={_defSkillResultBefore}; " +
@@ -98,7 +98,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] DefaultSkillHandledReentryTrace prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] DefaultSkillHandledReentryTrace prefix failed safely: {ex.Message}");
             }
         }
 
@@ -125,7 +125,7 @@ namespace NocturneAddNewSkills
                 int frame = UnityEngine.Time.frameCount;
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] DEFAULTSKILL-HANDLED-REENTRY-EXIT; " +
+                    "[NocturneSkillEvolution] DEFAULTSKILL-HANDLED-REENTRY-EXIT; " +
                     $"frame={frame}; unit={_unitBefore}; stockPtr=0x{_stockPtrBefore:X}; " +
                     $"eventParam={_eventParamBefore}; handled={_handledBefore}; " +
                     $"defSkillResult {_defSkillResultBefore}->{defSkillResultAfter}; " +
@@ -141,7 +141,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] DefaultSkillHandledReentryTrace postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] DefaultSkillHandledReentryTrace postfix failed safely: {ex.Message}");
             }
         }
     }

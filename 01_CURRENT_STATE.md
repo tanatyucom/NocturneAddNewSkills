@@ -1,22 +1,23 @@
-# NocturneAddNewSkills Current State
+# NocturneSkillEvolution Current State
 
-## Project Identity (2026-09-27 rename)
+## Project Identity (2026-09-28 rename)
 
-- Public display name: `Nocturne Add New Skills`
-- Repository / Assembly / Namespace: `NocturneAddNewSkills`(DLL: `NocturneAddNewSkills.dll`)
-- 旧名: `NocturneModernGameplay`(以下の過去Evidence・ログ・SHA-256記録内の旧名は当時の事実としてそのまま残す)
-- Historical path: `C:\SMT3Modding\NocturneModernGameplay`
-- Current path: `C:\SMT3Modding\NocturneAddNewSkills`
-- 設定ファイル: `NocturneAddNewSkills.settings.json`(旧`NocturneModernGameplay.settings.json`)
-- ProviderId: `nocturne_add_new_skills`(旧`nocturne_modern_gameplay`)
-- GUI連携ファイル: `NocturneModernAddNewSkills.features.json`(旧`NocturneModernGameplay.features.json`)。公開済みModernController v3.0.0は`NocturneModern*.features.json`で外部Providerを検出するため、この規約に一致する名前とする
+- Public display name: `Nocturne Skill Evolution`(旧`Nocturne Add New Skills`。GitHubでv0.1.0を短期間公開した後に正式rename)
+- Repository / Assembly / Namespace: `NocturneSkillEvolution`(DLL: `NocturneSkillEvolution.dll`)
+- 旧名: `NocturneAddNewSkills`(2026-09-27〜28)、`NocturneModernGameplay`(それ以前)。以下の過去Evidence・ログ・SHA-256記録内の旧名は当時の事実としてそのまま残す
+- Historical paths: `C:\SMT3Modding\NocturneModernGameplay`、`C:\SMT3Modding\NocturneAddNewSkills`
+- Current path: `C:\SMT3Modding\NocturneSkillEvolution`
+- 設定ファイル: `NocturneSkillEvolution.settings.json`(旧`NocturneAddNewSkills.settings.json`、さらに旧`NocturneModernGameplay.settings.json`)。新ファイルが無く旧`NocturneAddNewSkills.settings.json`がある場合のみ、起動時に旧ファイルの既知キーを新ファイルへ移行する(旧ファイルは削除しない)
+- ProviderId: `nocturne_skill_evolution`(旧`nocturne_add_new_skills`、さらに旧`nocturne_modern_gameplay`)
+- 全体トグルのFeatureId: `skill_evolution`(旧`add_new_skills`)
+- GUI連携ファイル: `NocturneModernSkillEvolution.features.json`(旧`NocturneModernAddNewSkills.features.json`はsnapshot初回書き込み時に削除。さらに旧`NocturneModernGameplay.features.json`)。公開済みModernController v3.0.0は`NocturneModern*.features.json`で外部Providerを検出するため、この規約に一致する名前とする
 
 ## Global Enable Toggle (2026-09-28)
 
 ### CONFIRMED (static + runtime toggle, 2026-09-28)
 
-- 設定: `NocturneAddNewSkills.settings.json`の`"Enabled"`。default `true`。キーが無い旧settingsは`true`として読み込み、起動時に`"Enabled": true`を補って保存する。
-- GUI: FeatureId `add_new_skills`(bool feature、SortOrder 89、Category `Gameplay Change`)。公開済みModernController v3.0.0の既存snapshot経路のみ使用(Controller repo変更なし)。統合snapshotでProvider先頭に表示される。
+- 設定: `NocturneSkillEvolution.settings.json`(当時`NocturneAddNewSkills.settings.json`)の`"Enabled"`。default `true`。キーが無い旧settingsは`true`として読み込み、起動時に`"Enabled": true`を補って保存する。
+- GUI: FeatureId `skill_evolution`(当時`add_new_skills`、bool feature、SortOrder 89、Category `Gameplay Change`)。公開済みModernController v3.0.0の既存snapshot経路のみ使用(Controller repo変更なし)。統合snapshotでProvider先頭に表示される。
 - false = native pass-through: Chance(Mutation/Power-Up)は保存値を変えずに実効モードNativeを適用し、native bytesをvanillaへ戻す(SharedOuterGate `A8 03`)。Repeatは`EffectiveRepeat`(OFF時Native)で判定する。
 - 個別設定(Chance/Repeat)はOFF中も保持され、ON時に元の値で再適用される(Always/Always/Unlimited → OFF → ON で`A8 00`復帰を実機ログで確認)。
 - runtime toggle対応: GUI request(`NocturneModernController.feature-requests.json`)経由で即時反映。toggle時のみ`Enabled = false/true`ログ。

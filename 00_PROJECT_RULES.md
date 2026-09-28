@@ -1,4 +1,4 @@
-# NocturneAddNewSkills Project Rules
+# NocturneSkillEvolution Project Rules
 
 ## 基本方針
 

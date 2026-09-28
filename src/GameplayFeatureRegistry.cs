@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     internal sealed class GameplayFeature
     {
@@ -89,7 +89,7 @@ namespace NocturneAddNewSkills
         // GameplaySettingsService.SetEnabled / ModEnableGate.
         private static void RegisterGlobalEnableFeature()
         {
-            const string id = "add_new_skills";
+            const string id = "skill_evolution";
             Features[id] = new GameplayFeature
             {
                 Id = id,

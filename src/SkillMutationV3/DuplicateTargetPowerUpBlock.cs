@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // DUPLICATE POWER-UP TARGET BLOCK (mode-independent - Overwrite AND
     // AddNew both blocked).
@@ -73,7 +73,7 @@ namespace NocturneAddNewSkills
                     int frame = UnityEngine.Time.frameCount;
                     string mode = FullCapacityAddNewBridgeTrigger.Enabled ? "AddNew" : "Overwrite";
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] DUPLICATE-PU-TARGET-BLOCK; " +
+                        "[NocturneSkillEvolution] DUPLICATE-PU-TARGET-BLOCK; " +
                         $"frame={frame}; unit={__0.id}; stockPtr=0x{__0.Pointer.ToInt64():X}; " +
                         $"target={SkillNameResolver.Format(__result)}; mode={mode}; " +
                         "action=BLOCK-AS-NO-CANDIDATE.");
@@ -85,7 +85,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] DuplicateTargetPowerUpBlock postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] DuplicateTargetPowerUpBlock postfix failed safely: {ex.Message}");
             }
         }
     }

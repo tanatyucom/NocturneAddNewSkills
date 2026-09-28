@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // HIDDEN NEW SKILL ENTRY (master-archive.md Section 22) - CONTROLLED
     // EXPERIMENT (not a confirmed fix yet).
@@ -75,7 +75,7 @@ namespace NocturneAddNewSkills
                         _capturedOriginal = true;
 
                         MelonLogger.Msg(
-                            "[NocturneAddNewSkills] HIDDEN-SLOT-POC-CAPTURE; " +
+                            "[NocturneSkillEvolution] HIDDEN-SLOT-POC-CAPTURE; " +
                             $"unit={_capturedUnit}; stockPtr=0x{stockPtr:X}; " +
                             $"originalSkill8={_originalValue}; " +
                             $"target={FullCapacityAddNewBridgeState.Target}.");
@@ -88,7 +88,7 @@ namespace NocturneAddNewSkills
                         {
                             arr[HiddenSlotIndex] = target;
                             MelonLogger.Msg(
-                                "[NocturneAddNewSkills] HIDDEN-SLOT-POC-STAGE; " +
+                                "[NocturneSkillEvolution] HIDDEN-SLOT-POC-STAGE; " +
                                 $"unit={_capturedUnit}; stockPtr=0x{stockPtr:X}; " +
                                 $"skill8Set={target}; skillcntUnchanged={stock.skillcnt}.");
                         }
@@ -102,7 +102,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] HiddenSlotPresentationPoc postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] HiddenSlotPresentationPoc postfix failed safely: {ex.Message}");
                 // Fail-closed: try to restore immediately rather than risk
                 // leaving index 8 modified.
                 RestoreNow("exception-fail-safe");
@@ -126,7 +126,7 @@ namespace NocturneAddNewSkills
                     {
                         arr[HiddenSlotIndex] = _originalValue;
                         MelonLogger.Msg(
-                            "[NocturneAddNewSkills] HIDDEN-SLOT-POC-RESTORE; " +
+                            "[NocturneSkillEvolution] HIDDEN-SLOT-POC-RESTORE; " +
                             $"reason={reason}; unit={_capturedUnit}; stockPtr=0x{liveStockPtr:X}; " +
                             $"restoredTo={_originalValue}; skillcntUnchanged={stock.skillcnt}.");
                         return;
@@ -134,7 +134,7 @@ namespace NocturneAddNewSkills
                 }
 
                 MelonLogger.Warning(
-                    "[NocturneAddNewSkills] HIDDEN-SLOT-POC-RESTORE-SKIPPED; " +
+                    "[NocturneSkillEvolution] HIDDEN-SLOT-POC-RESTORE-SKIPPED; " +
                     $"reason={reason}; capturedUnit={_capturedUnit}; " +
                     $"capturedStockPtr=0x{_capturedStockPtr:X}; liveStockPtr=0x{liveStockPtr:X} " +
                     "(stock pointer changed or unavailable - could not verify restore target).");
@@ -142,7 +142,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] HiddenSlotPresentationPoc restore failed: {ex.Message}");
+                    $"[NocturneSkillEvolution] HiddenSlotPresentationPoc restore failed: {ex.Message}");
             }
         }
     }

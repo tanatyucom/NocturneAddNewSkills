@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Option F result conversion - INITIAL CANDIDATE implementation
     // (investigations/REPEAT_UNLIMITED/PLAN.md). Converts
@@ -122,7 +122,7 @@ namespace NocturneAddNewSkills
             {
                 _coreActive = false;
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] OptionFRepeatUnlimitedControl prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] OptionFRepeatUnlimitedControl prefix failed safely: {ex.Message}");
                 return null;
             }
         }
@@ -154,7 +154,7 @@ namespace NocturneAddNewSkills
                 try
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] OPTIONF-DIAG-TOTAL-CALLS; " +
+                        "[NocturneSkillEvolution] OPTIONF-DIAG-TOTAL-CALLS; " +
                         $"totalCalls={_diagCallCounter}; frame={UnityEngine.Time.frameCount}.");
                 }
                 catch { /* diagnostic only */ }
@@ -165,7 +165,7 @@ namespace NocturneAddNewSkills
                 try
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] OPTIONF-DIAG-EXCLUSION-HIT; " +
+                        "[NocturneSkillEvolution] OPTIONF-DIAG-EXCLUSION-HIT; " +
                         $"totalCalls={_diagCallCounter}; coreActive=True; frame={UnityEngine.Time.frameCount}.");
                 }
                 catch { /* diagnostic only */ }
@@ -203,7 +203,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    "[NocturneAddNewSkills] OptionFRepeatUnlimitedControl exclusion observer failed safely: " +
+                    "[NocturneSkillEvolution] OptionFRepeatUnlimitedControl exclusion observer failed safely: " +
                     $"{ex.Message}");
             }
         }
@@ -345,7 +345,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] OptionFRepeatUnlimitedControl postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] OptionFRepeatUnlimitedControl postfix failed safely: {ex.Message}");
             }
             finally
             {
@@ -373,7 +373,7 @@ namespace NocturneAddNewSkills
             string skillName = SkillNameResolver.Resolve(pUpSkillId);
 
             MelonLogger.Msg(
-                "[NocturneAddNewSkills] OPTION-F-DECISION; " +
+                "[NocturneSkillEvolution] OPTION-F-DECISION; " +
                 $"invocation={state.InvocationId}; unit={state.UnitId}; level={state.Level}; " +
                 $"pUpSkillID={pUpSkillId}; pUpSkillName=\"{skillName}\"; rawResult={rawResult}; " +
                 $"bit6WasSet={state.Bit6WasSet}; exclusionObserved={_exclusionObservedThisCore}; " +

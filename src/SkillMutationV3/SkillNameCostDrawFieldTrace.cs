@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // HIDDEN NEW SKILL ENTRY (master-archive.md Section 22) - cmpSkillNameCostDraw
     // entry-point trace (read-only, no writes). Session continuation of
@@ -54,7 +54,7 @@ namespace NocturneAddNewSkills
                 if (method == null)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] SKILLNAMECOSTDRAW-PATCH-STATUS; " +
+                        "[NocturneSkillEvolution] SKILLNAMECOSTDRAW-PATCH-STATUS; " +
                         "methodInfo=NULL (GetMethod failed to resolve cmpDrawSkill.cmpSkillNameCostDraw).");
                     return;
                 }
@@ -64,7 +64,7 @@ namespace NocturneAddNewSkills
                 int postfixes = info?.Postfixes?.Count ?? 0;
                 IntPtr fnPtr = method.MethodHandle.GetFunctionPointer();
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] SKILLNAMECOSTDRAW-PATCH-STATUS; " +
+                    "[NocturneSkillEvolution] SKILLNAMECOSTDRAW-PATCH-STATUS; " +
                     $"methodInfo=FOUND; declaringType={method.DeclaringType}; " +
                     $"prefixes={prefixes}; postfixes={postfixes}; " +
                     $"functionPointer=0x{fnPtr.ToInt64():X}.");
@@ -72,7 +72,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] SkillNameCostDrawFieldTrace.LogPatchStatus failed: {ex}");
+                    $"[NocturneSkillEvolution] SkillNameCostDrawFieldTrace.LogPatchStatus failed: {ex}");
             }
         }
 
@@ -96,7 +96,7 @@ namespace NocturneAddNewSkills
                 if (_totalCalls == 1 || _totalCalls % 500 == 0)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] SKILLNAMECOSTDRAW-UNGATED-HEARTBEAT; " +
+                        "[NocturneSkillEvolution] SKILLNAMECOSTDRAW-UNGATED-HEARTBEAT; " +
                         $"totalCalls={_totalCalls}; frame={UnityEngine.Time.frameCount}; seq={seqForHeartbeat}.");
                 }
 
@@ -128,13 +128,13 @@ namespace NocturneAddNewSkills
 
                 int frame = UnityEngine.Time.frameCount;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] SKILLNAMECOSTDRAW-FIELD-TRACE; " +
+                    "[NocturneSkillEvolution] SKILLNAMECOSTDRAW-FIELD-TRACE; " +
                     $"frame={frame}; {snapshot}.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] SkillNameCostDrawFieldTrace prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] SkillNameCostDrawFieldTrace prefix failed safely: {ex.Message}");
             }
         }
     }

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // HIDDEN NEW SKILL ENTRY - direct capture of the highlight-on decision
     // gate's real runtime values (read-only, no writes). Session
@@ -206,7 +206,7 @@ namespace NocturneAddNewSkills
                     elapsed >= MaxArmedFrames)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] HIGHLIGHTGATE-AUTOUNINSTALL; " +
+                        "[NocturneSkillEvolution] HIGHLIGHTGATE-AUTOUNINSTALL; " +
                         $"distinctPairs={_seenCount}; rawHits={_rawHitCount}; loggedHits={_loggedHitCount}; " +
                         $"armedFrames={elapsed}.");
                     Uninstall();
@@ -215,7 +215,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] HighlightTargetGateTrace.Tick failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] HighlightTargetGateTrace.Tick failed safely: {ex.Message}");
             }
         }
 
@@ -256,14 +256,14 @@ namespace NocturneAddNewSkills
 
                 _installed = true;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] HIGHLIGHTGATE-INSTALLED; " +
+                    "[NocturneSkillEvolution] HIGHLIGHTGATE-INSTALLED; " +
                     $"targetVa=0x{_targetAddress.ToInt64():X}; " +
                     "mechanism=hardware-breakpoint(no GameAssembly.dll bytes written).");
             }
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneAddNewSkills] HighlightTargetGateTrace install refused safely: {ex}");
+                    $"[NocturneSkillEvolution] HighlightTargetGateTrace install refused safely: {ex}");
                 Uninstall();
             }
         }
@@ -278,7 +278,7 @@ namespace NocturneAddNewSkills
                     catch (Exception ex)
                     {
                         MelonLogger.Warning(
-                            $"[NocturneAddNewSkills] HighlightTargetGateTrace breakpoint removal failed: {ex.Message}");
+                            $"[NocturneSkillEvolution] HighlightTargetGateTrace breakpoint removal failed: {ex.Message}");
                     }
                 }
                 if (_vehHandle != IntPtr.Zero)
@@ -462,7 +462,7 @@ namespace NocturneAddNewSkills
                 ref PendingHit hit = ref _pending[i];
                 _loggedHitCount++;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] HIGHLIGHTGATE-HIT; " +
+                    "[NocturneSkillEvolution] HIGHLIGHTGATE-HIT; " +
                     $"frame={hit.Frame}; ebx={hit.Ebx}; target={hit.Target}; index={hit.Index}; " +
                     $"shift={hit.Shift}; loopUpper={hit.LoopUpper}; match={hit.Target == hit.Ebx}.");
             }

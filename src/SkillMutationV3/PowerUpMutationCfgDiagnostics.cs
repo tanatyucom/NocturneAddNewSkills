@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Read-only investigation telemetry for the Power-Up vs genuine Mutation
     // native branch inside rstcalc.rstCalcSkillPowerUpCore, per this
@@ -157,12 +157,12 @@ namespace NocturneAddNewSkills
 
                 int frame = UnityEngine.Time.frameCount;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] V3-CFG-CORE; " + Snapshot("prefix", frame) +
+                    "[NocturneSkillEvolution] V3-CFG-CORE; " + Snapshot("prefix", frame) +
                     $" invocationId={invocationId}.");
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneAddNewSkills] V3-CFG-CORE prefix failed safely: {ex.Message}");
+                MelonLogger.Warning($"[NocturneSkillEvolution] V3-CFG-CORE prefix failed safely: {ex.Message}");
             }
         }
 
@@ -173,12 +173,12 @@ namespace NocturneAddNewSkills
             {
                 int frame = UnityEngine.Time.frameCount;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] V3-CFG-CORE; " + Snapshot("postfix", frame) +
+                    "[NocturneSkillEvolution] V3-CFG-CORE; " + Snapshot("postfix", frame) +
                     $" coreResult={__result} invocationId={LastPrefixInvocationId}.");
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneAddNewSkills] V3-CFG-CORE postfix failed safely: {ex.Message}");
+                MelonLogger.Warning($"[NocturneSkillEvolution] V3-CFG-CORE postfix failed safely: {ex.Message}");
             }
         }
     }
@@ -208,14 +208,14 @@ namespace NocturneAddNewSkills
                 IntPtr gbwkStockPtr = gbwk?.pCurrentStock?.Pointer ?? IntPtr.Zero;
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] V3-CFG-RNDPOWERUP; " +
+                    "[NocturneSkillEvolution] V3-CFG-RNDPOWERUP; " +
                     $"phase=postfix frame={frame} eventStart={eventStart} seqCurrent={seqCurrent} unit={unit} " +
                     $"argStockPtr=0x{argStockPtr.ToInt64():X} gbwkStockPtr=0x{gbwkStockPtr.ToInt64():X} " +
                     $"result={__result} pIdx={__1}.");
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneAddNewSkills] V3-CFG-RNDPOWERUP postfix failed safely: {ex.Message}");
+                MelonLogger.Warning($"[NocturneSkillEvolution] V3-CFG-RNDPOWERUP postfix failed safely: {ex.Message}");
             }
         }
     }
@@ -262,11 +262,11 @@ namespace NocturneAddNewSkills
 
                 int frame = UnityEngine.Time.frameCount;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] V3-CFG-SKILLOWNER; " + Snapshot("prefix", frame, __0, __1) + ".");
+                    "[NocturneSkillEvolution] V3-CFG-SKILLOWNER; " + Snapshot("prefix", frame, __0, __1) + ".");
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneAddNewSkills] V3-CFG-SKILLOWNER prefix failed safely: {ex.Message}");
+                MelonLogger.Warning($"[NocturneSkillEvolution] V3-CFG-SKILLOWNER prefix failed safely: {ex.Message}");
             }
         }
 
@@ -280,12 +280,12 @@ namespace NocturneAddNewSkills
 
                 int frame = UnityEngine.Time.frameCount;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] V3-CFG-SKILLOWNER; " + Snapshot("postfix", frame, __0, __1) +
+                    "[NocturneSkillEvolution] V3-CFG-SKILLOWNER; " + Snapshot("postfix", frame, __0, __1) +
                     $" result={__result}.");
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneAddNewSkills] V3-CFG-SKILLOWNER postfix failed safely: {ex.Message}");
+                MelonLogger.Warning($"[NocturneSkillEvolution] V3-CFG-SKILLOWNER postfix failed safely: {ex.Message}");
             }
         }
     }
