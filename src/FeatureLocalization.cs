@@ -115,8 +115,9 @@ namespace NocturneAddNewSkills
                     "Unlimited removes the limit that makes further Power-Ups unlikely after a skill has been powered up."),
             };
 
-        internal static string Category(bool japanese) =>
-            japanese ? "ゲームプレイ変更" : "Gameplay Change";
+        // Not localized: the published Controller gameplay mods show
+        // "Gameplay Change" in both languages, so one category stays one label.
+        internal const string Category = "Gameplay Change";
 
         internal static string Name(GameplayFeature feature, bool japanese) =>
             Texts.TryGetValue(feature.Id, out LocalizedText? text)
