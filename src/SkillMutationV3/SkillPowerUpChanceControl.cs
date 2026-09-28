@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Zero-base implementation of [SkillPowerUp] Chance = Native / Always /
     // Disabled, per the Canonical CFG in 01_CURRENT_STATE.md. Disabled uses
@@ -72,7 +72,7 @@ namespace NocturneAddNewSkills
 
                 _resolved = true;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] SkillPowerUpChanceControl resolved; all sites vanilla-or-known.");
+                    "[NocturneSkillEvolution] SkillPowerUpChanceControl resolved; all sites vanilla-or-known.");
 
                 ApplyMode(NativeChanceMode.Native);
             }
@@ -80,7 +80,7 @@ namespace NocturneAddNewSkills
             {
                 _resolved = false;
                 MelonLogger.Error(
-                    $"[NocturneAddNewSkills] SkillPowerUpChanceControl init refused safely: {ex}");
+                    $"[NocturneSkillEvolution] SkillPowerUpChanceControl init refused safely: {ex}");
             }
         }
 
@@ -89,7 +89,7 @@ namespace NocturneAddNewSkills
             if (!_resolved)
             {
                 MelonLogger.Warning(
-                    "[NocturneAddNewSkills] SkillPowerUpChanceControl not resolved; ignoring SetMode.");
+                    "[NocturneSkillEvolution] SkillPowerUpChanceControl not resolved; ignoring SetMode.");
                 return;
             }
             // Fail-safe: Always depends on SharedSkillChangeOuterGateControl
@@ -104,7 +104,7 @@ namespace NocturneAddNewSkills
             if (mode == NativeChanceMode.Always && !SharedSkillChangeOuterGateControl.IsResolved)
             {
                 MelonLogger.Error(
-                    "[NocturneAddNewSkills] SkillPowerUpChanceControl refusing Always; " +
+                    "[NocturneSkillEvolution] SkillPowerUpChanceControl refusing Always; " +
                     "SharedSkillChangeOuterGateControl is not resolved (outer gate cannot be forced). " +
                     "Mode left unchanged.");
                 return;
@@ -141,14 +141,14 @@ namespace NocturneAddNewSkills
                 }
 
                 Mode = mode;
-                MelonLogger.Msg($"[NocturneAddNewSkills] SkillPowerUpChanceControl mode set; mode={mode}.");
+                MelonLogger.Msg($"[NocturneSkillEvolution] SkillPowerUpChanceControl mode set; mode={mode}.");
 
                 SharedSkillChangeOuterGateControl.Recompute();
             }
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneAddNewSkills] SkillPowerUpChanceControl SetMode({mode}) failed safely: {ex}");
+                    $"[NocturneSkillEvolution] SkillPowerUpChanceControl SetMode({mode}) failed safely: {ex}");
             }
         }
     }
@@ -259,7 +259,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] SkillPowerUpChance Always prefix capture failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] SkillPowerUpChance Always prefix capture failed safely: {ex.Message}");
             }
         }
 
@@ -330,7 +330,7 @@ namespace NocturneAddNewSkills
                     __result = 1;
 
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] SkillPowerUpChance Always priority applied; " +
+                        "[NocturneSkillEvolution] SkillPowerUpChance Always priority applied; " +
                         $"unit={stock.id} frame={UnityEngine.Time.frameCount} " +
                         $"restoredSkillId={SkillPowerUpChanceCandidateCapture.LastOriginalCandidateSkillId}.");
                 }
@@ -340,7 +340,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] SkillPowerUpChance Always priority failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] SkillPowerUpChance Always priority failed safely: {ex.Message}");
             }
         }
     }

@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Chance mode shared by SkillMutationChanceControl and
     // SkillPowerUpChanceControl.
@@ -74,7 +74,7 @@ namespace NocturneAddNewSkills
             if (BytesEqual(actual, patched)) { isPatched = true; return true; }
             isPatched = false;
             MelonLogger.Error(
-                $"[NocturneAddNewSkills] {name} unexpected bytes at 0x{address.ToInt64():X}; " +
+                $"[NocturneSkillEvolution] {name} unexpected bytes at 0x{address.ToInt64():X}; " +
                 $"expected vanilla={FormatBytes(vanilla)} or patched={FormatBytes(patched)}, " +
                 $"actual={FormatBytes(actual)}. Refusing to touch this site.");
             return false;

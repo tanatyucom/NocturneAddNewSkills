@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Skill Power-Up AddNew V3 - DEFAULTSKILL ITERATOR ENTRY/EXIT TRACE.
     // Read-only observer only. Never writes any field.
@@ -97,7 +97,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] DefaultSkillIteratorTrace prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] DefaultSkillIteratorTrace prefix failed safely: {ex.Message}");
             }
         }
 
@@ -144,7 +144,7 @@ namespace NocturneAddNewSkills
                     seqCurrentAfter, seqLastAfter, gbwk.TargetIndex, gbwk.TargetCnt, bit6Now);
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] DEFAULTSKILL-ITERATOR-CALL; " +
+                    "[NocturneSkillEvolution] DEFAULTSKILL-ITERATOR-CALL; " +
                     $"frame={frame}; unit={_unitBefore}->{unitAfter}; " +
                     $"stockPtr=0x{_stockPtrBefore:X}; " +
                     $"eventParam {_eventParamBefore}->{eventParamAfter}; " +
@@ -161,7 +161,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] DefaultSkillIteratorTrace postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] DefaultSkillIteratorTrace postfix failed safely: {ex.Message}");
             }
         }
     }
@@ -208,7 +208,7 @@ namespace NocturneAddNewSkills
                 if (method == null)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] GETDEFAULTSKILL-PATCH-STATUS; " +
+                        "[NocturneSkillEvolution] GETDEFAULTSKILL-PATCH-STATUS; " +
                         "methodInfo=NULL (GetMethod failed to resolve rstcalc.rstGetDefaultSkill).");
                     return;
                 }
@@ -218,7 +218,7 @@ namespace NocturneAddNewSkills
                 int postfixes = info?.Postfixes?.Count ?? 0;
                 IntPtr fnPtr = method.MethodHandle.GetFunctionPointer();
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] GETDEFAULTSKILL-PATCH-STATUS; " +
+                    "[NocturneSkillEvolution] GETDEFAULTSKILL-PATCH-STATUS; " +
                     $"methodInfo=FOUND; declaringType={method.DeclaringType}; " +
                     $"prefixes={prefixes}; postfixes={postfixes}; " +
                     $"functionPointer=0x{fnPtr.ToInt64():X}.");
@@ -226,7 +226,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] GetDefaultSkillCallBoundaryTrace.LogPatchStatus failed: {ex}");
+                    $"[NocturneSkillEvolution] GetDefaultSkillCallBoundaryTrace.LogPatchStatus failed: {ex}");
             }
         }
 
@@ -261,7 +261,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] GetDefaultSkillCallBoundaryTrace prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] GetDefaultSkillCallBoundaryTrace prefix failed safely: {ex.Message}");
             }
         }
 
@@ -286,7 +286,7 @@ namespace NocturneAddNewSkills
                 int frame = UnityEngine.Time.frameCount;
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] GETDEFAULTSKILL-CALL; " +
+                    "[NocturneSkillEvolution] GETDEFAULTSKILL-CALL; " +
                     $"frame={frame}; unit={_unitBefore}->{unitAfter}; " +
                     $"eventParam {_eventParamBefore}->{eventParamAfter}; " +
                     $"eventNums {_eventNumsBefore}->{eventNumsAfter}; " +
@@ -299,7 +299,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] GetDefaultSkillCallBoundaryTrace postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] GetDefaultSkillCallBoundaryTrace postfix failed safely: {ex.Message}");
             }
         }
     }

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Read-only raw instrumentation inside rstCalcSkillPowerUpCore's
     // promotion-check / bit6-test / 16-scan / Mutation-merge region, added
@@ -258,14 +258,14 @@ namespace NocturneAddNewSkills
 
                 _installed = true;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] V3-CFG-BLOCKPASS-RAW installed; " +
+                    "[NocturneSkillEvolution] V3-CFG-BLOCKPASS-RAW installed; " +
                     $"pointA=0x{_targetAddressA.ToInt64():X} pointB=0x{_targetAddressB.ToInt64():X} " +
                     $"pointC=0x{_targetAddressC.ToInt64():X} pointD=0x{_targetAddressD.ToInt64():X} " +
                     "mechanism=hardware-breakpoint(no GameAssembly.dll bytes written).");
             }
             catch (Exception ex)
             {
-                MelonLogger.Error($"[NocturneAddNewSkills] V3-CFG-BLOCKPASS-RAW install refused safely: {ex}");
+                MelonLogger.Error($"[NocturneSkillEvolution] V3-CFG-BLOCKPASS-RAW install refused safely: {ex}");
                 Uninstall();
             }
         }
@@ -308,7 +308,7 @@ namespace NocturneAddNewSkills
                     catch (Exception ex)
                     {
                         MelonLogger.Warning(
-                            $"[NocturneAddNewSkills] V3-CFG-BLOCKPASS-RAW breakpoint removal failed: {ex.Message}");
+                            $"[NocturneSkillEvolution] V3-CFG-BLOCKPASS-RAW breakpoint removal failed: {ex.Message}");
                     }
                 }
                 if (_vehHandle != IntPtr.Zero)
@@ -595,7 +595,7 @@ namespace NocturneAddNewSkills
             {
                 _captureErrorCount = 0;
                 MelonLogger.Warning(
-                    "[NocturneAddNewSkills] V3-CFG-BLOCKPASS-RAW capture errors " +
+                    "[NocturneSkillEvolution] V3-CFG-BLOCKPASS-RAW capture errors " +
                     $"(raw-read failures inside the exception handler, safely dropped): {errors}.");
             }
         }
@@ -630,7 +630,7 @@ namespace NocturneAddNewSkills
                     string flagStatus = hit.FlagOk ? "ok" : "read-failed";
 
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] V3-CFG-BIT6-RAW; " +
+                        "[NocturneSkillEvolution] V3-CFG-BIT6-RAW; " +
                         $"point=B threadId={hit.ThreadId} rip=0x{hit.Rip:X} " +
                         $"frame={frame} unit={hit.Unit} seqCurrent={seqCurrent} eventStart={eventStart} " +
                         $"coreInvocationId={hit.CoreInvocationId} rax=0x{hit.Rax:X} " +
@@ -642,7 +642,7 @@ namespace NocturneAddNewSkills
                 else if (hit.Point == 'D')
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] V3-CFG-BLOCKPASS-RAW; " +
+                        "[NocturneSkillEvolution] V3-CFG-BLOCKPASS-RAW; " +
                         $"point=D coreInvocationId={hit.CoreInvocationId} " +
                         $"rip=0x{hit.Rip:X} threadId={hit.ThreadId} " +
                         $"drReadOk={hit.DrReadOk} dr0=0x{hit.DrDr0:X} dr1=0x{hit.DrDr1:X} " +
@@ -651,14 +651,14 @@ namespace NocturneAddNewSkills
                 else
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] V3-CFG-BLOCKPASS-RAW; " +
+                        "[NocturneSkillEvolution] V3-CFG-BLOCKPASS-RAW; " +
                         $"point={hit.Point} coreInvocationId={hit.CoreInvocationId} " +
                         $"rip=0x{hit.Rip:X} threadId={hit.ThreadId}.");
                 }
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneAddNewSkills] V3-CFG-BLOCKPASS-RAW emit failed safely: {ex.Message}");
+                MelonLogger.Warning($"[NocturneSkillEvolution] V3-CFG-BLOCKPASS-RAW emit failed safely: {ex.Message}");
             }
         }
 

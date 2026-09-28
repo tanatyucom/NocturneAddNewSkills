@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // OLD QUEUE LOOP SUPPRESSION ARCHAEOLOGY - lifecycle boundary check
     // (read-only, no clearing, no suppression). Never writes any field.
@@ -53,7 +53,7 @@ namespace NocturneAddNewSkills
                 var (handledCleared, consumedCleared) = HandledCandidatesObserver.ClearForNewLifecycle();
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] RSTCREATE-TARGETLIST-LIFECYCLE; " +
+                    "[NocturneSkillEvolution] RSTCREATE-TARGETLIST-LIFECYCLE; " +
                     $"frame={frame}; unit={unit}; stockPtr=0x{stockPtr:X}; seq={seq}; " +
                     $"handledCountBefore={handledCountBefore}; " +
                     $"handledCleared={handledCleared}; consumedCleared={consumedCleared}.");
@@ -61,7 +61,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] ResultLifecycleBoundaryObserver prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] ResultLifecycleBoundaryObserver prefix failed safely: {ex.Message}");
             }
         }
     }

@@ -5,7 +5,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Skill Power-Up AddNew V3 - DEFAULTSKILL OWNERSHIP WRITER
     // RUNTIME GENERIC THUNK RESOLUTION. Read-only observer only. Never
@@ -99,7 +99,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] GenericThunkResolutionTrace module lookup failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] GenericThunkResolutionTrace module lookup failed safely: {ex.Message}");
             }
         }
 
@@ -146,7 +146,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] GenericThunkResolutionTrace prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] GenericThunkResolutionTrace prefix failed safely: {ex.Message}");
             }
         }
 
@@ -176,7 +176,7 @@ namespace NocturneAddNewSkills
                     bool inGameAssembly = !isNull && location.StartsWith("GameAssembly.dll", StringComparison.OrdinalIgnoreCase);
 
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] GENERIC-THUNK-RESOLVE; " +
+                        "[NocturneSkillEvolution] GENERIC-THUNK-RESOLVE; " +
                         $"name={_slots[i].Name}; thunkVA=0x{_slots[i].ThunkVA:X}; cacheSlotVA=0x{_slots[i].CacheSlotVA:X}; " +
                         $"moduleBase=0x{moduleBaseVal:X}; " +
                         $"cacheValueBefore=0x{before:X}; cacheValueAfter=0x{valueAfter:X}; " +
@@ -187,7 +187,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] GenericThunkResolutionTrace postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] GenericThunkResolutionTrace postfix failed safely: {ex.Message}");
             }
         }
     }

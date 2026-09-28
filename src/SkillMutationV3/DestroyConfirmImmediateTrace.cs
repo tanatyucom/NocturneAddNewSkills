@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Skill Power-Up AddNew V3 - DestroyConfirm immediate before/after trace.
     // Read-only observer only. Never writes SeqInfo.Current, Flag, skill[],
@@ -75,7 +75,7 @@ namespace NocturneAddNewSkills
             {
                 _captured = false;
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] DestroyConfirmImmediateTrace prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] DestroyConfirmImmediateTrace prefix failed safely: {ex.Message}");
             }
         }
 
@@ -124,7 +124,7 @@ namespace NocturneAddNewSkills
                 int frame = UnityEngine.Time.frameCount;
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] DESTROYCONFIRM-BEGIN; " +
+                    "[NocturneSkillEvolution] DESTROYCONFIRM-BEGIN; " +
                     $"invocation={_invocation}; frame={frame}; unit={_unit}; " +
                     $"seqBefore={_seqBefore}; flagBefore={_flagBefore}; " +
                     $"skillCntBefore={_skillCntBefore}; " +
@@ -132,7 +132,7 @@ namespace NocturneAddNewSkills
                     $"skillsBefore=[{string.Join(",", _skillsBefore)}].");
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] DESTROYCONFIRM-END; " +
+                    "[NocturneSkillEvolution] DESTROYCONFIRM-END; " +
                     $"invocation={_invocation}; frame={frame}; unit={_unit}; " +
                     $"seqAfter={seqAfter}; flagAfter={flagAfter}; " +
                     $"skillCntAfter={skillCntAfter}; " +
@@ -142,7 +142,7 @@ namespace NocturneAddNewSkills
                 if (_skillCntBefore == 8 && skillCntAfter == 7)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] DESTROYCONFIRM-DELETE-OBSERVED; " +
+                        "[NocturneSkillEvolution] DESTROYCONFIRM-DELETE-OBSERVED; " +
                         $"invocation={_invocation}; unit={_unit}; " +
                         $"skillsBefore=[{string.Join(",", _skillsBefore)}]; " +
                         $"skillsAfter=[{string.Join(",", skillsAfter)}].");
@@ -150,14 +150,14 @@ namespace NocturneAddNewSkills
                 else if (!skillCntChanged && arraysChanged)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] DESTROYCONFIRM-REPLACE-OBSERVED; " +
+                        "[NocturneSkillEvolution] DESTROYCONFIRM-REPLACE-OBSERVED; " +
                         $"invocation={_invocation}; unit={_unit}; skillCnt={skillCntAfter}; " +
                         $"changedSlots=[{string.Join(",", changedSlots)}].");
                 }
                 else if (skillCntChanged)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] DESTROYCONFIRM-SKILLCNT-CHANGE; " +
+                        "[NocturneSkillEvolution] DESTROYCONFIRM-SKILLCNT-CHANGE; " +
                         $"invocation={_invocation}; unit={_unit}; " +
                         $"skillCntBefore={_skillCntBefore}; skillCntAfter={skillCntAfter}.");
                 }
@@ -165,7 +165,7 @@ namespace NocturneAddNewSkills
                 if (pUpChanged)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] DESTROYCONFIRM-PUPSKILL-CHANGE; " +
+                        "[NocturneSkillEvolution] DESTROYCONFIRM-PUPSKILL-CHANGE; " +
                         $"invocation={_invocation}; unit={_unit}; " +
                         $"pUpResultBefore={_pUpResultBefore}; pUpResultAfter={pUpResultAfter}; " +
                         $"pUpIndexBefore={_pUpIndexBefore}; pUpIndexAfter={pUpIndexAfter}; " +
@@ -175,7 +175,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] DestroyConfirmImmediateTrace postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] DestroyConfirmImmediateTrace postfix failed safely: {ex.Message}");
             }
         }
     }

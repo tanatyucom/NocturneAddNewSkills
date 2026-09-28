@@ -5,7 +5,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Skill Power-Up AddNew V3 - GENERIC RUNTIME SKILL OWNERSHIP WRITER
     // TRACE. Read-only observer only. Never writes any field.
@@ -163,14 +163,14 @@ namespace NocturneAddNewSkills
                 bool skillsChanged = !SameArray(before.Skills, after.Skills);
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] SKILL-WRITER-BOUNDARY-BEGIN; " +
+                    "[NocturneSkillEvolution] SKILL-WRITER-BOUNDARY-BEGIN; " +
                     $"method={methodName}; invocation={invocation}; frame={frame}; " +
                     $"unit={before.Unit}; seq={before.Seq}; seqLast={before.SeqLast}; flag={before.Flag}; " +
                     $"skillCnt={before.SkillCnt}; pending32={before.Pending32}; state3c={before.State3c}; " +
                     $"skills=[{string.Join(",", before.Skills)}].");
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] SKILL-WRITER-BOUNDARY-END; " +
+                    "[NocturneSkillEvolution] SKILL-WRITER-BOUNDARY-END; " +
                     $"method={methodName}; invocation={invocation}; frame={frame}; " +
                     $"unit={after.Unit}; seq={after.Seq}; seqLast={after.SeqLast}; flag={after.Flag}; " +
                     $"skillCnt={after.SkillCnt}; pending32={after.Pending32}; state3c={after.State3c}; " +
@@ -179,7 +179,7 @@ namespace NocturneAddNewSkills
                 if (skillCntChanged || skillsChanged)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] SKILL-WRITER-CHANGE; " +
+                        "[NocturneSkillEvolution] SKILL-WRITER-CHANGE; " +
                         $"method={methodName}; invocation={invocation}; unit={before.Unit}; " +
                         $"skillCntBefore={before.SkillCnt}; skillCntAfter={after.SkillCnt}; " +
                         $"pendingSkillAtBegin={before.Pending32}; " +
@@ -190,7 +190,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] SkillWriterBoundaryShared report failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] SkillWriterBoundaryShared report failed safely: {ex.Message}");
             }
         }
 

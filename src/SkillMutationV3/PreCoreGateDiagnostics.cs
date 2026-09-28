@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Read-only investigation telemetry: mirrors (does not hook or alter)
     // the native pre-Core gate chain inside rstcalc.rstCalc, resolved this
@@ -83,7 +83,7 @@ namespace NocturneAddNewSkills
                 }
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] V3-PRECORE-GATE; " +
+                    "[NocturneSkillEvolution] V3-PRECORE-GATE; " +
                     $"frame={frame} unit={unit} seq={seq} " +
                     $"gate1Value24={gate1Value24} gate1Pass={gate1Pass} " +
                     $"gate2bValue={gate2bValue} gate2bZero={gate2bZero} " +
@@ -91,7 +91,7 @@ namespace NocturneAddNewSkills
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[NocturneAddNewSkills] V3-PRECORE-GATE failed safely: {ex.Message}");
+                MelonLogger.Warning($"[NocturneSkillEvolution] V3-PRECORE-GATE failed safely: {ex.Message}");
             }
         }
 

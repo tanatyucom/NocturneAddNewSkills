@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // MULTI-LEVEL EPISODE BOUNDARY TRACE PoC (2026-09-19). Read-only
     // observer only. Never writes any native field, never touches the
@@ -102,7 +102,7 @@ namespace NocturneAddNewSkills
             LastSeen[stockPtr] = current;
 
             MelonLogger.Msg(
-                "[NocturneAddNewSkills] MULTILEVEL-STATE; " +
+                "[NocturneSkillEvolution] MULTILEVEL-STATE; " +
                 $"frame={frame}; unit={unit}; stockPtr=0x{stockPtr:X}; level={level}; " +
                 $"levelUpCnt={levelUpCnt}; seqCurrent={seqCurrent}; seqLast={seqLast}; " +
                 $"targetIndex={targetIndex}; targetCnt={targetCnt}; bit6={bit6}.");

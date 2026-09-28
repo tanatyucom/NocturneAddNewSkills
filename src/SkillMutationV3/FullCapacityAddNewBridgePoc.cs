@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Skill Power-Up AddNew V3 - FULL-CAPACITY BRIDGE PoC, SEQ10-PRESERVING
     // REDESIGN.
@@ -184,7 +184,7 @@ namespace NocturneAddNewSkills
                 {
                     FullCapacityAddNewGate.Arm(unit, stockPtr, target);
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] PUP-BRIDGE-GATE-ARM; " +
+                        "[NocturneSkillEvolution] PUP-BRIDGE-GATE-ARM; " +
                         $"frame={UnityEngine.Time.frameCount}; unit={unit}; target={SkillNameResolver.Format(target)}; " +
                         $"defSkillResult={gbwk.DefSkillResult}; eventNums={gbwk.EventNums}; eventOfs={gbwk.EventOfs}; " +
                         $"seqCurrent={gbwk.SeqInfo.Current}; seqLast={gbwk.SeqInfo.Last}.");
@@ -198,7 +198,7 @@ namespace NocturneAddNewSkills
                         if (FullCapacityAddNewGate.StableCount != 0)
                         {
                             MelonLogger.Msg(
-                                "[NocturneAddNewSkills] PUP-BRIDGE-GATE-RESET; " +
+                                "[NocturneSkillEvolution] PUP-BRIDGE-GATE-RESET; " +
                                 $"reason=defSkillResult={gbwk.DefSkillResult}-eventNums={gbwk.EventNums}; " +
                                 $"oldStableCount={FullCapacityAddNewGate.StableCount}.");
                         }
@@ -213,7 +213,7 @@ namespace NocturneAddNewSkills
                     }
 
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] PUP-BRIDGE-GATE-OPEN; " +
+                        "[NocturneSkillEvolution] PUP-BRIDGE-GATE-OPEN; " +
                         $"stableFrames={FullCapacityAddNewGate.StableCount}; unit={unit}; " +
                         $"target={SkillNameResolver.Format(target)}.");
                     // Stay open from here on for this SAME candidate - do
@@ -240,7 +240,7 @@ namespace NocturneAddNewSkills
             {
                 FullCapacityAddNewBridgeArming.Armed = false;
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] FullCapacityAddNewBridgeTrigger prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] FullCapacityAddNewBridgeTrigger prefix failed safely: {ex.Message}");
             }
         }
 
@@ -280,7 +280,7 @@ namespace NocturneAddNewSkills
                 short levelUpCntAtBegin = gbwk.LevelUpCnt;
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] FULLCAP-ADDNEW-BEGIN; " +
+                    "[NocturneSkillEvolution] FULLCAP-ADDNEW-BEGIN; " +
                     $"unit={unit}; stockPtr=0x{stockPtr:X}; " +
                     $"sourceIndex={sourceIndex}; source={SkillNameResolver.Format(sourceSkillId)}; " +
                     $"target={SkillNameResolver.Format(target)}; pending32Before={originalPending}; " +
@@ -309,14 +309,14 @@ namespace NocturneAddNewSkills
                     unit, stockPtr, target, sourceIndex, sourceSkillId, originalPending, seqBefore);
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] FULLCAP-ADDNEW-REDIRECT-DEFERRED; " +
+                    "[NocturneSkillEvolution] FULLCAP-ADDNEW-REDIRECT-DEFERRED; " +
                     $"seqAtDefer={seqBefore}; target={SkillNameResolver.Format(target)}; " +
                     "waiting for native seq to leave 10 on its own before redirecting to seq21.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] FullCapacityAddNewBridgeTrigger postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] FullCapacityAddNewBridgeTrigger postfix failed safely: {ex.Message}");
             }
             finally
             {
@@ -386,7 +386,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] FullCapacityOverwriteSuppressor prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] FullCapacityOverwriteSuppressor prefix failed safely: {ex.Message}");
             }
         }
 
@@ -408,7 +408,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] FullCapacityOverwriteSuppressor postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] FullCapacityOverwriteSuppressor postfix failed safely: {ex.Message}");
             }
         }
     }
@@ -610,7 +610,7 @@ namespace NocturneAddNewSkills
                 {
                     int frame = UnityEngine.Time.frameCount;
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] POSTCOMPLETE-REENTRY-WATCH; " +
+                        "[NocturneSkillEvolution] POSTCOMPLETE-REENTRY-WATCH; " +
                         $"frame={frame}; unit={_postCompleteUnit}; framesLeft={_postCompleteFramesRemaining}; " +
                         $"seq {_lastSeq}->{seq}; flag {_lastFlag}->{flag}; " +
                         $"defSkillResult {_lastDefSkillResult}->{defSkillResult}; " +
@@ -626,7 +626,7 @@ namespace NocturneAddNewSkills
             {
                 _postCompleteArmed = false;
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] FullCapacityAddNewBridgeMonitor post-complete watch failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] FullCapacityAddNewBridgeMonitor post-complete watch failed safely: {ex.Message}");
             }
         }
 
@@ -655,7 +655,7 @@ namespace NocturneAddNewSkills
                     // skill[] via the wrapper. Report what is known and
                     // stop watching rather than guess.
                     MelonLogger.Warning(
-                        "[NocturneAddNewSkills] FULLCAP-ADDNEW-LOST-TRACKING; " +
+                        "[NocturneSkillEvolution] FULLCAP-ADDNEW-LOST-TRACKING; " +
                         $"unit={FullCapacityAddNewBridgeState.WatchedUnit}; " +
                         "reason=pCurrentStock-changed-before-outcome-observed; " +
                         $"seq={seq}.");
@@ -686,7 +686,7 @@ namespace NocturneAddNewSkills
                 if (targetPresent)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] FULLCAP-ADDNEW-COMPLETE; " +
+                        "[NocturneSkillEvolution] FULLCAP-ADDNEW-COMPLETE; " +
                         $"unit={FullCapacityAddNewBridgeState.WatchedUnit}; " +
                         $"finalSkills=[{string.Join(",", skills)}]; sourcePreserved={sourcePreserved}; " +
                         $"targetPresent={targetPresent}; skillcnt={skillCnt}; seq={seq}; " +
@@ -697,7 +697,7 @@ namespace NocturneAddNewSkills
                 else
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] FULLCAP-ADDNEW-CANCEL; " +
+                        "[NocturneSkillEvolution] FULLCAP-ADDNEW-CANCEL; " +
                         $"unit={FullCapacityAddNewBridgeState.WatchedUnit}; " +
                         "reason=target-not-present-after-forget-flow-exit; " +
                         $"finalSkills=[{string.Join(",", skills)}]; skillcnt={skillCnt}; seq={seq}; " +
@@ -712,7 +712,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] FullCapacityAddNewBridgeMonitor postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] FullCapacityAddNewBridgeMonitor postfix failed safely: {ex.Message}");
             }
         }
 
@@ -808,7 +808,7 @@ namespace NocturneAddNewSkills
                 sbyte changeAfter = gbwk.SeqInfo.Change;
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] FULLCAP-ADDNEW-ENTER-FORGET; " +
+                    "[NocturneSkillEvolution] FULLCAP-ADDNEW-ENTER-FORGET; " +
                     $"seqBefore={seqNow}; seqAfter={seqAfter}; target={SkillNameResolver.Format(target)}; " +
                     $"eventParamStagedForUi={gbwk.EventParam}; originalPendingToRestoreLater={originalPending}; " +
                     $"next {nextBefore}->{nextAfter}; last {lastBefore}->{lastAfter}; " +
@@ -822,7 +822,7 @@ namespace NocturneAddNewSkills
             {
                 FullCapacityAddNewBridgePendingRedirect.Clear();
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] FullCapacityAddNewBridgeMonitor deferred redirect failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] FullCapacityAddNewBridgeMonitor deferred redirect failed safely: {ex.Message}");
             }
         }
     }
@@ -900,7 +900,7 @@ namespace NocturneAddNewSkills
                 _injected = true;
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] C2-INJECT; " +
+                    "[NocturneSkillEvolution] C2-INJECT; " +
                     $"unit={stock.id}; eventParamBeforeCall={_eventParamBeforeCall}; " +
                     $"target={SkillNameResolver.Format(target)}; skillcnt={stock.skillcnt}; " +
                     $"seqCurrent={gbwk.SeqInfo.Current}; seqLast={gbwk.SeqInfo.Last}; " +
@@ -910,7 +910,7 @@ namespace NocturneAddNewSkills
             {
                 _injected = false;
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] FullCapacityAddNewBridgeInsertionInjector prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] FullCapacityAddNewBridgeInsertionInjector prefix failed safely: {ex.Message}");
             }
         }
 
@@ -948,7 +948,7 @@ namespace NocturneAddNewSkills
                 }
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] C2-RESTORE; " +
+                    "[NocturneSkillEvolution] C2-RESTORE; " +
                     $"target={SkillNameResolver.Format(target)}; " +
                     $"eventParamAfterNative={eventParamAfterNative}; " +
                     $"restoredToNativeOriginal={_nativeOriginalToRestore}; " +
@@ -957,7 +957,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] FullCapacityAddNewBridgeInsertionInjector postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] FullCapacityAddNewBridgeInsertionInjector postfix failed safely: {ex.Message}");
             }
         }
     }

@@ -5,7 +5,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Skill Power-Up AddNew V3 - PENDING NEW-SKILL ORIGIN trace.
     // Read-only observer only. Never writes any field.
@@ -110,7 +110,7 @@ namespace NocturneAddNewSkills
                 }
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] PENDING-SNAPSHOT-SMALL; " +
+                    "[NocturneSkillEvolution] PENDING-SNAPSHOT-SMALL; " +
                     $"frame={frame}; unit={unit}; level={level}; flag={flag}; " +
                     $"seq={seq}; seqLast={seqLast}; defSkillResult={defResult}; " +
                     $"levelupparam=[{levelupparamStr}]; skillparam=[{skillparamStr}]; param=[{paramStr}].");
@@ -119,16 +119,16 @@ namespace NocturneAddNewSkills
                 string stockHex = DumpHex(stock.Pointer, 0x200);
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] PENDING-SNAPSHOT-RAW-GBWK; " +
+                    "[NocturneSkillEvolution] PENDING-SNAPSHOT-RAW-GBWK; " +
                     $"frame={frame}; unit={unit}; level={level}; hex={gbwkHex}.");
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] PENDING-SNAPSHOT-RAW-STOCK; " +
+                    "[NocturneSkillEvolution] PENDING-SNAPSHOT-RAW-STOCK; " +
                     $"frame={frame}; unit={unit}; level={level}; hex={stockHex}.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] PendingNewSkillOriginTrace prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] PendingNewSkillOriginTrace prefix failed safely: {ex.Message}");
             }
         }
 

@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // TEMPORARY DIAGNOSTIC HELPER - native bit6 CLEAR investigation aid
     // only. NOT an official Gameplay feature: not registered with
@@ -53,13 +53,13 @@ namespace NocturneAddNewSkills
                 __result = multipliedExp;
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] EXP-MULTIPLIER; " +
+                    "[NocturneSkillEvolution] EXP-MULTIPLIER; " +
                     $"stock={stock} nativeExp={nativeExp} multipliedExp={multipliedExp} multiplier={Multiplier}.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] ExperienceMultiplierDiagnostics postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] ExperienceMultiplierDiagnostics postfix failed safely: {ex.Message}");
             }
         }
 

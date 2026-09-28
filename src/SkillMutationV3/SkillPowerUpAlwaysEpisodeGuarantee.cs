@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // SKILLPOWERUP.CHANCE=ALWAYS PER-EPISODE GUARANTEE (2026-09-19).
     //
@@ -294,7 +294,7 @@ namespace NocturneAddNewSkills
                 bool episodeLatchAfter = HandledCandidatesObserver.IsEpisodeLatched(stockPtr);
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] ALWAYS-EPISODE-GUARANTEE; " +
+                    "[NocturneSkillEvolution] ALWAYS-EPISODE-GUARANTEE; " +
                     $"frame={frame}; unit={unit}; stockPtr=0x{stockPtr:X}; rawResult=0; " +
                     $"originalPUpSkillId={originalPUpSkillId}; " +
                     $"powerUpCandidateCount={rawPowerUpCandidates.Count}; " +
@@ -311,7 +311,7 @@ namespace NocturneAddNewSkills
             {
                 _retryInProgress = false;
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] SkillPowerUpAlwaysEpisodeGuarantee postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] SkillPowerUpAlwaysEpisodeGuarantee postfix failed safely: {ex.Message}");
             }
         }
 

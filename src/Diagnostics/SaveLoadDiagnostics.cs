@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Read-only investigation diagnostic - NOT an official Gameplay
     // feature: no GUI, no settings.json entry, not registered with
@@ -148,7 +148,7 @@ namespace NocturneAddNewSkills
             {
                 int frame = UnityEngine.Time.frameCount;
                 int? gslMode = TryReadGslMode();
-                string line = "[NocturneAddNewSkills] V3-SAVE-LOAD; type=LoadComplete; " +
+                string line = "[NocturneSkillEvolution] V3-SAVE-LOAD; type=LoadComplete; " +
                     $"frame={frame}; gslMode={(gslMode.HasValue ? gslMode.Value.ToString() : "NULL")}";
 
                 // Best-effort, optional enrichment only. Omitted entirely
@@ -173,7 +173,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] SaveLoadDiagnostics postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] SaveLoadDiagnostics postfix failed safely: {ex.Message}");
             }
         }
     }

@@ -3,7 +3,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Mutation AddNew investigation (investigations/ACQUISITION_LEARNASNEW/
     // PLAN.md) - Calc/Update timing check (2026-09-15).
@@ -54,14 +54,14 @@ namespace NocturneAddNewSkills
                 string resultStr = methodResult.HasValue ? methodResult.Value.ToString() : "n/a";
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] MUTADDNEW-TIMING; " +
+                    "[NocturneSkillEvolution] MUTADDNEW-TIMING; " +
                     $"point={point}; frame={frame}; seq={seq}; unit={unit}; " +
                     $"eventParam={eventParam}; defSkillResult={defSkillResult}; methodResult={resultStr}.");
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] MutationAddNewCalcUpdateTimingTrace log failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] MutationAddNewCalcUpdateTimingTrace log failed safely: {ex.Message}");
             }
         }
 

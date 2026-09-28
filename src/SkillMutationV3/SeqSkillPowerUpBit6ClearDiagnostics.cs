@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Read-only investigation telemetry for the native bit6 CLEAR mechanism
     // inside rstupdate.rstUpdateSeqSkillPowerUp (VA 0x18228C770), added this
@@ -122,7 +122,7 @@ namespace NocturneAddNewSkills
             {
                 _captured = false;
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] SeqSkillPowerUpBit6ClearDiagnostics prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] SeqSkillPowerUpBit6ClearDiagnostics prefix failed safely: {ex.Message}");
             }
         }
 
@@ -145,7 +145,7 @@ namespace NocturneAddNewSkills
                 int? state1CAfter = TryReadState1C();
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] V3-SEQ10-BIT6; " +
+                    "[NocturneSkillEvolution] V3-SEQ10-BIT6; " +
                     $"unit={_unit} frame={frame} " +
                     $"seqBefore={_seqBefore} seqAfter={seqAfter} " +
                     $"flagBefore={_flagBefore} flagAfter={flagAfter} " +
@@ -158,7 +158,7 @@ namespace NocturneAddNewSkills
                 if (_bit6Before && !bit6After)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] V3-BIT6-CLEAR; " +
+                        "[NocturneSkillEvolution] V3-BIT6-CLEAR; " +
                         $"unit={_unit} frame={frame} seqBefore={_seqBefore} seqAfter={seqAfter} " +
                         $"flagBefore={_flagBefore} flagAfter={flagAfter} " +
                         $"pUpResult={pUpResultAfter} " +
@@ -168,7 +168,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] SeqSkillPowerUpBit6ClearDiagnostics postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] SeqSkillPowerUpBit6ClearDiagnostics postfix failed safely: {ex.Message}");
             }
         }
     }

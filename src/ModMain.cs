@@ -1,13 +1,13 @@
 using MelonLoader;
 
 [assembly: MelonInfo(
-    typeof(NocturneAddNewSkills.ModMain),
-    "Nocturne Add New Skills",
+    typeof(NocturneSkillEvolution.ModMain),
+    "Nocturne Skill Evolution",
     "0.1.0",
     "Gray Ghost")]
 [assembly: MelonGame(null, "smt3hd")]
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     public sealed class ModMain : MelonMod
     {
@@ -28,7 +28,7 @@ namespace NocturneAddNewSkills
             SkillMutationChanceControl.Initialize();
             SkillPowerUpChanceControl.Initialize();
             // Settings Service is the single source of truth: it reads
-            // NocturneAddNewSkills.settings.json (writing sane defaults
+            // NocturneSkillEvolution.settings.json (writing sane defaults
             // if missing) and applies the result via SetMode immediately -
             // this must run AFTER Initialize() (native sites resolved) and
             // BEFORE GameplayFeatureRegistry.Initialize() (which reads the
@@ -41,7 +41,7 @@ namespace NocturneAddNewSkills
             SkillNameCostDrawFieldTrace.LogPatchStatus();
             SkillMakeStrColFieldTrace.LogPatchStatus();
             LoggerInstance.Msg(
-                "[NocturneAddNewSkills] Loaded standalone; " +
+                "[NocturneSkillEvolution] Loaded standalone; " +
                 "GUI metadata bridge is optional.");
         }
 

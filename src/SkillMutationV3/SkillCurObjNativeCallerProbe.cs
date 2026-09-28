@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // HIDDEN NEW SKILL ENTRY - native caller capture for skillCurObj[i].
     // SetActive() (read-only, no writes). Session continuation after an
@@ -232,7 +232,7 @@ namespace NocturneAddNewSkills
                     // longer influence when this probe stops.
                     int distinctCallerCount = ComputeDistinctCallerCount();
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] SKILLCUROBJ-NATIVE-CALLER-AUTOUNINSTALL; " +
+                        "[NocturneSkillEvolution] SKILLCUROBJ-NATIVE-CALLER-AUTOUNINSTALL; " +
                         $"distinctIndexCount={_distinctIndexCount}; distinctCallerCount={distinctCallerCount}; " +
                         $"distinctPairs={_seenCount}; totalHits={_totalHitCount}; armedFrames={elapsed}.");
                     Uninstall();
@@ -241,7 +241,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] SkillCurObjNativeCallerProbe.Tick failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] SkillCurObjNativeCallerProbe.Tick failed safely: {ex.Message}");
             }
         }
 
@@ -294,7 +294,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] SkillCurObjNativeCallerProbe.RefreshTargets failed: {ex.Message}");
+                    $"[NocturneSkillEvolution] SkillCurObjNativeCallerProbe.RefreshTargets failed: {ex.Message}");
             }
         }
 
@@ -339,14 +339,14 @@ namespace NocturneAddNewSkills
 
                 _installed = true;
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] SKILLCUROBJ-NATIVE-CALLER-INSTALLED; " +
+                    "[NocturneSkillEvolution] SKILLCUROBJ-NATIVE-CALLER-INSTALLED; " +
                     $"cmpSetupObjectVa=0x{_targetAddress.ToInt64():X}; targetCount={_targetCount}; " +
                     "mechanism=hardware-breakpoint(no GameAssembly.dll bytes written).");
             }
             catch (Exception ex)
             {
                 MelonLogger.Error(
-                    $"[NocturneAddNewSkills] SkillCurObjNativeCallerProbe install refused safely: {ex}");
+                    $"[NocturneSkillEvolution] SkillCurObjNativeCallerProbe install refused safely: {ex}");
                 Uninstall();
             }
         }
@@ -361,7 +361,7 @@ namespace NocturneAddNewSkills
                     catch (Exception ex)
                     {
                         MelonLogger.Warning(
-                            $"[NocturneAddNewSkills] SkillCurObjNativeCallerProbe breakpoint removal failed: {ex.Message}");
+                            $"[NocturneSkillEvolution] SkillCurObjNativeCallerProbe breakpoint removal failed: {ex.Message}");
                     }
                 }
                 if (_vehHandle != IntPtr.Zero)
@@ -546,7 +546,7 @@ namespace NocturneAddNewSkills
                 ref PendingHit hit = ref _pending[i];
                 long staticVa = GameAssemblyPreferredBase + (hit.ReturnAddress - _actualModuleBase);
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] SKILLCUROBJ-NATIVE-CALLER-HIT; " +
+                    "[NocturneSkillEvolution] SKILLCUROBJ-NATIVE-CALLER-HIT; " +
                     $"frame={hit.Frame}; index={hit.Index}; returnAddress=0x{hit.ReturnAddress:X}; staticVa=0x{staticVa:X}; " +
                     $"rcx=0x{hit.Rcx:X}; value={hit.Value}.");
             }

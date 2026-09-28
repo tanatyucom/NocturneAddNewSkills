@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Repeat=Unlimited investigation, Option F / F2 feasibility diagnostic
     // ONLY (investigations/REPEAT_UNLIMITED/PLAN.md). Read-only observer -
@@ -129,7 +129,7 @@ namespace NocturneAddNewSkills
                 };
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] V3-OPTIONF-F2-LIFECYCLE; " +
+                    "[NocturneSkillEvolution] V3-OPTIONF-F2-LIFECYCLE; " +
                     $"stage=CorePrefixReset; invocation={_invocationCounter}.");
             }
             catch (Exception ex)
@@ -143,7 +143,7 @@ namespace NocturneAddNewSkills
                 _coreActive = false;
                 __state = null;
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] OptionFF2CoreDiagnostics prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] OptionFF2CoreDiagnostics prefix failed safely: {ex.Message}");
             }
         }
 
@@ -189,11 +189,11 @@ namespace NocturneAddNewSkills
                         classification = "UNKNOWN";
 
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] V3-OPTIONF-F2-LIFECYCLE; " +
+                        "[NocturneSkillEvolution] V3-OPTIONF-F2-LIFECYCLE; " +
                         $"stage=CorePostfixConsume; invocation={__state.InvocationId}.");
 
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] V3-OPTIONF-F2; " +
+                        "[NocturneSkillEvolution] V3-OPTIONF-F2; " +
                         $"invocation={__state.InvocationId}; rawResult={rawResult}; " +
                         $"bit6WasSet={bit6WasSet}; pUpSkillID={pUpSkillID}; " +
                         $"exclusionObserved={exclusionObserved}; exclusionMatched={exclusionMatched}; " +
@@ -207,7 +207,7 @@ namespace NocturneAddNewSkills
                     if (rawResult == 0)
                     {
                         MelonLogger.Msg(
-                            "[NocturneAddNewSkills] V3-OPTIONF-F2-R0; " +
+                            "[NocturneSkillEvolution] V3-OPTIONF-F2-R0; " +
                             $"invocation={__state.InvocationId}; bit6WasSet={bit6WasSet}; " +
                             $"pUpSkillID={pUpSkillID}; skillCnt={exclusionSkillIds.Length}; " +
                             $"exclusionMatched={exclusionMatched}; " +
@@ -234,7 +234,7 @@ namespace NocturneAddNewSkills
                         exclusionSkillIdsNamed[i] = SkillNameResolver.Format(exclusionSkillIds[i]);
 
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] V3-OPTIONF-F2-EXCLUSION-ALL; " +
+                        "[NocturneSkillEvolution] V3-OPTIONF-F2-EXCLUSION-ALL; " +
                         $"invocation={__state.InvocationId}; observed={exclusionObserved}; " +
                         $"skillCnt={exclusionSkillIds.Length}; " +
                         $"skillIDs=[{string.Join(",", exclusionSkillIds)}]; " +
@@ -255,7 +255,7 @@ namespace NocturneAddNewSkills
                 catch (Exception ex)
                 {
                     MelonLogger.Warning(
-                        $"[NocturneAddNewSkills] OptionFF2CoreDiagnostics postfix failed safely: {ex.Message}");
+                        $"[NocturneSkillEvolution] OptionFF2CoreDiagnostics postfix failed safely: {ex.Message}");
                 }
             }
             finally
@@ -312,7 +312,7 @@ namespace NocturneAddNewSkills
                 if (__3 == null || __3.Pointer == IntPtr.Zero)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] V3-OPTIONF-F2-LIFECYCLE; " +
+                        "[NocturneSkillEvolution] V3-OPTIONF-F2-LIFECYCLE; " +
                         $"stage=ExclusionObserved; invocation={invocation}; infoNull=True.");
                     return;
                 }
@@ -325,7 +325,7 @@ namespace NocturneAddNewSkills
                 if (skillIdArrayPtr == IntPtr.Zero)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] V3-OPTIONF-F2-LIFECYCLE; " +
+                        "[NocturneSkillEvolution] V3-OPTIONF-F2-LIFECYCLE; " +
                         $"stage=ExclusionObserved; invocation={invocation}; skillCnt={skillCnt}; arrayNull=True.");
                     OptionFF2CoreDiagnostics.SetExclusionSnapshot(Array.Empty<ushort>());
                     return;
@@ -338,7 +338,7 @@ namespace NocturneAddNewSkills
                 if (gbwk == null)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] V3-OPTIONF-F2-LIFECYCLE; " +
+                        "[NocturneSkillEvolution] V3-OPTIONF-F2-LIFECYCLE; " +
                         $"stage=ExclusionObserved; invocation={invocation}; skillCnt={skillCnt}; gbwkNull=True.");
                     return;
                 }
@@ -364,7 +364,7 @@ namespace NocturneAddNewSkills
                 if (matched) OptionFF2CoreDiagnostics.MarkExclusionMatched();
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] V3-OPTIONF-F2-LIFECYCLE; " +
+                    "[NocturneSkillEvolution] V3-OPTIONF-F2-LIFECYCLE; " +
                     $"stage=ExclusionObserved; invocation={invocation}; skillCnt={skillCnt}; " +
                     $"exclusionMatched={matched}.");
 
@@ -375,7 +375,7 @@ namespace NocturneAddNewSkills
                 if (matched)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] V3-OPTIONF-F2-EXCLUSION; " +
+                        "[NocturneSkillEvolution] V3-OPTIONF-F2-EXCLUSION; " +
                         $"invocation={invocation}; pUpSkillID={pUpSkillID}; skillCnt={skillCnt}; " +
                         $"matchedIndex={matchedIndex}; matchedSkillID={matchedSkillID}; " +
                         $"candidateSkillIDs=[{string.Join(",", candidateIds)}].");
@@ -384,7 +384,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] OptionFF2ExclusionListObserver postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] OptionFF2ExclusionListObserver postfix failed safely: {ex.Message}");
             }
         }
     }

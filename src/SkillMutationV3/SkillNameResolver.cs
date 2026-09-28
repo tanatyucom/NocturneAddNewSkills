@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Diagnostic usability helper ONLY (Repeat=Unlimited / Option F
     // investigation). Resolves a raw skill ID to its in-game display name
@@ -78,7 +78,7 @@ namespace NocturneAddNewSkills
             {
                 resolved = UnresolvedName;
                 MelonLogger.Warning(
-                    "[NocturneAddNewSkills] SkillNameResolver failed safely for " +
+                    "[NocturneSkillEvolution] SkillNameResolver failed safely for " +
                     $"skillId={skillId}: {ex.Message}");
             }
 

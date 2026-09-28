@@ -7,7 +7,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Phase A only: read-only reproduction of cmbGetMutationSkill's native
     // candidate filters. This does not change __result, the skill array, or
@@ -93,7 +93,7 @@ namespace NocturneAddNewSkills
                 }
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] MUTATION-VALID-CANDIDATES; " +
+                    "[NocturneSkillEvolution] MUTATION-VALID-CANDIDATES; " +
                     $"frame={frame} unit={unit} original={__0} nativeResult={__result} " +
                     $"candidateCount={candidates.Length} validCount={valid.Count} " +
                     $"validCandidates=[{string.Join(",", valid)}] " +
@@ -103,7 +103,7 @@ namespace NocturneAddNewSkills
                 if (__result == 0 && valid.Count > 0)
                 {
                     MelonLogger.Warning(
-                        "[NocturneAddNewSkills] MUTATION-RANDOM-SEARCH-MISS; " +
+                        "[NocturneSkillEvolution] MUTATION-RANDOM-SEARCH-MISS; " +
                         $"frame={frame} unit={unit} original={__0} " +
                         $"candidateCount={candidates.Length} validCount={valid.Count} " +
                         $"validCandidates=[{string.Join(",", valid)}].");
@@ -112,7 +112,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    "[NocturneAddNewSkills] MUTATION-VALID-CANDIDATES failed safely; " +
+                    "[NocturneSkillEvolution] MUTATION-VALID-CANDIDATES failed safely; " +
                     $"frame={frame} unit={unit} original={__0} nativeResult={__result} " +
                     $"reason={ex.GetType().Name}:{ex.Message}.");
             }
@@ -122,7 +122,7 @@ namespace NocturneAddNewSkills
             int frame, int unit, ushort original, ushort nativeResult, string reason)
         {
             MelonLogger.Warning(
-                "[NocturneAddNewSkills] MUTATION-VALID-CANDIDATES unavailable; " +
+                "[NocturneSkillEvolution] MUTATION-VALID-CANDIDATES unavailable; " +
                 $"frame={frame} unit={unit} original={original} nativeResult={nativeResult} " +
                 $"reason={reason}.");
         }
@@ -156,7 +156,7 @@ namespace NocturneAddNewSkills
                         moduleBase, checked((int)CmbGetMutationSkillThunkRva));
                     byte[] runtimeEntryBytes = ReadBytes(runtimeEntry, 8);
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] MUTATION-CANDIDATE-RESOLVER entry; " +
+                        "[NocturneSkillEvolution] MUTATION-CANDIDATE-RESOLVER entry; " +
                         $"moduleBase=0x{moduleBase.ToInt64():X} " +
                         $"rva=0x{CmbGetMutationSkillThunkRva:X} " +
                         $"runtimeEntry=0x{runtimeEntry.ToInt64():X} " +
@@ -240,7 +240,7 @@ namespace NocturneAddNewSkills
                     candidates = resolved;
                     failure = string.Empty;
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] MUTATION-CANDIDATE-TABLE resolved read-only; " +
+                        "[NocturneSkillEvolution] MUTATION-CANDIDATE-TABLE resolved read-only; " +
                         $"runtimeEntry=0x{runtimeEntry.ToInt64():X} " +
                         $"runtimeEntryBytes={FormatBytes(runtimeEntryBytes)} " +
                         $"helperRva=0x{helperRva:X} helper=0x{helper.ToInt64():X} " +

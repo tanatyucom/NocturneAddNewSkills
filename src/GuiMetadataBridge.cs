@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text.Json;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     internal sealed class FeatureMetadataSnapshot
     {
@@ -36,8 +36,8 @@ namespace NocturneAddNewSkills
 
     internal sealed class ProviderMetadataSnapshot
     {
-        public string ProviderId { get; set; } = "nocturne_add_new_skills";
-        public string ProviderName { get; set; } = "Nocturne Add New Skills";
+        public string ProviderId { get; set; } = "nocturne_skill_evolution";
+        public string ProviderName { get; set; } = "Nocturne Skill Evolution";
         public string Version { get; set; } = "0.1.0";
         public List<FeatureMetadataSnapshot> Features { get; set; } = new();
         public string Error { get; set; } = string.Empty;
@@ -56,7 +56,7 @@ namespace NocturneAddNewSkills
 
     internal static class GuiMetadataBridge
     {
-        private const string ProviderId = "nocturne_add_new_skills";
+        private const string ProviderId = "nocturne_skill_evolution";
         private const int LanguageCheckIntervalMs = 500;
         private static int _lastRequestWriteTick;
         private static bool _snapshotJapanese = true;
@@ -91,6 +91,37 @@ namespace NocturneAddNewSkills
                     new[] { provider },
                     new JsonSerializerOptions { WriteIndented = true }));
             _snapshotJapanese = japanese;
+            DeleteLegacySnapshot();
+        }
+
+        // Snapshot written by this MOD before its rename ("Nocturne Add New
+        // Skills", provider nocturne_add_new_skills). Controller discovers
+        // every NocturneModern*.features.json, so a leftover copy would show
+        // a second, dead card. Only this one exact file name is touched.
+        private const string LegacySnapshotFileName = "NocturneModernAddNewSkills.features.json";
+        private static bool _legacySnapshotChecked;
+
+        private static void DeleteLegacySnapshot()
+        {
+            if (_legacySnapshotChecked)
+            {
+                return;
+            }
+            _legacySnapshotChecked = true;
+            string legacyPath = Path.Combine(ModDirectory, LegacySnapshotFileName);
+            try
+            {
+                if (File.Exists(legacyPath))
+                {
+                    File.Delete(legacyPath);
+                    MelonLogger.Msg($"[NocturneSkillEvolution] Removed old GUI snapshot {LegacySnapshotFileName}.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning(
+                    $"[NocturneSkillEvolution] Could not remove old GUI snapshot {LegacySnapshotFileName}: {ex.Message}");
+            }
         }
 
         // Controller applies a language change when its Settings GUI closes
@@ -150,7 +181,7 @@ namespace NocturneAddNewSkills
                 // SETTINGS-RELOAD diagnostic (Settings GUI Chance reset bug
                 // investigation, 2026-09-12): "source" is this provider's
                 // persistent record (GameplaySettingsService, which is
-                // also what NocturneAddNewSkills.settings.json holds -
+                // also what NocturneSkillEvolution.settings.json holds -
                 // see that class's own header comment) as it stood BEFORE
                 // this request batch is applied. "applied" is the same
                 // three values AFTER. A human comparing the two lines can
@@ -172,7 +203,7 @@ namespace NocturneAddNewSkills
                 }
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] SETTINGS-RELOAD; " +
+                    "[NocturneSkillEvolution] SETTINGS-RELOAD; " +
                     $"sourceEnabled={sourceEnabled}; appliedEnabled={GameplaySettingsService.Enabled}; " +
                     $"sourceMutationChance={sourceMutationChance}; sourcePowerUpChance={sourcePowerUpChance}; " +
                     $"sourceRepeat={sourceRepeat}; " +
@@ -196,7 +227,7 @@ namespace NocturneAddNewSkills
         // "NocturneModern" prefix is required: published ModernController
         // discovers external providers via "NocturneModern*.features.json".
         private static string SnapshotPath =>
-            Path.Combine(ModDirectory, "NocturneModernAddNewSkills.features.json");
+            Path.Combine(ModDirectory, "NocturneModernSkillEvolution.features.json");
         private static string RequestPath =>
             Path.Combine(ModDirectory, "NocturneModernController.feature-requests.json");
     }

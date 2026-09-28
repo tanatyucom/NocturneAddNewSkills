@@ -4,7 +4,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
 
-namespace NocturneAddNewSkills
+namespace NocturneSkillEvolution
 {
     // Skill Power-Up AddNew V3 - EMPTY-SLOT ONLY runtime diagnostic PoC.
     // Full static safety investigation this session (see
@@ -228,7 +228,7 @@ namespace NocturneAddNewSkills
                         // semantic) - only logged on the true->false
                         // transition, never per-frame.
                         MelonLogger.Msg(
-                            "[NocturneAddNewSkills] ADDNEW-LATCH-RESET; " +
+                            "[NocturneSkillEvolution] ADDNEW-LATCH-RESET; " +
                             $"unit={_committedUnit}; pUpSkillResult={gbwk.PUpSkillResult}.");
                     }
                     _eventCommitted = false;
@@ -290,7 +290,7 @@ namespace NocturneAddNewSkills
                         // reset alongside _eventCommitted above.
                         _blockLoggedForCurrentLatch = true;
                         MelonLogger.Msg(
-                            "[NocturneAddNewSkills] ADDNEW-LATCH-BLOCK; " +
+                            "[NocturneSkillEvolution] ADDNEW-LATCH-BLOCK; " +
                             $"unit={unit}; originalIndex={originalIndex}; " +
                             $"source={SkillNameResolver.Format(sourceSkillId)}; " +
                             $"target={SkillNameResolver.Format(targetSkillId)}; " +
@@ -311,7 +311,7 @@ namespace NocturneAddNewSkills
                 if (skillCnt < 0 || skillCnt >= LogicalSkillCapacity || arrayLength < LogicalSkillCapacity)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] ADDNEW-POC-SKIP; " +
+                        "[NocturneSkillEvolution] ADDNEW-POC-SKIP; " +
                         $"invocation={invocation}; unit={unit}; reason=no-capacity.");
                     return; // full capacity: native left completely untouched
                 }
@@ -335,7 +335,7 @@ namespace NocturneAddNewSkills
                 if (!packed)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] ADDNEW-POC-SKIP; " +
+                        "[NocturneSkillEvolution] ADDNEW-POC-SKIP; " +
                         $"invocation={invocation}; unit={unit}; reason=non-packed-skill-layout.");
                     return;
                 }
@@ -355,7 +355,7 @@ namespace NocturneAddNewSkills
                 _skillsBefore = skillsBefore;
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] ADDNEW-POC-BEGIN; " +
+                    "[NocturneSkillEvolution] ADDNEW-POC-BEGIN; " +
                     $"invocation={_invocation}; unit={_unit}; " +
                     $"originalIndex={_originalIndex}; emptySlot={_emptySlot}; " +
                     $"skillCnt={_originalSkillCnt}; " +
@@ -376,7 +376,7 @@ namespace NocturneAddNewSkills
             {
                 _active = false;
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] AddNewEmptySlotPoc prefix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] AddNewEmptySlotPoc prefix failed safely: {ex.Message}");
             }
         }
 
@@ -409,7 +409,7 @@ namespace NocturneAddNewSkills
                 sbyte pUpIndexBeforeRestore = gbwk.PUpSkillIndex;
 
                 MelonLogger.Msg(
-                    "[NocturneAddNewSkills] ADDNEW-POC-END; " +
+                    "[NocturneSkillEvolution] ADDNEW-POC-END; " +
                     $"invocation={_invocation}; unit={_unit}; " +
                     $"skillsAfter=[{string.Join(",", skillsAfter)}]; " +
                     $"sourcePreserved={sourcePreserved}; targetAtEmptySlot={targetAtEmptySlot}; " +
@@ -427,19 +427,19 @@ namespace NocturneAddNewSkills
                 if (!targetAtEmptySlot)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] ADDNEW-POC-NO-COMMIT; " +
+                        "[NocturneSkillEvolution] ADDNEW-POC-NO-COMMIT; " +
                         $"invocation={_invocation}; unit={_unit}; reason=target-not-written.");
                 }
                 else if (!sourcePreserved)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] ADDNEW-POC-NO-COMMIT; " +
+                        "[NocturneSkillEvolution] ADDNEW-POC-NO-COMMIT; " +
                         $"invocation={_invocation}; unit={_unit}; reason=source-not-preserved.");
                 }
                 else if (currentSkillCnt != _originalSkillCnt)
                 {
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] ADDNEW-POC-NO-COMMIT; " +
+                        "[NocturneSkillEvolution] ADDNEW-POC-NO-COMMIT; " +
                         $"invocation={_invocation}; unit={_unit}; reason=skillcnt-changed-unexpectedly.");
                 }
                 else
@@ -453,13 +453,13 @@ namespace NocturneAddNewSkills
                     _committedTargetSkillId = _targetSkillId;
 
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] ADDNEW-LATCH-SET; " +
+                        "[NocturneSkillEvolution] ADDNEW-LATCH-SET; " +
                         $"unit={_unit}; originalIndex={_originalIndex}; " +
                         $"source={SkillNameResolver.Format(_sourceSkillId)}; " +
                         $"target={SkillNameResolver.Format(_targetSkillId)}.");
 
                     MelonLogger.Msg(
-                        "[NocturneAddNewSkills] ADDNEW-POC-COMMIT; " +
+                        "[NocturneSkillEvolution] ADDNEW-POC-COMMIT; " +
                         $"invocation={_invocation}; unit={_unit}; " +
                         $"sourceSlot={_originalIndex}; targetSlot={_emptySlot}; " +
                         $"source={SkillNameResolver.Format(_sourceSkillId)}; " +
@@ -470,7 +470,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] AddNewEmptySlotPoc postfix failed safely: {ex.Message}");
+                    $"[NocturneSkillEvolution] AddNewEmptySlotPoc postfix failed safely: {ex.Message}");
             }
             finally
             {
@@ -502,7 +502,7 @@ namespace NocturneAddNewSkills
                 if (__exception != null)
                 {
                     MelonLogger.Warning(
-                        "[NocturneAddNewSkills] ADDNEW-POC-EXCEPTION; " +
+                        "[NocturneSkillEvolution] ADDNEW-POC-EXCEPTION; " +
                         $"invocation={_invocation}; unit={_unit}; " +
                         $"restoring PUpSkillIndex after an exception: {__exception.Message}");
                 }
@@ -524,7 +524,7 @@ namespace NocturneAddNewSkills
             catch (Exception ex)
             {
                 MelonLogger.Warning(
-                    $"[NocturneAddNewSkills] AddNewEmptySlotPoc restore failed: {ex.Message}");
+                    $"[NocturneSkillEvolution] AddNewEmptySlotPoc restore failed: {ex.Message}");
             }
         }
     }
