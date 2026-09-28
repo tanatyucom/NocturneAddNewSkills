@@ -28,6 +28,10 @@ namespace NocturneAddNewSkills
         // with a GUI that does not understand Value at all.
         public string[]? AllowedValues { get; set; }
         public string? Value { get; set; }
+
+        // Display label per raw AllowedValues entry (Controller 3.0.0+;
+        // older Controllers ignore it and show their own default labels).
+        public Dictionary<string, string>? AllowedValueLabels { get; set; }
     }
 
     internal sealed class ProviderMetadataSnapshot
@@ -53,25 +57,31 @@ namespace NocturneAddNewSkills
     internal static class GuiMetadataBridge
     {
         private const string ProviderId = "nocturne_add_new_skills";
+        private const int LanguageCheckIntervalMs = 500;
         private static int _lastRequestWriteTick;
+        private static bool _snapshotJapanese = true;
+        private static int _lastLanguageCheckTick;
 
         internal static void WriteSnapshot()
         {
+            bool japanese = ControllerUiLanguage.UseJapanese;
             var provider = new ProviderMetadataSnapshot
             {
+                ProviderName = FeatureLocalization.ProviderDisplayName,
                 Features = GameplayFeatureRegistry.GetFeatures().Select(feature =>
                     new FeatureMetadataSnapshot
                     {
                         Id = feature.Id,
-                        Name = feature.Name,
-                        Description = feature.Description,
+                        Name = FeatureLocalization.Name(feature, japanese),
+                        Description = FeatureLocalization.Description(feature, japanese),
                         Enabled = feature.Enabled,
-                        Category = feature.Category,
+                        Category = FeatureLocalization.Category(japanese),
                         SortOrder = feature.SortOrder,
                         RequiresRestart = feature.RequiresRestart,
                         Version = "0.1.0",
                         AllowedValues = feature.AllowedValues,
-                        Value = feature.Value
+                        Value = feature.Value,
+                        AllowedValueLabels = FeatureLocalization.ValueLabels(feature, japanese)
                     }).ToList()
             };
             Directory.CreateDirectory(ModDirectory);
@@ -80,6 +90,32 @@ namespace NocturneAddNewSkills
                 JsonSerializer.Serialize(
                     new[] { provider },
                     new JsonSerializerOptions { WriteIndented = true }));
+            _snapshotJapanese = japanese;
+        }
+
+        // Controller applies a language change when its Settings GUI closes
+        // and re-reads this snapshot right before the next open, so a
+        // throttled poll here keeps the cards in Controller's language on
+        // every reopen without restarting the game.
+        internal static void SampleLanguage(bool force = false)
+        {
+            int now = Environment.TickCount;
+            if (!force && unchecked(now - _lastLanguageCheckTick) < LanguageCheckIntervalMs)
+            {
+                return;
+            }
+            _lastLanguageCheckTick = now;
+            try
+            {
+                if (ControllerUiLanguage.UseJapanese != _snapshotJapanese)
+                {
+                    WriteSnapshot();
+                }
+            }
+            catch
+            {
+                // Retried on the next poll; the snapshot is display-only.
+            }
         }
 
         internal static void SampleToggleRequests()

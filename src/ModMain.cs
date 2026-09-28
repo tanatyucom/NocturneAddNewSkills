@@ -45,6 +45,15 @@ namespace NocturneAddNewSkills
                 "GUI metadata bridge is optional.");
         }
 
+        // After every MOD's OnInitializeMelon, so Controller (if installed)
+        // is loaded whatever the load order: rewrite the GUI snapshot in its
+        // UI language right away instead of waiting for the first poll.
+        public override void OnLateInitializeMelon()
+        {
+            ControllerUiLanguage.FinishLookup();
+            GuiMetadataBridge.SampleLanguage(force: true);
+        }
+
         public override void OnUpdate()
         {
             // Diagnostics-only (POWERUP_MUTATION_CFG investigation), default
@@ -58,6 +67,7 @@ namespace NocturneAddNewSkills
                 PowerUpMutationBit6RawProbe.EnsureInstalledOnGameplayThread();
                 PowerUpMutationBit6RawProbe.FlushPendingLogs();
             }
+            GuiMetadataBridge.SampleLanguage();
             GuiMetadataBridge.SampleToggleRequests();
             GameplayFeatureRegistry.Sample();
             // StatusUiFieldOffsetProbe.TryProbe() and SelectSkillIdOffsetProbe

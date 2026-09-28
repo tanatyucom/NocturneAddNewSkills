@@ -68,14 +68,16 @@ namespace NocturneAddNewSkills
                 "0% = 抑止、通常 = native、100% = 候補があれば必ず試行(成立の可否はnative判定のまま)。",
                 GameplaySettingsService.SkillMutationChance,
                 GameplaySettingsService.SetSkillMutationChance,
-                SkillMutationChanceControl.Shutdown);
+                SkillMutationChanceControl.Shutdown,
+                sortOrder: 90);
             RegisterChanceFeature(
                 "skill_powerup_chance", "Skill Power-Up: Chance",
                 "ordinary Skill Power-Upの発生確率です。0% = 抑止、通常 = native、" +
                 "100% = bit6がCLEARな限りgenuine Mutationより優先して成立させます。",
                 GameplaySettingsService.SkillPowerUpChance,
                 GameplaySettingsService.SetSkillPowerUpChance,
-                SkillPowerUpChanceControl.Shutdown);
+                SkillPowerUpChanceControl.Shutdown,
+                sortOrder: 91);
             RegisterRepeatFeature();
         }
 
@@ -120,7 +122,7 @@ namespace NocturneAddNewSkills
                               "無制限 = R0-C(bit6ゲート由来の不成立)のみ通常成功へ変換します" +
                               "(native除外〈R0-B〉・候補なし〈R0-A〉は変換しません)。",
                 Category = "Gameplay Change",
-                SortOrder = 91,
+                SortOrder = 92,
                 AllowedValues = RepeatAllowedValues,
                 Value = GameplaySettingsService.Repeat,
                 Enabled = true,
@@ -130,7 +132,7 @@ namespace NocturneAddNewSkills
 
         private static void RegisterChanceFeature(
             string id, string name, string description, NativeChanceMode currentMode,
-            Action<NativeChanceMode> setMode, Action shutdown)
+            Action<NativeChanceMode> setMode, Action shutdown, int sortOrder)
         {
             Features[id] = new GameplayFeature
             {
@@ -138,7 +140,9 @@ namespace NocturneAddNewSkills
                 Name = name,
                 Description = description,
                 Category = "Gameplay Change",
-                SortOrder = 90,
+                // Distinct per feature: Controller breaks SortOrder ties by
+                // the (localized) name, which would reorder cards per language.
+                SortOrder = sortOrder,
                 AllowedValues = ChanceAllowedValues,
                 Value = currentMode.ToString(),
                 Enabled = currentMode != NativeChanceMode.Disabled,
